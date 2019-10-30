@@ -2,7 +2,7 @@ import pytest
 import os
 from UnifiedBuild.RepoMgr import RepoMgr
 from UnifiedBuild.BuildPlatform import BuildPlatform
-from FileCompare import CompareFile
+from utilities.FileCompare import CompareFile
 from CaseMgr import case_mgr
 import shutil
 import tempfile

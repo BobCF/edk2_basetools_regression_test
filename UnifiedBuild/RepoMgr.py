@@ -37,6 +37,8 @@ class RepoMgr():
         if self._repos is None:
             self._repos = []
             for repo_info in self.repo_conf:
+                if not repo_info:
+                    continue
                 self._repos.append(Repo(self.workspace, repo_info['name'],repo_info['git'],repo_info['branch'],repo_info['version']))
         return self._repos
     
@@ -77,22 +79,3 @@ class Case():
         self.name = ""
         self.descriptoin = ''
         self.case_patch_list = [] # (repo, patch_path)
-        
-# 
-# if __name__ == "__main__":
-#     repo_mgr = RepoMgr('')
-#     test_cases = []
-#     basetool_patches = []
-#     edk2builder = Edk2Builder()
-#     for case in test_cases:
-#         repo_mgr.setup_repo()
-#         repo_mgr.apply_cases(case)
-#         edk2builder.build()
-#         edk2 = repo_mgr.getrepo('edk2')
-#         edk2.apply_patch(basetool_patches)
-#         repo_mgr.apply_cases(case)
-#         edk2builder.build()
-#         assert(compare(baseline,change) == True)
-#         repo_mgr.clean_all()
-#         repo_mgr.reset_all()
-    
