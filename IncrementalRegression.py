@@ -5,6 +5,12 @@ import shutil
 import os
 from UnifiedBuild.RepoMgr import RepoMgr
 import tempfile
+from filehash import FileHash
+import collections
+
+EXCLUDE_FILELIST_TYPE = [".obj", ".map", ".lib", ".dll", ".bin"]
+FileHashResult = collections.namedtuple("FileHashResult", ["filename", "hash"])
+
 def gen_tmp_dir():
     print (tempfile.tempdir)
     tempfile.tempdir = r"C:\Temp"
@@ -15,6 +21,24 @@ def get_basetools_patches():
         return [patch for patch in os.listdir("./BaseToolsPatches") if patch.endswith(".patch")]
     except:
         return []
+
+def get_hash(build_dir):
+    """Compute hash of directory."""
+    sha256 = FileHash('sha256')
+    build_files = get_buildfiles(build_dir)
+    return sha256.cathash_files(build_files)
+
+
+def get_buildfiles(build_dir):
+    """Return file list from a build folder."""
+    build_file_list = []
+    for root,_,files in os.walk(build_dir):
+        for file_name in files:
+            name, ext = os.path.splitext(file_name)
+            if ext not in EXCLUDE_FILELIST_TYPE:
+                build_file_list.append(os.path.join(root,file_name))
+    return build_file_list
+
 class Test_PlatformRegression():
     tmp_dir = gen_tmp_dir()
     diff_dir =  os.path.join(tmp_dir,".Diff")
@@ -50,20 +74,20 @@ class Test_PlatformRegression():
         working_dir = self.manifest.Defines.get("workdir")
         if not working_dir:
             assert 0
-        input()
         try:
             build_dir = os.path.join(working_dir,"Build")
             shutil.rmtree(build_dir)
         except:
             print("no Build Folder")
+        # First time build with patch
         BuildPlatform(working_dir,build_steps)
         self.PrepareBaseLine()
-        input()
         repo_mgr.revert_patch(patch)
-        input()
+
+        #fist time build without patch
         BuildPlatform(working_dir,build_steps)
         repo_mgr.apply_cases(patch)
-        
+
         yield
         repo_mgr.clean_all()
         repo_mgr.revert_patch(patch)
@@ -72,7 +96,7 @@ class Test_PlatformRegression():
             shutil.rmtree(self.tmp_dir)
         except:
             print("rm folder failed")
-        
+
     def PrepareBaseLine(self):
         platform_workspace = self.manifest.Defines.get("workspace")
         if not platform_workspace:
@@ -88,5 +112,7 @@ class Test_PlatformRegression():
     def test_run(self,setup_cases):
         build_steps = self.manifest.BuildCate.get(self.build_cate)
         working_dir = self.manifest.Defines.get("workdir")
+        build_dir = os.path.join(working_dir,"Build")
+        # Incremental build
         BuildPlatform(working_dir,build_steps)
-        #assert(self.CompareAutoGen())
+        assert(get_hash(self.BaseLine_dir) == get_hash(build_dir))
