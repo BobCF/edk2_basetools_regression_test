@@ -27,7 +27,7 @@ class RegressionTest():
     manifest = None
     build_cate = ''
 
-    @pytest.fixture(scope='module')
+    @pytest.fixture(scope='session')
     def setup_repository(self):
         print(self.manifest.Defines)
         workspace = self.manifest.Defines.get("workspace",".")
@@ -40,7 +40,7 @@ class RegressionTest():
         repo_mgr.setup_repo()
         return repo_mgr
 
-    @pytest.fixture(scope='module',
+    @pytest.fixture(scope='session',
                     params = case_mgr.CaseSuite)
     def setup_cases(self,setup_repository,request):
         repo_mgr = setup_repository
@@ -52,12 +52,19 @@ class RegressionTest():
         working_dir = self.manifest.Defines.get("workdir")
         if not working_dir:
             assert 0
-        BuildPlatform(working_dir,build_steps)
-        self.PrepareBaseLine()
+        #BuildPlatform(working_dir,build_steps)
+        #self.PrepareBaseLine()
         edk2 = repo_mgr.get_repo('edk2')
         edk2.apply_patches(get_basetools_patches())
         yield
+        repo_mgr.clean_all()
         repo_mgr.reset_all()
+        try:
+            print(self.BaseLine_dir)
+            shutil.rmtree(self.tmp_dir)
+        except:
+            print("rm folder failed")
+        
     
     def PrepareBaseLine(self):
         platform_workspace = self.manifest.Defines.get("workspace")

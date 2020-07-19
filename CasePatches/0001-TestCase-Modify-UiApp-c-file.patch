@@ -1,0 +1,34 @@
+From 6ac4eb795a9f387b76e706f87201099707edd191 Mon Sep 17 00:00:00 2001
+From: "Feng, Bob C" <bob.c.feng@intel.com>
+Date: Sun, 19 Jul 2020 11:40:19 +0800
+Subject: [Patch] TestCase: Modify UiApp c file
+
+Description: Change an application's c file.
+
+Repo: edk2
+
+Signed-off-by: Feng, Bob C <bob.c.feng@intel.com>
+---
+ MdeModulePkg/Application/UiApp/String.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Application/UiApp/String.c b/MdeModulePkg/Application/UiApp/String.c
+index a4d0c32108..da2a414ef0 100644
+--- a/MdeModulePkg/Application/UiApp/String.c
++++ b/MdeModulePkg/Application/UiApp/String.c
+@@ -17,11 +17,11 @@ EFI_GUID mUiStringPackGuid = {
+ 
+ EFI_GUID  mFontPackageGuid = {
+   0x78941450, 0x90ab, 0x4fb1, {0xb7, 0x5f, 0x58, 0x92, 0x14, 0xe2, 0x4a, 0xc}
+ };
+ 
+-#define NARROW_GLYPH_NUMBER 8
++#define NARROW_GLYPH_NUMBER 16
+ #define WIDE_GLYPH_NUMBER   75
+ 
+ typedef struct {
+   ///
+   /// This 4-bytes total array length is required by HiiAddPackages()
+-- 
+2.18.0.windows.1
+

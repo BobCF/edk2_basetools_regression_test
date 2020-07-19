@@ -6,7 +6,7 @@ def pytest_addoption(parser):
         "--platform",
         action="store", 
         dest="platform",
-        default=r"./ProjectManifest/Ovmf.toml",
+        default=r"./ProjectManifest/TestPkg.toml",
         help="The Platform name",
     )
     parser.addoption(

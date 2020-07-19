@@ -31,21 +31,26 @@ class CaseMgr():
     
     def create_case_bom(self):
         ''' create case bom list file '''
+        case_list = []
         for root, _, files in os.walk(self.case_dir):
             patches = []
             for file in files:
                 if file.endswith(".patch"):
                     patch_info = self.ReadPatch(os.path.join(root,file))
+                    print(patch_info)
+                    print("-----------")
                     patches.append(patch_info)
+            print(len(patches))
             if patches:
                 dir_s = os.path.split(root)
                 case_name= dir_s[1]
                 case_cate = os.path.split(dir_s[0])[1]
                 case = Case(case_name,r"\n".join([patch['Description'] for patch in patches]),patches,"",case_cate)
-                self._case_list.append(case)
+                self._case_list.extend([(patch['Repo'], patch['path']) for patch in patches])
+                case_list.append(case)
         case_toml = collections.OrderedDict()
         case_toml['Case_Num'] = len(self._case_list)
-        for case in self._case_list:
+        for case in case_list:
             try:
                 case_toml[case.case_cate]['Case'].append({
                 "name" : ".".join((case_cate,case.name)),

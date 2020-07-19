@@ -1,5 +1,6 @@
 import toml
-
+import os
+import subprocess
 class Repo():
     def __init__(self,workspace,name,link,branch,version):
         self.workspace = workspace
@@ -7,6 +8,18 @@ class Repo():
         self.link = link
         self.branch = branch
         self.version = version
+    
+    def git_cmd(self, *args):
+        with cd(self.workspace):
+            error, lines = cli_cmd('git', *args)
+            if error:
+                raise git_error(message = self.get_giterror(['git']+list(args), error, lines))
+            return lines
+    def get_giterror(self, cmd, error_code, subprocess_lines):
+        "Format and returns error message received from subprocess."
+        git_command = " ".join([argument for argument in  cmd])
+        error_message = " ".join([line for line in  subprocess_lines])
+        return "\n Command:{} \n Code:{} \n Message:{}".format(git_command, error_code, error_message)
     
     def clone(self):
         ''' clone the repo to local '''
@@ -20,8 +33,14 @@ class Repo():
     def reset(self):
         ''' reset the repo to self.version '''
         
-    def apply_patches(self, patch_path_list):
+    def apply_patches(self,patchfile):
+        if patchfile:
+            self.git_cmd("reset", "--hard") 
+            self.git_cmd("am", "--3way", "--ignore-space-change", "--keep-cr", patchfile[0]) 
+        
+    def revert_patch(self):
         ''' apply the patch_path to specific repo named repo_name '''
+        self.git_cmd("reset", "9c046b4cef4d40c6a7b6207b7a81028ac1f2e346","--hard") 
         
     def status(self):
         ''' 0 is repo does not exist, 1 is repo exists '''
@@ -69,13 +88,57 @@ class RepoMgr():
                 repo.reset()
     def apply_cases(self,case):
         print(case)
-        return
-        for repo_name, patch_path in case.case_patch_list:
-            repo = self.get_repo(repo_name)
-            repo.apply_patches([patch_path])
+        repo_name, patch_path = case
+        print(patch_path)
+        print("============")
+        repo = self.get_repo(repo_name)
+        repo.apply_patches([patch_path])
+    def revert_patch(self,case):
+        print(case)
+        repo_name, patch_path = case
+        print(patch_path)
+        print("============")
+        repo = self.get_repo(repo_name)
+        repo.revert_patch()
+ 
+class git_error(Exception):
+    """Error to raise when Git commands fail."""
+    def __init__(self, message):
+        super().__init__(message)
+        
+def cli_cmd(command, *args):
+    """Run a shell command and return its error code and the lines it
+    printed to stdout or stderr.
+    """
+    cmdline = [command] + list(args)
+    p = subprocess.Popen(cmdline,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT,
+                         shell=False,
+                         universal_newlines=True,
+                         encoding='ascii',
+                         errors="ignore")
+
+    lines = []
+    for line in p.stdout:
+        lines.append(line)
+
+    return p.wait(), lines
+
+class cd:
+    """Context manager for changing the current working directory.
+    """
+    def __init__(self, newPath):
+        """
+        with utilities.cd(targetDir):
+            ...do something in the target directory
+        """
+        self.newPath = newPath
+
+    def __enter__(self):
+        self.savedPath = os.getcwd()
+        os.chdir(self.newPath)
+
+    def __exit__(self, etype, value, traceback):
+        os.chdir(self.savedPath)
             
-class Case():
-    def __init__(self):
-        self.name = ""
-        self.descriptoin = ''
-        self.case_patch_list = [] # (repo, patch_path)
