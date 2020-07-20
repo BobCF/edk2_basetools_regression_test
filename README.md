@@ -16,13 +16,33 @@ The incremental build test require the edk2 of https://github.com/BobCF/edk2.git
 * filehash. `pip install filehash`
 
 ## Usage
-1. clone this repository.
+- Incremental Build Test
 
-`git clone https://github.com/BobCF/edk2_basetools_regression_test.git`
+  - Install tox
 
-2. Copy basetools patches to BaseToolsPatches folder
+    `py -3 -m pip install tox`
 
-3. Run the pytest
+  - clone edk2 for test 
+
+    ` git clone https://github.com/BobCF/edk2.git`
+
+    `git checkout IncrementalBuildTest`
+
+  - set edk2 folder as z:\edk2
+
+    `subst z: <path_2_edk2>`
+
+  - execute test
+
+    `py -3 -m tox`
+- Common
+  - clone this repository.
+
+    `git clone https://github.com/BobCF/edk2_basetools_regression_test.git`
+
+  - Copy basetools patches to BaseToolsPatches folder
+  
+  - Run the pytest
 
 For clean build regression testing:
 
