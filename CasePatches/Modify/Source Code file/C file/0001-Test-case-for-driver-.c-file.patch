@@ -1,0 +1,30 @@
+From 6c64d1a52ad697b3d7ed42cdd8a5473e5765868c Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Fri, 17 Jul 2020 13:26:10 +0800
+Subject: [PATCH 1/1] Test case for driver .c file
+
+Description: Change the value of 'mBootTextModeColumn' in the MdeModulePkg\Application\UiApp\FrontPage.c
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Application/UiApp/FrontPage.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Application/UiApp/FrontPage.c b/MdeModulePkg/Application/UiApp/FrontPage.c
+index 4b95cccb5cf5..54d272768fdb 100644
+--- a/MdeModulePkg/Application/UiApp/FrontPage.c
++++ b/MdeModulePkg/Application/UiApp/FrontPage.c
+@@ -24,7 +24,7 @@ BOOLEAN   mModeInitialized = FALSE;
+ //
+ UINT32    mBootHorizontalResolution    = 0;
+ UINT32    mBootVerticalResolution      = 0;
+-UINT32    mBootTextModeColumn          = 0;
++UINT32    mBootTextModeColumn          = 3;
+ UINT32    mBootTextModeRow             = 0;
+ //
+ // BIOS setup video resolution and text mode.
+-- 
+2.27.0.windows.1
+

@@ -1,0 +1,30 @@
+From 096e77beb4b21c5769c1739b4a41dd759b93cf71 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 20 Jul 2020 15:01:37 +0800
+Subject: [PATCH 1/1] Test case for driver .uni file
+
+Description: Change the description string in the UefiCpuPkg/CpuIo2Smm/CpuIo2Smm.uni.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ UefiCpuPkg/CpuIo2Smm/CpuIo2Smm.uni | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/UefiCpuPkg/CpuIo2Smm/CpuIo2Smm.uni b/UefiCpuPkg/CpuIo2Smm/CpuIo2Smm.uni
+index 6ab9960d77c6..316b58eb179a 100644
+--- a/UefiCpuPkg/CpuIo2Smm/CpuIo2Smm.uni
++++ b/UefiCpuPkg/CpuIo2Smm/CpuIo2Smm.uni
+@@ -10,7 +10,7 @@
+ // **/
+ 
+ 
+-#string STR_MODULE_ABSTRACT             #language en-US "Produces the SMM CPU I/O 2 Protocol by using the services of the I/O Library"
++#string STR_MODULE_ABSTRACT             #language en-US "Produces the SMM CPU I/O 2 Protocol by using the services of the I/O Library. For a test."
+ 
+ #string STR_MODULE_DESCRIPTION          #language en-US "Produces the SMM CPU I/O 2 Protocol by using the services of the I/O Library."
+ 
+-- 
+2.27.0.windows.1
+

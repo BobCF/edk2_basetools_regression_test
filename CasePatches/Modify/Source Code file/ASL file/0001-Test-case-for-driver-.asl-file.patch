@@ -1,0 +1,30 @@
+From 759f65f490b35d8ddb6e5d85dad34785e4b0984d Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 20 Jul 2020 10:06:09 +0800
+Subject: [PATCH 1/1] Test case for driver .asl file
+
+Description: Change the name of '_HID' in the Device definition in the MdeModulePkg\Universal\Disk\RamDiskDxe\RamDisk.asl
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Universal/Disk/RamDiskDxe/RamDisk.asl | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Universal/Disk/RamDiskDxe/RamDisk.asl b/MdeModulePkg/Universal/Disk/RamDiskDxe/RamDisk.asl
+index 9615aaa66b48..aa7f8dbdb672 100644
+--- a/MdeModulePkg/Universal/Disk/RamDiskDxe/RamDisk.asl
++++ b/MdeModulePkg/Universal/Disk/RamDiskDxe/RamDisk.asl
+@@ -22,7 +22,7 @@ DefinitionBlock (
+       //
+       // Define _HID, "ACPI0012" NVDIMM Root Device
+       //
+-      Name (_HID, "ACPI0012")
++      Name (_HID, "ACPI0016")
+ 
+       //
+       // Readable name of this device
+-- 
+2.27.0.windows.1
+

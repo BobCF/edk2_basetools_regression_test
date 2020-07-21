@@ -1,0 +1,30 @@
+From 5712cbaaa90556d5cdf6b6ab6c8e4643caef499b Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 20 Jul 2020 13:20:37 +0800
+Subject: [PATCH 1/1] Test case for library .vfr file
+
+Description: Change the text key value in the MdeModulePkg/Library/BootManagerUiLib/BootManagerVfr.Vfr
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Library/BootManagerUiLib/BootManagerVfr.Vfr | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Library/BootManagerUiLib/BootManagerVfr.Vfr b/MdeModulePkg/Library/BootManagerUiLib/BootManagerVfr.Vfr
+index 4049fe677406..2eb70f3bcae0 100644
+--- a/MdeModulePkg/Library/BootManagerUiLib/BootManagerVfr.Vfr
++++ b/MdeModulePkg/Library/BootManagerUiLib/BootManagerVfr.Vfr
+@@ -34,7 +34,7 @@ formset
+               help  = STRING_TOKEN(STR_LAST_STRING ),
+               text  = STRING_TOKEN(STR_LAST_STRING ),
+               flags = INTERACTIVE,
+-              key   = 0x1212;
++              key   = 0x1215;
+      endif;
+ 
+     //
+-- 
+2.27.0.windows.1
+

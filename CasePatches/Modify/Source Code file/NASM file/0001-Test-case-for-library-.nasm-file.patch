@@ -1,0 +1,30 @@
+From 9baa79fbe4f73e3e46619d4ab84e495387689814 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 20 Jul 2020 10:45:14 +0800
+Subject: [PATCH 1/1] Test case for library .nasm file
+
+Description: Change the variable reference value in the CryptoPkg/Library/IntrinsicLib/Ia32/MathLShiftS64.nasm
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ CryptoPkg/Library/IntrinsicLib/Ia32/MathLShiftS64.nasm | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CryptoPkg/Library/IntrinsicLib/Ia32/MathLShiftS64.nasm b/CryptoPkg/Library/IntrinsicLib/Ia32/MathLShiftS64.nasm
+index 056b5b1fb17d..a72cb15b0a44 100644
+--- a/CryptoPkg/Library/IntrinsicLib/Ia32/MathLShiftS64.nasm
++++ b/CryptoPkg/Library/IntrinsicLib/Ia32/MathLShiftS64.nasm
+@@ -23,7 +23,7 @@ global ASM_PFX(__ashldi3)
+ ;
+ ;------------------------------------------------------------------------------
+ ASM_PFX(__ashldi3):
+-    cmp cl,0x40
++    cmp cl,0x20
+     jnc ReturnZero
+     cmp cl,0x20
+     jnc More32
+-- 
+2.27.0.windows.1
+

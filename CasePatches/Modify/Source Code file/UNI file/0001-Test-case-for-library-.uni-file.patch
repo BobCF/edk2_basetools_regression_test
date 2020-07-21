@@ -1,0 +1,30 @@
+From 8edd2bd27486f62725e1eff393306922ebe77774 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 20 Jul 2020 14:57:05 +0800
+Subject: [PATCH 1/1] Test case for library .uni file
+
+Description: Change the description string in the UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.uni.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.uni | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.uni b/UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.uni
+index 27cfdd37ae60..9700064d02b6 100644
+--- a/UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.uni
++++ b/UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.uni
+@@ -10,7 +10,7 @@
+ // **/
+ 
+ 
+-#string STR_MODULE_ABSTRACT             #language en-US "MP Initialize Library instance for DXE driver."
++#string STR_MODULE_ABSTRACT             #language en-US "MP Initialize Library instance for DXE driver.For a test"
+ 
+ #string STR_MODULE_DESCRIPTION          #language en-US "MP Initialize Library instance for DXE driver."
+ 
+-- 
+2.27.0.windows.1
+

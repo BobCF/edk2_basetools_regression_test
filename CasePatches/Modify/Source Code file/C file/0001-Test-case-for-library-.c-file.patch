@@ -1,0 +1,30 @@
+From 77787df5245c95ba363020ccddbde88c5ea8c912 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Fri, 17 Jul 2020 14:57:36 +0800
+Subject: [PATCH 1/1] Test case for library .c file
+
+Description: Change the value of 'mBmpImageHeaderTemplate' in the MdeModulePkg\Library\BaseBmpSupportLib\BmpSupportLib.c
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Library/BaseBmpSupportLib/BmpSupportLib.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Library/BaseBmpSupportLib/BmpSupportLib.c b/MdeModulePkg/Library/BaseBmpSupportLib/BmpSupportLib.c
+index 3ac31f6723d0..a32a82219af7 100644
+--- a/MdeModulePkg/Library/BaseBmpSupportLib/BmpSupportLib.c
++++ b/MdeModulePkg/Library/BaseBmpSupportLib/BmpSupportLib.c
+@@ -45,7 +45,7 @@ const BMP_IMAGE_HEADER  mBmpImageHeaderTemplate = {
+   0,      // ImageSize will be updated at runtime
+   0,      // XPixelsPerMeter
+   0,      // YPixelsPerMeter
+-  0,      // NumberOfColors
++  2,      // NumberOfColors
+   0       // ImportantColors
+ };
+ 
+-- 
+2.27.0.windows.1
+
