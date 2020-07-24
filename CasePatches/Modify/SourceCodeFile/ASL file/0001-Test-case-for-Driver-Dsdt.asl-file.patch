@@ -1,0 +1,38 @@
+From 0c0619586a9b62bd91f706d9e452f5e8e738c33e Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Fri, 24 Jul 2020 10:16:16 +0800
+Subject: [PATCH] Test case for Driver - Dsdt.asl file
+
+Description: Change the '_HID' name and 'WORDBusNumber' defined in the TestPkg/AcpiTables/Dsdt.asl
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/Dsdt.asl | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/TestPkg/AcpiTables/Dsdt.asl b/TestPkg/AcpiTables/Dsdt.asl
+index 85f9b78d79..4f7424486c 100644
+--- a/TestPkg/AcpiTables/Dsdt.asl
++++ b/TestPkg/AcpiTables/Dsdt.asl
+@@ -24,7 +24,7 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+     // PCI Root Bridge
+     //
+     Device (PCI0) {
+-      Name (_HID, EISAID ("PNP0A03"))
++      Name (_HID, EISAID ("PNP0A08"))
+       Name (_ADR, 0x00000000)
+       Name (_BBN, 0x00)
+       Name (_UID, 0x00)
+@@ -40,7 +40,7 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+           PosDecode,             // PosDecode
+           0x0000,                // Granularity
+           0x0000,                // Min
+-          0x00FF,                // Max
++          0x00FE,                // Max
+           0x0000,                // Translation
+           0x0100                 // Range Length = Max-Min+1
+           )
+-- 
+2.27.0.windows.1
+
