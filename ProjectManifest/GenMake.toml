@@ -1,0 +1,27 @@
+[Defines]
+    workdir = "/home/bfeng1/DCG10nm/Intel"
+    projectname = "GenMake"
+    workspace = "/home/bfeng1/DCG10nm/Intel"
+    cache_dir = ""
+
+[[Repo]]
+    name = 'edk2'
+    git = 'https://github.com/tianocore/edk2.git'
+    branch = 'master'
+    version = 'head'
+
+[Basic]
+    [[Basic.step]]
+        name = "BuildPlatform"
+        depends = []
+        [Basic.step.command]
+            cmd = 'build'
+            parameters = ['cleanall','-D','LINUX_GCC_BUILD=TRUE','-D','XMLCLI_COMPILE=FALSE','-D','SV_BIOS_ENABLE=FALSE','-D','CORE_BIN_BUILD=FALSE','-D','LEGACY_BIN_BUILD=FALSE','-D','MAX_SOCKET=4','-D','MAX_CORE=64','-D','MAX_THREAD=2','-D','PCHTARGET=LBG','-D','CPUTARGET=ICX','-D','SKUCPU=','-D','SUB_TARGET=','-D','DEFINED_PLATFORM_FLAG=None','-D','BUILD_TARGET=DEBUG','-D','PLATFORM_PKG=MinPlatformPkg','-D','SILICON_PKG=ServerSiliconPkg','-D','SECURITY_PKG=ServerSecurityPkg','-D','PLATFORM_RESTRICTED_PKG=None','-D','PCH_PKG=ServerSiliconPkg/Pch/SouthClusterLbg','-D','RP_PKG=WhitleyOpenboardPkg','-t','GCC5','-a','IA32','-a','X64','-p','WhitleyOpenboardPkg/PlatformPkg.dsc','-D','BUILD_WITH_LEGACY_STACK=TRUE','-n','5','-D','PCD_DYNAMIC_AS_DYNAMICEX','-y','report.txt','-D','FSP_BUILD=TRUE','-D','FSP_MODE=1']
+        output_type = ['File']
+    [[Basic.step]]
+        name = "BuildPlatform"
+        depends = []
+        [Basic.step.command]
+            cmd = 'build'
+            parameters = ['-D','LINUX_GCC_BUILD=TRUE','-D','XMLCLI_COMPILE=FALSE','-D','SV_BIOS_ENABLE=FALSE','-D','CORE_BIN_BUILD=FALSE','-D','LEGACY_BIN_BUILD=FALSE','-D','MAX_SOCKET=4','-D','MAX_CORE=64','-D','MAX_THREAD=2','-D','PCHTARGET=LBG','-D','CPUTARGET=ICX','-D','SKUCPU=','-D','SUB_TARGET=','-D','DEFINED_PLATFORM_FLAG=None','-D','BUILD_TARGET=DEBUG','-D','PLATFORM_PKG=MinPlatformPkg','-D','SILICON_PKG=ServerSiliconPkg','-D','SECURITY_PKG=ServerSecurityPkg','-D','PLATFORM_RESTRICTED_PKG=None','-D','PCH_PKG=ServerSiliconPkg/Pch/SouthClusterLbg','-D','RP_PKG=WhitleyOpenboardPkg','-t','GCC5','-a','IA32','-a','X64','-p','WhitleyOpenboardPkg/PlatformPkg.dsc','-D','BUILD_WITH_LEGACY_STACK=TRUE','-n','5','-D','PCD_DYNAMIC_AS_DYNAMICEX','-y','report.txt','-D','FSP_BUILD=TRUE','-D','FSP_MODE=1']
+        output_type = ['File']

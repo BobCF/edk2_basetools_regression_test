@@ -7,6 +7,7 @@ def pytest_addoption(parser):
         action="store", 
         dest="platform",
         default=r"./ProjectManifest/TestPkg.toml",
+        #default=r"./ProjectManifest/GenMake.toml"
         help="The Platform name",
     )
     parser.addoption(

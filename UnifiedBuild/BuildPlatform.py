@@ -6,7 +6,6 @@ def BuildPlatform(PlatformWorkingPath,BuildSteps,ignore_steps=None):
     if ignore_steps is None:
         ignore_steps = []
     env_dict = os.environ
-    env_dict['PYTHON_HOME'] = r"c:\python27"
     for step in BuildSteps.get('step'):
         if step['name'] in ignore_steps:
             continue
@@ -24,13 +23,16 @@ def BuildPlatform(PlatformWorkingPath,BuildSteps,ignore_steps=None):
             cmds.append("set")
             need_capture_output = True
         print(cmds)
+        print(env_dict['PATH'])
         rt = subprocess.run(cmds,capture_output=need_capture_output,cwd=PlatformWorkingPath,shell=True,text=True,env=env_dict)
+        #rt = subprocess.run(cmds,cwd=PlatformWorkingPath,env=env_dict) # py36 on linux
         if rt.returncode != 0:
             print(rt.stderr)
             print(rt.stdout)
             exit(1)
         if "EnvVar" in output_type:
             envirmentvar = rt.stdout
+            print (envirmentvar)
             for envi in envirmentvar.split("\n"):
                 try:
                     name,value = envi.split("=")
