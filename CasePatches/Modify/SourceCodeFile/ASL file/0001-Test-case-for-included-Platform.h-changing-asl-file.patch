@@ -1,0 +1,29 @@
+From 8b58f6cc8a96f216b4c77aad7810018ba1f7b3d4 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 28 Jul 2020 14:13:14 +0800
+Subject: [PATCH] Test case for included Platform.h changing - asl file
+
+Description: Change the Platform.h files which included in the TestPkg\AcpiTables\Dsdt.asl.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/Platform.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/AcpiTables/Platform.h b/TestPkg/AcpiTables/Platform.h
+index b1341ee2a4..d6606c56f1 100644
+--- a/TestPkg/AcpiTables/Platform.h
++++ b/TestPkg/AcpiTables/Platform.h
+@@ -52,7 +52,7 @@
+                          EFI_ACPI_2_0_RESET_REG_SUP)
+ #define RESET_REG       0xCF9
+ #define RESET_VALUE     (BIT2 | BIT1) // PIIX3 Reset CPU + System Reset
+-#define MAX_DWORDMEMORY 0x000BFFFF
++#define MAX_DWORDMEMORY 0x000BFFEE
+ 
+ //
+ // Byte-aligned IO port register block initializer for
+-- 
+2.27.0.windows.1
+

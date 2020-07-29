@@ -1,0 +1,31 @@
+From 1daacf7550a3f22d0563d0d6a9d88787b502fa13 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 27 Jul 2020 14:11:45 +0800
+Subject: [PATCH] Test case for included SwitchRam.asm changing - asm file
+
+Description: Change the SwitchRam.asm included in the TestPkg/FakeEmuSec/Ia32/Test.asm.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Ia32/SwitchRam.asm | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+index 99ef002980..b06278dc35 100644
+--- a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
++++ b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+@@ -40,8 +40,8 @@ SecSwitchStack   PROC
+     ; memory at first!
+     ;
+ 
+-    mov   ebx, [esp + 20]          ; Save the first parameter
+-    mov   ecx, [esp + 24]          ; Save the second parameter
++    mov   ebx, [esp + 22]          ; Save the first parameter
++    mov   ecx, [esp + 26]          ; Save the second parameter
+ 
+     ;
+     ; Save this function's return address into permanent memory at first.
+-- 
+2.27.0.windows.1
+

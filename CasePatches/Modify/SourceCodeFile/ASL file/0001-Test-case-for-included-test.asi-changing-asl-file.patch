@@ -1,0 +1,29 @@
+From c026d83a2645555e99425485a7069c70bd8e1018 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 28 Jul 2020 14:11:36 +0800
+Subject: [PATCH] Test case for included test.asi changing - asl file
+
+Description: Change the test.asi files which included in the TestPkg\AcpiTables\Dsdt.asl.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/test.asi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/AcpiTables/test.asi b/TestPkg/AcpiTables/test.asi
+index 95554593d2..676de1cd14 100644
+--- a/TestPkg/AcpiTables/test.asi
++++ b/TestPkg/AcpiTables/test.asi
+@@ -26,7 +26,7 @@
+ **/
+ 
+ 
+-#define MAX_QWordMemory  0xFFFFFFFFFF
++#define MAX_QWordMemory  0xFFFFFFFFFC
+ 
+ 
+ 
+-- 
+2.27.0.windows.1
+
