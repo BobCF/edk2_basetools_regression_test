@@ -1,0 +1,29 @@
+From 7b495a864876b7e1973dc1511aad0d41b2db9628 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 10:10:01 +0800
+Subject: [PATCH] Test case7 for Change default value of PcdsDynamic PCD
+
+Description: Change default value of PcdsDynamic PCD as ("gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|32") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 532d084223..50ada826db 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -184,7 +184,7 @@ gEfiMdeModulePkgTokenSpaceGuid.PcdPeiFullPcdDatabaseEnable|TRUE
+ gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang|"en-US"|VOID*|0x0000001f
+ 
+ [PcdsDynamicDefault]
+-gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|64
++gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|32
+ 
+ [PcdsDynamicVpd]
+ gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase64|0x8000001
+-- 
+2.27.0.windows.1
+

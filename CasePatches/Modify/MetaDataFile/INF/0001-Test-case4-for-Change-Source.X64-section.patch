@@ -1,0 +1,54 @@
+From 8f0c1a1622c5d5eecd290f0c61e710d6182cabd7 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 12:53:01 +0800
+Subject: [PATCH] Test case4 for Change Source.X64 section
+
+Description: Add a new source in Source.X64 section (Add the "Test_inf.h") in TestPkg/FakeEmuSec/Sec.inf.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Sec.inf           | 1 +
+ TestPkg/FakeEmuSec/X64/SwitchRam.asm | 5 +++--
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/TestPkg/FakeEmuSec/Sec.inf b/TestPkg/FakeEmuSec/Sec.inf
+index 0a10d74c0b..ea51850480 100644
+--- a/TestPkg/FakeEmuSec/Sec.inf
++++ b/TestPkg/FakeEmuSec/Sec.inf
+@@ -24,6 +24,7 @@
+ [Sources.X64]
+   X64/SwitchRam.asm
+   X64/SwitchRam.S
++  X64/Test_inf.h
+ 
+ [Sources.IA32]
+   Ia32/TempRam.c
+diff --git a/TestPkg/FakeEmuSec/X64/SwitchRam.asm b/TestPkg/FakeEmuSec/X64/SwitchRam.asm
+index e66bda5bf4..aa8007b969 100644
+--- a/TestPkg/FakeEmuSec/X64/SwitchRam.asm
++++ b/TestPkg/FakeEmuSec/X64/SwitchRam.asm
+@@ -6,6 +6,7 @@
+ ;
+ ;------------------------------------------------------------------------------
+ 
++#include "Test_inf.h"
+ EXTERN CopyMem:PROC
+ EXTERN ZeroMem:PROC
+ 
+@@ -40,10 +41,10 @@ SecTemporaryRamSupport PROC
+   ;          %rcx,                %rdx,                %r8
+   mov     rcx, r8       ; Shift arguments
+   mov     r8, r9
+-  sub     rsp, 028h     ; Allocate register spill area & 16-byte align stack
++  sub     rsp, testaddr1     ; Allocate register spill area & 16-byte align stack
+   call    CopyMem
+   ; Temp mem stack now copied to permanent location. %esp still in temp memory
+-  add     rsp, 028h
++  add     rsp, testaddr1
+ 
+   pop     r9            ; CopySize (old stack)
+   pop     r8            ; PermanentMemoryBase (old stack)
+-- 
+2.27.0.windows.1
+

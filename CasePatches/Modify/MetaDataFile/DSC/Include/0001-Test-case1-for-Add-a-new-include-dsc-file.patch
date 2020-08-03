@@ -1,0 +1,28 @@
+From 48f76e6ad719d0fdfdddf006c94c7e16c61b74ea Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 12:10:19 +0800
+Subject: [PATCH] Test case1 for Add a new include dsc file
+
+Description: Add a new include dsc file ("!include PcdSettings.dsc") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 532d084223..671c1a22ae 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -70,6 +70,7 @@
+ !endif
+ 
+ !include buildoptions.dsc
++!include PcdSettings.dsc
+ 
+ ################################################################################
+ #
+-- 
+2.27.0.windows.1
+

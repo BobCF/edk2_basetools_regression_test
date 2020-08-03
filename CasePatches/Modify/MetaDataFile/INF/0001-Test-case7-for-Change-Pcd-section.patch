@@ -1,0 +1,25 @@
+From cad992210e41ae1bbd017329ab069375bacdcdde Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 13:06:26 +0800
+Subject: [PATCH] Test case7 for Change Pcd section
+
+Description: Add a new Pcd in Pcd section (Add the "gEmulatorPkgTokenSpaceGuid.PcdNetworkPacketFilterSize") in TestPkg/FakeEmuSec/Sec.inf.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Sec.inf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/FakeEmuSec/Sec.inf b/TestPkg/FakeEmuSec/Sec.inf
+index 0a10d74c0b..9f51e5c333 100644
+--- a/TestPkg/FakeEmuSec/Sec.inf
++++ b/TestPkg/FakeEmuSec/Sec.inf
+@@ -50,3 +50,4 @@
+ 
+ [Pcd]
+   gEmulatorPkgTokenSpaceGuid.PcdPeiServicesTablePage
++  gEmulatorPkgTokenSpaceGuid.PcdNetworkPacketFilterSize
+-- 
+2.27.0.windows.1
+

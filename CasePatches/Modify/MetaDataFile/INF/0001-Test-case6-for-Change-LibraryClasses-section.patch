@@ -1,0 +1,28 @@
+From 874cf0e9e4bc59b96c8adb48cee597184a4e06f9 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 13:03:51 +0800
+Subject: [PATCH] Test case6 for Change LibraryClasses section
+
+Description: Add a new library in LibraryClasses section (Add the "CpuLib") in TestPkg/FakeEmuSec/Sec.inf.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Sec.inf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/FakeEmuSec/Sec.inf b/TestPkg/FakeEmuSec/Sec.inf
+index 0a10d74c0b..596245e66e 100644
+--- a/TestPkg/FakeEmuSec/Sec.inf
++++ b/TestPkg/FakeEmuSec/Sec.inf
+@@ -44,6 +44,7 @@
+   PeiServicesLib
+   PpiListLib
+   BaseMemoryLib
++  CpuLib
+ 
+ [Ppis]
+   gEfiTemporaryRamSupportPpiGuid
+-- 
+2.27.0.windows.1
+

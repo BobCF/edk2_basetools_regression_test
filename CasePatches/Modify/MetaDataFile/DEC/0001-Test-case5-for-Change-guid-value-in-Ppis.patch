@@ -1,0 +1,29 @@
+From 1a596a24910bf542c3283d2de68edc88e2e406a3 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 12:33:21 +0800
+Subject: [PATCH] Test case5 for Change guid value in Ppis
+
+Description: Change guid value in Ppis section (to gPeiAtaControllerPpiGuid = { 0xf47e6981, 0xcef9, 0x4e8a, { 0xc0, 0x3a, 0xbe, 0x77, 0x7f, 0x12, 0x34, 0x6d }}) in MdeModulePkg/MdeModulePkg.dec.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/MdeModulePkg.dec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/MdeModulePkg.dec b/MdeModulePkg/MdeModulePkg.dec
+index 843e963ad3..98c59e4df7 100644
+--- a/MdeModulePkg/MdeModulePkg.dec
++++ b/MdeModulePkg/MdeModulePkg.dec
+@@ -391,7 +391,7 @@
+ 
+ [Ppis]
+   ## Include/Ppi/AtaController.h
+-  gPeiAtaControllerPpiGuid       = { 0xa45e60d1, 0xc719, 0x44aa, { 0xb0, 0x7a, 0xaa, 0x77, 0x7f, 0x85, 0x90, 0x6d }}
++  gPeiAtaControllerPpiGuid       = { 0xf47e6981, 0xcef9, 0x4e8a, { 0xc0, 0x3a, 0xbe, 0x77, 0x7f, 0x12, 0x34, 0x6d }}
+ 
+   ## Include/Ppi/UsbHostController.h
+   gPeiUsbHostControllerPpiGuid   = { 0x652B38A9, 0x77F4, 0x453F, { 0x89, 0xD5, 0xE7, 0xBD, 0xC3, 0x52, 0xFC, 0x53 }}
+-- 
+2.27.0.windows.1
+
