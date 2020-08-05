@@ -65,7 +65,7 @@ class Test_PlatformRegression():
     def setup_cases(self,setup_repository,request):
         repo_mgr = setup_repository
         patch = request.param
-        repo_mgr.revert_patch(patch)
+        repo_mgr.reset((patch[0],"92cdc66d1b"))
         repo_mgr.apply_cases(patch)
         print(self.build_cate)
         build_steps = self.manifest.BuildCate.get(self.build_cate)
@@ -82,7 +82,7 @@ class Test_PlatformRegression():
         # First time build with patch
         BuildPlatform(working_dir,build_steps)
         self.PrepareBaseLine()
-        repo_mgr.revert_patch(patch)
+        repo_mgr.reset((patch[0],"92cdc66d1b"))
 
         #fist time build without patch
         BuildPlatform(working_dir,build_steps)
@@ -90,7 +90,7 @@ class Test_PlatformRegression():
 
         yield
         repo_mgr.clean_all()
-        repo_mgr.revert_patch(patch)
+        repo_mgr.reset((patch[0],"92cdc66d1b"))
         try:
             print(self.BaseLine_dir)
             shutil.rmtree(self.tmp_dir)

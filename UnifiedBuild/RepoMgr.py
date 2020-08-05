@@ -40,7 +40,8 @@ class Repo():
         
     def revert_patch(self):
         ''' apply the patch_path to specific repo named repo_name '''
-        self.git_cmd("reset", "9c046b4cef4d40c6a7b6207b7a81028ac1f2e346","--hard") 
+    def reset_version(self,version):
+        self.git_cmd("reset", version,"--hard") 
         
     def status(self):
         ''' 0 is repo does not exist, 1 is repo exists '''
@@ -93,13 +94,11 @@ class RepoMgr():
         print("============")
         repo = self.get_repo(repo_name)
         repo.apply_patches([patch_path])
-    def revert_patch(self,case):
-        print(case)
-        repo_name, patch_path = case
-        print(patch_path)
-        print("============")
+
+    def reset(self,case):
+        repo_name, version = case
         repo = self.get_repo(repo_name)
-        repo.revert_patch()
+        repo.reset_version(version)
  
 class git_error(Exception):
     """Error to raise when Git commands fail."""
