@@ -1,6 +1,6 @@
-From f624ba457de24def838ecf4e5fe53a0ad9f35d57 Mon Sep 17 00:00:00 2001
+From b350fdb1eab1a05b1e83f7db8090f37f79cb2966 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Wed, 29 Jul 2020 11:44:52 +0800
+Date: Thu, 6 Aug 2020 10:39:24 +0800
 Subject: [PATCH] Test case5 for Add module in component&library class
 
 Description: Add the library module (MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf) in component (Sec) section and library class.
@@ -14,17 +14,17 @@ Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
  3 files changed, 3 insertions(+)
 
 diff --git a/TestPkg/LibraryClass.dsc b/TestPkg/LibraryClass.dsc
-index 6530bafbe7..c3b63cd685 100644
+index 6530bafbe7..64a27ae8fb 100644
 --- a/TestPkg/LibraryClass.dsc
 +++ b/TestPkg/LibraryClass.dsc
-@@ -44,6 +44,7 @@ NvVarsFileLib|TestPkg/Library/NvVarsFileLib/NvVarsFileLib.inf
-   MtrrLib|UefiCpuPkg/Library/MtrrLib/MtrrLib.inf
-   FakeLibraryLib|TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.inf
-   LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
-+  SortLib|MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf
- 
+@@ -48,6 +48,7 @@ NvVarsFileLib|TestPkg/Library/NvVarsFileLib/NvVarsFileLib.inf
  [LibraryClasses.common.SEC]
    TimerLib|TestPkg/Library/AcpiTimerLib/BaseRomAcpiTimerLib.inf
+   PpiListLib|EmulatorPkg/Library/SecPpiListLib/SecPpiListLib.inf
++  SortLib|MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf
+   
+ !ifdef $(DEBUG_ON_SERIAL_PORT)
+   DebugLib|MdePkg/Library/BaseDebugLibSerialPort/BaseDebugLibSerialPort.inf
 diff --git a/TestPkg/Sec/SecMain.inf b/TestPkg/Sec/SecMain.inf
 index 3066e0d102..a8f073f581 100644
 --- a/TestPkg/Sec/SecMain.inf
@@ -38,7 +38,7 @@ index 3066e0d102..a8f073f581 100644
  [Ppis]
    gEfiTemporaryRamSupportPpiGuid                # PPI ALWAYS_PRODUCED
 diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
-index b24f19fc5f..4e2d1693eb 100644
+index 8c881de93b..4f167ae720 100644
 --- a/TestPkg/TestPkg32X64.dsc
 +++ b/TestPkg/TestPkg32X64.dsc
 @@ -118,6 +118,7 @@
