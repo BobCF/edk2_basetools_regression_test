@@ -1,6 +1,6 @@
-From 54994555bd1525780dd194c97d4f2349881be085 Mon Sep 17 00:00:00 2001
+From 11b61336930ba392b88e017d6b7cb135cd2a6068 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Wed, 29 Jul 2020 11:51:16 +0800
+Date: Thu, 6 Aug 2020 11:09:47 +0800
 Subject: [PATCH] Test case8 for delete arch miss driver
 
 Description: Delete the Driver (MdeModulePkg\Universal\DevicePathDxe\DevicePathDxe.inf) which only located in dsc component, while command only build IA32.
@@ -12,15 +12,18 @@ Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
-index b24f19fc5f..e94cc0b24d 100644
+index 8c881de93b..d4f38537c8 100644
 --- a/TestPkg/TestPkg32X64.dsc
 +++ b/TestPkg/TestPkg32X64.dsc
-@@ -166,4 +166,4 @@
+@@ -166,7 +166,7 @@
    }
    FatPkg/EnhancedFatDxe/Fat.inf
    TestPkg/AcpiTables/AcpiTables.inf
 -  MdeModulePkg\Universal\DevicePathDxe\DevicePathDxe.inf
 +  #MdeModulePkg\Universal\DevicePathDxe\DevicePathDxe.inf
+ 
+ 
+ 
 -- 
 2.27.0.windows.1
 
