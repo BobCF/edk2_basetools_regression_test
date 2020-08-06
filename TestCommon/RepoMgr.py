@@ -8,8 +8,13 @@ class Repo():
         self.link = link
         self.branch = branch
         self.version = version
+        ver = self.git_cmd("ls-remote","origin","refs/heads/IncrementalBuildTest")
+        self.version = ver[0].split()[0].strip()
+        print(self.version)
     
     def git_cmd(self, *args):
+        if not os.path.exists(self.workspace):
+            raise git_error(message = "workspace does not exist.")
         with cd(self.workspace):
             error, lines = cli_cmd('git', *args)
             if error:
@@ -26,25 +31,37 @@ class Repo():
     
     def checkout(self):
         ''' check out self.branch '''
-        
+
     def clean(self):
         ''' clean all the un-tracked files '''
+        self.git_cmd("clean","-ffd")
         
     def reset(self):
         ''' reset the repo to self.version '''
+        self.git_cmd("reset","--hard")
         
     def apply_patches(self,patchfile):
         if patchfile:
-            self.git_cmd("reset", "--hard") 
-            self.git_cmd("am", "--3way", "--ignore-space-change", "--keep-cr", patchfile[0]) 
+            try:
+                self.git_cmd("reset", "--hard")
+                self.git_cmd("am", "--3way", "--ignore-space-change", "--keep-cr", patchfile[0])
+            except git_error as ge:
+                print(str(ge))
+                self.git_cmd("am", "--abort")
         
     def revert_patch(self):
         ''' apply the patch_path to specific repo named repo_name '''
-    def reset_version(self,version):
-        self.git_cmd("reset", version,"--hard") 
+    def reset_version(self):
+        try:
+            print(self.version)
+            self.git_cmd("reset", self.version,"--hard") 
+        except git_error as ge:
+            print(str(ge))
+            assert 0, "Repo %s need to update." % self.name
         
     def status(self):
         ''' 0 is repo does not exist, 1 is repo exists '''
+        return 1
         
 class RepoMgr():
     def __init__(self,workspace, repo_conf):
@@ -78,7 +95,8 @@ class RepoMgr():
 
     def clean_all(self):
         ''' clean all the repo '''
-        print("clean all")
+        for repo in self.Repos:
+            repo.git_cmd("clean","-ffd")
 
     def setup_repo(self):
         for repo in self.Repos:
@@ -96,9 +114,9 @@ class RepoMgr():
         repo.apply_patches([patch_path])
 
     def reset(self,case):
-        repo_name, version = case
+        repo_name = case
         repo = self.get_repo(repo_name)
-        repo.reset_version(version)
+        repo.reset_version()
  
 class git_error(Exception):
     """Error to raise when Git commands fail."""

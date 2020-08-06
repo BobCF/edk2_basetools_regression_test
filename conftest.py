@@ -1,5 +1,4 @@
-from Manifest import Manifest
-from CaseMgr import case_mgr
+from TestCommon.Manifest import Manifest
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -19,7 +18,9 @@ def pytest_addoption(parser):
         help="How many commit number patch will be generated",
     )
 
+
 def pytest_generate_tests(metafunc):
     metafunc.cls.target_platform = metafunc.config.getoption("platform")
     metafunc.cls.manifest = Manifest(metafunc.config.getoption("platform"))
     metafunc.cls.build_cate = metafunc.config.getoption("build_cate")
+

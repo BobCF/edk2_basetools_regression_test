@@ -23,9 +23,9 @@ class CaseMgr():
     If the case bom list exist, will check and update this file.
     '''
     
-    def __init__(self):
+    def __init__(self,case_dir):
         self._case_list = []
-        self.case_dir = r".\CasePatches"
+        self.case_dir = case_dir
     def update_case_bom(self):
         ''' update bom list based on file '''
     
@@ -101,6 +101,3 @@ class CaseMgr():
                     PatchInfo['Description'] += line
         PatchInfo['path'] = os.path.abspath(patch_file)
         return PatchInfo
-
-
-case_mgr = CaseMgr()
