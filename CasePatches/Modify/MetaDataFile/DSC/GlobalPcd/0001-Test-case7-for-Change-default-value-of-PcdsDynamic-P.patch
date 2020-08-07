@@ -1,6 +1,6 @@
-From 7b495a864876b7e1973dc1511aad0d41b2db9628 Mon Sep 17 00:00:00 2001
+From 07eb0925ed62aa8a18c18515443cada5cf0e9f97 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Mon, 3 Aug 2020 10:10:01 +0800
+Date: Fri, 7 Aug 2020 09:30:33 +0800
 Subject: [PATCH] Test case7 for Change default value of PcdsDynamic PCD
 
 Description: Change default value of PcdsDynamic PCD as ("gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|32") in TestPkg/TestPkg32X64.dsc.
@@ -8,19 +8,28 @@ Description: Change default value of PcdsDynamic PCD as ("gUefiCpuPkgTokenSpaceG
 Repo: edk2
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---
- TestPkg/TestPkg32X64.dsc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ TestPkg/TestPkg32X64.dsc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
-index 532d084223..50ada826db 100644
+index 8c881de93b..4115dd7350 100644
 --- a/TestPkg/TestPkg32X64.dsc
 +++ b/TestPkg/TestPkg32X64.dsc
+@@ -93,7 +93,7 @@
+   gEfiMdeModulePkgTokenSpaceGuid.PcdSetNxForStack|FALSE
+   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvStoreReserved|0
+   gUefiCpuPkgTokenSpaceGuid.PcdCpuBootLogicalProcessorNumber|0
+-  gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|64
++  gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|32
+   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiS3Enable|FALSE
+   gEfiMdeModulePkgTokenSpaceGuid.PcdPciDisableBusEnumeration|FALSE
+ !if $(SMM_REQUIRE) == FALSE
 @@ -184,7 +184,7 @@ gEfiMdeModulePkgTokenSpaceGuid.PcdPeiFullPcdDatabaseEnable|TRUE
  gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang|"en-US"|VOID*|0x0000001f
  
  [PcdsDynamicDefault]
 -gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|64
-+gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|32
++#gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|64
  
  [PcdsDynamicVpd]
  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase64|0x8000001
