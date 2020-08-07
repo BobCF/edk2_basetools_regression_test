@@ -1,6 +1,6 @@
-From c026d83a2645555e99425485a7069c70bd8e1018 Mon Sep 17 00:00:00 2001
+From 81576777f139284a5bc892857a10f2ea2c72a549 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Tue, 28 Jul 2020 14:11:36 +0800
+Date: Fri, 7 Aug 2020 13:59:21 +0800
 Subject: [PATCH] Test case for included test.asi changing - asl file
 
 Description: Change the test.asi files which included in the TestPkg\AcpiTables\Dsdt.asl.
@@ -8,9 +8,23 @@ Description: Change the test.asi files which included in the TestPkg\AcpiTables\
 Repo: edk2
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---
+ TestPkg/AcpiTables/Dsdt.asl | 2 +-
  TestPkg/AcpiTables/test.asi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/TestPkg/AcpiTables/Dsdt.asl b/TestPkg/AcpiTables/Dsdt.asl
+index 383d72af54..6085ee7d9d 100644
+--- a/TestPkg/AcpiTables/Dsdt.asl
++++ b/TestPkg/AcpiTables/Dsdt.asl
+@@ -117,7 +117,7 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+             0x8000000000,        // Min
+             MAX_QWordMemory,     // Max
+             0x00000000,          // Translation
+-            0x8000000000,        // Range Length
++            0x7FFFFFFFFD,        // Range Length
+             ,                    // ResourceSourceIndex
+             ,                    // ResourceSource
+             PW64                 // DescriptorName
 diff --git a/TestPkg/AcpiTables/test.asi b/TestPkg/AcpiTables/test.asi
 index 95554593d2..676de1cd14 100644
 --- a/TestPkg/AcpiTables/test.asi
