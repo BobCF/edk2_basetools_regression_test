@@ -1,19 +1,20 @@
-From 2938adf9e0e6d027a0cfb1729be353c9f743a80d Mon Sep 17 00:00:00 2001
+From 27106b244c52efbae0499dc409c5406d47cfa2fe Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Mon, 27 Jul 2020 15:15:37 +0800
+Date: Mon, 24 Aug 2020 11:36:42 +0800
 Subject: [PATCH] Test case for included UniIncluded.uni-changing Extra.uni
  file
 
 Description: Change the description in the TestPkg/Library/BaseFakeLibraryLib/UniIncluded.uni which is included in the Extra .uni file.
 
 Repo: edk2
+
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---
  TestPkg/Library/BaseFakeLibraryLib/UniIncluded.uni | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/TestPkg/Library/BaseFakeLibraryLib/UniIncluded.uni b/TestPkg/Library/BaseFakeLibraryLib/UniIncluded.uni
-index 5796a7f25c..7c9119cad0 100644
+index 5796a7f25c..149d258a0e 100644
 --- a/TestPkg/Library/BaseFakeLibraryLib/UniIncluded.uni
 +++ b/TestPkg/Library/BaseFakeLibraryLib/UniIncluded.uni
 @@ -15,7 +15,7 @@
@@ -21,7 +22,7 @@ index 5796a7f25c..7c9119cad0 100644
  #langdef en-US  "English"
  
 -#string EXTRAINC_ABSTRACT             #language en-US "This is the UNI included in the Extra ABSTRACT of the Module"
-+#string EXTRAINC_ABSTRACT             #language en-US "This is the UNI included in the Extra ABSTRACT of the Module for a test"
++#string EXTRAINC_ABSTRACT             #language en-US "For a test: This is the UNI included in the Extra ABSTRACT of the Module"
  
  #string EXTRAINC_DESCRIPTION          #language en-US "This is the UNI included in the Extra DESCRIPTION of the Module"
  

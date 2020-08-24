@@ -1,0 +1,30 @@
+From f5c62d42864cd8f67654aeabb7659767b2d0fe9c Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Fri, 21 Aug 2020 14:44:57 +0800
+Subject: [PATCH] Test case6 for Change Pcd value in PcdsFixedAtBuild
+
+Description: Change Pcd value in PcdsFixedAtBuild section in MdeModulePkg/MdeModulePkg.dec.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdePkg/MdePkg.dec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdePkg/MdePkg.dec b/MdePkg/MdePkg.dec
+index 682e61cb88..ed10ad767d 100644
+--- a/MdePkg/MdePkg.dec
++++ b/MdePkg/MdePkg.dec
+@@ -2205,7 +2205,7 @@
+   #  BIT2 - Enable Debug Code.<BR>
+   # @Prompt Report Status Code Property.
+   # @Expression  0x80000002 | (gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask & 0xF8) == 0
+-  gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask|0|UINT8|0x00000007
++  gEfiMdePkgTokenSpaceGuid.PcdReportStatusCodePropertyMask|0|UINT8|0x000000000
+ 
+   ## This value is used to fill a segment of memory when PcdDebugPropertyMask Clear Memory is enabled.
+   # @Prompt Value to Clear Memory.
+-- 
+2.27.0.windows.1
+

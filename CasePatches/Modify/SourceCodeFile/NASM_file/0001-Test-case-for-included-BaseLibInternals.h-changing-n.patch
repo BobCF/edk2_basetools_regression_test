@@ -1,0 +1,44 @@
+From 25bd531e11dc64b9e09c9a48a1b1fa1fb0068c38 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 24 Aug 2020 13:34:06 +0800
+Subject: [PATCH] Test case for included BaseLibInternals.h changing - nasm
+ file
+
+Description: Change the BaseLibInternals.h files which included in the MdePkg/Library/BaseLib/Ia32/Thunk16.nasm.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdePkg/Library/BaseLib/BaseLibInternals.h | 1 +
+ MdePkg/Library/BaseLib/Ia32/Thunk16.nasm  | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/MdePkg/Library/BaseLib/BaseLibInternals.h b/MdePkg/Library/BaseLib/BaseLibInternals.h
+index 6837d67d90..e8e38a22b9 100644
+--- a/MdePkg/Library/BaseLib/BaseLibInternals.h
++++ b/MdePkg/Library/BaseLib/BaseLibInternals.h
+@@ -8,6 +8,7 @@
+ 
+ #ifndef __BASE_LIB_INTERNALS__
+ #define __BASE_LIB_INTERNALS__
++#define testaddr0 64
+ 
+ #include <Base.h>
+ #include <Library/BaseLib.h>
+diff --git a/MdePkg/Library/BaseLib/Ia32/Thunk16.nasm b/MdePkg/Library/BaseLib/Ia32/Thunk16.nasm
+index 03a300dc68..a2fe0bea86 100644
+--- a/MdePkg/Library/BaseLib/Ia32/Thunk16.nasm
++++ b/MdePkg/Library/BaseLib/Ia32/Thunk16.nasm
+@@ -219,7 +219,7 @@ BITS    32
+     add     edi, eax                    ; edi <- linear address of 16-bit stack
+     pop     ecx
+     rep     movsd                       ; copy RegSet
+-    mov     eax, [esp + 40]             ; eax <- address of transition code
++    mov     eax, [esp + testaddr0]             ; eax <- address of transition code
+     mov     esi, edx                    ; esi <- 16-bit stack segment
+     lea     edx, [eax + (_BackFromUserCode.SavedCr0End - ASM_PFX(m16Start))]
+     mov     ecx, eax
+-- 
+2.27.0.windows.1
+

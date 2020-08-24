@@ -1,0 +1,56 @@
+From 6f534bd51733d4c08b633c854ec4fa761781f26c Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Thu, 20 Aug 2020 16:38:06 +0800
+Subject: [PATCH] Test case for included String.h changing - FrontPage.h file
+
+Description: Change the String.h files which included in the MdeModulePkg\Application\UiApp\FrontPage.h.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Application/UiApp/FrontPage.c | 2 +-
+ MdeModulePkg/Application/UiApp/FrontPage.h | 1 +
+ MdeModulePkg/Application/UiApp/String.h    | 1 +
+ 3 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Application/UiApp/FrontPage.c b/MdeModulePkg/Application/UiApp/FrontPage.c
+index 4b95cccb5c..25fed6daa1 100644
+--- a/MdeModulePkg/Application/UiApp/FrontPage.c
++++ b/MdeModulePkg/Application/UiApp/FrontPage.c
+@@ -10,7 +10,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
+ #include "FrontPage.h"
+ #include "FrontPageCustomizedUi.h"
+ 
+-#define MAX_STRING_LEN            200
++#define MAX_STRING_LEN            test_len
+ 
+ EFI_GUID   mFrontPageGuid      = FRONT_PAGE_FORMSET_GUID;
+ 
+diff --git a/MdeModulePkg/Application/UiApp/FrontPage.h b/MdeModulePkg/Application/UiApp/FrontPage.h
+index 36207287b9..deeb9408f9 100644
+--- a/MdeModulePkg/Application/UiApp/FrontPage.h
++++ b/MdeModulePkg/Application/UiApp/FrontPage.h
+@@ -21,6 +21,7 @@ extern UINT8  FrontPageVfrBin[];
+ extern EFI_FORM_BROWSER2_PROTOCOL      *gFormBrowser2;
+ 
+ 
++#define test_len testtest_len
+ #define SMBIOS_TYPE4_CPU_SOCKET_POPULATED BIT6
+ 
+ //
+diff --git a/MdeModulePkg/Application/UiApp/String.h b/MdeModulePkg/Application/UiApp/String.h
+index 3dc4c3316b..4441167bc9 100644
+--- a/MdeModulePkg/Application/UiApp/String.h
++++ b/MdeModulePkg/Application/UiApp/String.h
+@@ -25,6 +25,7 @@ extern UINT8  BdsDxeStrings[];
+   { \
+     0x7777E939, 0xD57E, 0x4DCB, 0xA0, 0x8E, 0x64, 0xD7, 0x98, 0x57, 0x1E, 0x0F \
+   }
++#define testtest_len 180
+ 
+ /**
+   Get string by string id from HII Interface
+-- 
+2.27.0.windows.1
+
