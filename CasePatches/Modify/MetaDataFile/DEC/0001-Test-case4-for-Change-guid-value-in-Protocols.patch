@@ -1,29 +1,29 @@
-From 9291ba9c15e6e3d203a971424af50e59d3411506 Mon Sep 17 00:00:00 2001
+From 7d0db7150a6dd508212625a48bcad31b5c3daad6 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Mon, 3 Aug 2020 12:30:36 +0800
+Date: Mon, 24 Aug 2020 14:26:26 +0800
 Subject: [PATCH] Test case4 for Change guid value in Protocols
 
-Description: Change guid value in Protocols section (to gEfiLoadPeImageProtocolGuid = { 0x5CB5C546, 0x60D5, 0x45FE, { 0x88, 0x3C, 0x45, 0x37, 0x78, 0xDD, 0x4B, 0x3F }}) in MdeModulePkg/MdeModulePkg.dec.
+Description: Change guid value in Protocols section (to gEfiLoadFileProtocolGuid = { 0x56E24071, 0x96DC, 0x11D2, { 0x8E, 0x3E, 0x00, 0xA0, 0xC9, 0x69, 0x82, 0x4F }}) in MdeModulePkg/MdeModulePkg.dec.
 
 Repo: edk2
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---
- MdeModulePkg/MdeModulePkg.dec | 2 +-
+ MdePkg/MdePkg.dec | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/MdeModulePkg/MdeModulePkg.dec b/MdeModulePkg/MdeModulePkg.dec
-index 843e963ad3..cce15e2218 100644
---- a/MdeModulePkg/MdeModulePkg.dec
-+++ b/MdeModulePkg/MdeModulePkg.dec
-@@ -471,7 +471,7 @@
-   #  Include/Protocol/LoadPe32Image.h
-   #  This protocol is deprecated. Native EDKII module should NOT use this protocol to load/unload image.
-   #  If developer need implement such functionality, they should use BasePeCoffLib.
--  gEfiLoadPeImageProtocolGuid    = { 0x5CB5C776, 0x60D5, 0x45EE, { 0x88, 0x3C, 0x45, 0x27, 0x08, 0xCD, 0x74, 0x3F }}
-+  gEfiLoadPeImageProtocolGuid    = { 0x5CB5C546, 0x60D5, 0x45FE, { 0x88, 0x3C, 0x45, 0x37, 0x78, 0xDD, 0x4B, 0x3F }}
+diff --git a/MdePkg/MdePkg.dec b/MdePkg/MdePkg.dec
+index 682e61cb88..84ace7ca44 100644
+--- a/MdePkg/MdePkg.dec
++++ b/MdePkg/MdePkg.dec
+@@ -1425,7 +1425,7 @@
+   gEfiLoadedImageDevicePathProtocolGuid = { 0xbc62157e, 0x3e33, 0x4fec, {0x99, 0x20, 0x2d, 0x3b, 0x36, 0xd7, 0x50, 0xdf }}
  
-   ## Print protocols define basic print functions to print the format unicode and ascii string.
-   # Include/Protocol/Print2.h
+   ## Include/Protocol/LoadFile.h
+-  gEfiLoadFileProtocolGuid       = { 0x56EC3091, 0x954C, 0x11D2, { 0x8E, 0x3F, 0x00, 0xA0, 0xC9, 0x69, 0x72, 0x3B }}
++  gEfiLoadFileProtocolGuid       = { 0x56E24071, 0x96DC, 0x11D2, { 0x8E, 0x3E, 0x00, 0xA0, 0xC9, 0x69, 0x82, 0x4F }}
+ 
+   ## Include/Protocol/LoadFile2.h
+   gEfiLoadFile2ProtocolGuid       = { 0x4006c0c1, 0xfcb3, 0x403e, {0x99, 0x6d, 0x4a, 0x6c, 0x87, 0x24, 0xe0, 0x6d }}
 -- 
 2.27.0.windows.1
 
