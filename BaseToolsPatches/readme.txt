@@ -1,1 +1,0 @@
-Copy the BaseTools patches in this folder. Test script will apply these patches to edk2 repo. If there are multiple patches, the name of patches need to be 0001-xxxx.patch, 0002-xxxx.patch and so on.

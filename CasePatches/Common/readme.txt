@@ -1,1 +1,0 @@
-Put the various test cases patches which has no specific category. The patch in this folder should follow: 1. file name is the case name and the commit message is the case description. The test script will read them. The patch's file extension should be .patch.
