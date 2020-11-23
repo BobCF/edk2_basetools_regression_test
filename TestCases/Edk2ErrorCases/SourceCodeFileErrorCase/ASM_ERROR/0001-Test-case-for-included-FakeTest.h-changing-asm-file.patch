@@ -1,0 +1,28 @@
+From 31af91e137196b5a6abec1ed51deb707b8edad9a Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 29 Jul 2020 08:42:18 +0800
+Subject: [PATCH] Test case-E for included FakeTest.h changing - asm file
+
+Description: Change the FakeTest.h included in the TestPkg/FakeEmuSec/Ia32/SwitchRam.asm.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Ia32/FakeTest.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/FakeEmuSec/Ia32/FakeTest.h b/TestPkg/FakeEmuSec/Ia32/FakeTest.h
+index 7aabf4b637..7fde6c415b 100644
+--- a/TestPkg/FakeEmuSec/Ia32/FakeTest.h
++++ b/TestPkg/FakeEmuSec/Ia32/FakeTest.h
+@@ -7,4 +7,4 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
+ 
+ **/
+ 
+-#define testaddr1 12
+\ No newline at end of file
++#define 
+\ No newline at end of file
+-- 
+2.27.0.windows.1
+

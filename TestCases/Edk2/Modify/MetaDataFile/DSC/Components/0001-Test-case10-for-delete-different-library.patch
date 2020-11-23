@@ -1,0 +1,30 @@
+From 77ab224625e31aea77f7b94ba09ecac7f1d96688 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 15 Sep 2020 15:11:19 +0800
+Subject: [PATCH] Test case10 for delete different library
+
+Description: Delete the library (PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf) from dsc component, which write in Library class with different value.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 8c881de93b..0f1f80cb82 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -126,7 +126,7 @@
+   MdeModulePkg/Core/Pei/PeiMain.inf
+   MdeModulePkg/Universal/PCD/Pei/Pcd.inf  {
+     <LibraryClasses>
+-      PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
++      #PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
+   }
+ 
+   MdeModulePkg/Core/DxeIplPeim/DxeIpl.inf
+-- 
+2.27.0.windows.1
+

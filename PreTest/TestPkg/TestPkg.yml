@@ -1,0 +1,12 @@
+init:
+  - PipBaseTools.patch
+  - 0001-Add-TestPkg.patch
+  - 0002-Add-fake-library-and-drivers-in-TestPkg-in-order-to-.patch
+  - 0003-Support-for-test-case-1.include-.h-and-.asi-in-asl-f.patch
+  - 0004-Support-for-Metadata-file-test-cases.patch
+  - 0005-Support-for-ExVPD-test-case.patch
+  - 0006-Support-for-DSC-include-test-case.patch
+  - 0007-Support-for-test-case.patch
+  - 0008-Support-for-INF-Sources.X64-test-cases.patch
+  - 0009-Support-for-INF-Binary-test-cases.patch
+  - 0010-1.-Support-for-UNI-test-cases.patch

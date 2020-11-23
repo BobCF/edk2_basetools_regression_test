@@ -1,0 +1,34 @@
+From 0d1111d440da70ad918d4050db09388dd66a6417 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 16:54:08 +0800
+Subject: [PATCH] Test case1 for Change NumBlocks in fdf file
+
+Description: Change the Size and NumBlocks in fdf.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 9c1cef54b0..7249897b48 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -62,10 +62,10 @@ FV = SECFV
+ 
+ [FD.MEMFD]
+ BaseAddress   = $(MEMFD_BASE_ADDRESS)
+-Size          = 0xD00000
++Size          = 0xE00000
+ ErasePolarity = 1
+ BlockSize     = 0x10000
+-NumBlocks     = 0xD0
++NumBlocks     = 0xE0
+ 
+ 0x000000|0x006000
+ gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPageTablesBase|gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPageTablesSize
+-- 
+2.26.1.windows.1
+

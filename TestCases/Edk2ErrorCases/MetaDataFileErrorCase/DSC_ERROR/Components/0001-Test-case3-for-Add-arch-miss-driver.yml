@@ -1,0 +1,15 @@
+---
+name: Test case3-E for Add arch miss driver
+description: Add the driver (MdeModulePkg\Universal\EbcDxe\EbcDebugger.inf) in X64 section, while command only build IA32.
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+input:
+  type: repo
+  source: edk2
+
+change:
+  - 0001-Test-case3-for-Add-arch-miss-driver.patch
+
+output:
+  - edk2\Build
+    

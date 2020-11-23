@@ -1,0 +1,27 @@
+From 29a97b07f150dada44b1287ba0d54e6e94fa4286 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 19:33:23 +0800
+Subject: [PATCH] Test case13 for included .inc changing in fdf file
+
+Description: Change the value defined in TestPkgDefines.fdf.inc which is included in TestIa32X64.fdf file.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkgDefines.fdf.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/TestPkgDefines.fdf.inc b/TestPkg/TestPkgDefines.fdf.inc
+index ae26cdcbdb..fb5c58ad77 100644
+--- a/TestPkg/TestPkgDefines.fdf.inc
++++ b/TestPkg/TestPkgDefines.fdf.inc
+@@ -88,4 +88,4 @@ SET gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase = gUefiOvmfPk
+ SET gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase   = gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageFtwSpareBase
+ !endif
+ 
+-DEFINE MEMFD_BASE_ADDRESS = 0x800000
++DEFINE MEMFD_BASE_ADDRESS = 0x900000
+-- 
+2.26.1.windows.1
+

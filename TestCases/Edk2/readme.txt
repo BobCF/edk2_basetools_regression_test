@@ -1,0 +1,2 @@
+Put the test case patches in this folder. The same category cases should be in a folder named as category name, for example, structurepcd. 
+The patch file should follow: 1. file name is the case name. 2. the commit message is the case description. The test script will read them. The patch's file extension should be .patch.

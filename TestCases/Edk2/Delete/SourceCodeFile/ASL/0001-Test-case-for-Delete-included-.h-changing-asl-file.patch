@@ -1,0 +1,41 @@
+From 866ebc45d57dcc12706ce2606bede9d0ae955bc9 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 8 Sep 2020 10:59:39 +0800
+Subject: [PATCH] Test case for Delete included .h changing - asl file
+
+Description: Delete the included ForAddTest.h files in the TestPkg/AcpiTables/Dsdt.asl.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/Dsdt.asl | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/TestPkg/AcpiTables/Dsdt.asl b/TestPkg/AcpiTables/Dsdt.asl
+index 71ac9d2784..b7b1105c65 100644
+--- a/TestPkg/AcpiTables/Dsdt.asl
++++ b/TestPkg/AcpiTables/Dsdt.asl
+@@ -6,7 +6,6 @@
+ 
+ **/
+ #include "Platform.h"
+-#include "ForAddTest.h"
+ #include "test.asi"
+ DefinitionBlock ("Dsdt.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+   //
+@@ -41,9 +40,9 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+           PosDecode,             // PosDecode
+           0x0000,                // Granularity
+           0x0000,                // Min
+-          MaxRangeForAddTest,                // Max
++          0x00FC,                // Max
+           0x0000,                // Translation
+-          RangeLengthForAddTest                 // Range Length = Max-Min+1
++          0x00FD                 // Range Length = Max-Min+1
+           )
+ 
+         IO (Decode16, 0xCF8, 0xCF8, 0x01, 0x08)       //Consumed resource (0xCF8-0xCFF)
+-- 
+2.27.0.windows.1
+

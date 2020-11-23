@@ -1,0 +1,29 @@
+From a02d14a58f07a564036e76d42c3f8793cb4c7da1 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 12:25:46 +0800
+Subject: [PATCH] Test case3 for Change guid value in Guids
+
+Description: Change guid value in Guids section (to gEfiMdeModulePkgTokenSpaceGuid = { 0xA1AFF159, 0xFDEB, 0x362a, { 0xE3, 0x20, 0x18, 0x2B, 0x37, 0xBA, 0x4B, 0xAC }}) in MdeModulePkg/MdeModulePkg.dec.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/MdeModulePkg.dec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/MdeModulePkg.dec b/MdeModulePkg/MdeModulePkg.dec
+index 843e963ad3..33fdaf05c8 100644
+--- a/MdeModulePkg/MdeModulePkg.dec
++++ b/MdeModulePkg/MdeModulePkg.dec
+@@ -149,7 +149,7 @@
+ [Guids]
+   ## MdeModule package token space guid
+   # Include/Guid/MdeModulePkgTokenSpace.h
+-  gEfiMdeModulePkgTokenSpaceGuid       = { 0xA1AFF049, 0xFDEB, 0x442a, { 0xB3, 0x20, 0x13, 0xAB, 0x4C, 0xB7, 0x2B, 0xBC }}
++  gEfiMdeModulePkgTokenSpaceGuid       = { 0xA1AFF159, 0xFDEB, 0x362a, { 0xE3, 0x20, 0x18, 0x2B, 0x37, 0xBA, 0x4B, 0xAC }}
+ 
+   ## Hob guid for Pcd DataBase
+   #  Include/Guid/PcdDataBaseHobGuid.h
+-- 
+2.27.0.windows.1
+

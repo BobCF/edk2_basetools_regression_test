@@ -1,0 +1,40 @@
+From f3516f9518889186f3a1ae0429b3afd837edb0ce Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 19:05:09 +0800
+Subject: [PATCH] Support for Add a new FD section in fdf file
+
+Description: Support for Add a new FD section in fdf file.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf | 11 -----------
+ 1 file changed, 11 deletions(-)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 9c1cef54b0..da15a262a4 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -45,18 +45,7 @@ NumBlocks     = $(VARS_BLOCKS)
+ 
+ !include VarStore.fdf.inc
+ 
+-[FD.OVMF_CODE]
+-BaseAddress   = $(CODE_BASE_ADDRESS)
+-Size          = $(CODE_SIZE)
+-ErasePolarity = 1
+-BlockSize     = $(BLOCK_SIZE)
+-NumBlocks     = $(CODE_BLOCKS)
+ 
+-0x00000000|$(FVMAIN_SIZE)
+-FV = FVMAIN_COMPACT
+-
+-$(FVMAIN_SIZE)|$(SECFV_SIZE)
+-FV = SECFV
+ 
+ ################################################################################
+ 
+-- 
+2.26.1.windows.1
+

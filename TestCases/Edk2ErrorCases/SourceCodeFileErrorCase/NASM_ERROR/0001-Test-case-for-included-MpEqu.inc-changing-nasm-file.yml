@@ -1,0 +1,15 @@
+---
+name: Test case-E for included MpEqu.inc changing - nasm file
+description: Change the MpEqu.inc files which included in the UefiCpuPkg\Library\MpInitLib\DxeMpInitLib.inf.
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+input:
+  type: repo
+  source: edk2
+
+change:
+  - 0001-Test-case-for-included-MpEqu.inc-changing-nasm-file.patch
+
+output:
+  - edk2\Build
+    

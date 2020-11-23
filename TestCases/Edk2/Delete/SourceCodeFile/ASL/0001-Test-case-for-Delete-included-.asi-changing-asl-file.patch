@@ -1,0 +1,41 @@
+From f4e68c156695ab3085771f54db9e73291094f70a Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 8 Sep 2020 11:07:51 +0800
+Subject: [PATCH] Test case for Delete included .asi changing - asl file
+
+Description: Delete the included test.asi files in the TestPkg/AcpiTables/Dsdt.asl.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/Dsdt.asl | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/TestPkg/AcpiTables/Dsdt.asl b/TestPkg/AcpiTables/Dsdt.asl
+index 383d72af54..707e98603c 100644
+--- a/TestPkg/AcpiTables/Dsdt.asl
++++ b/TestPkg/AcpiTables/Dsdt.asl
+@@ -6,7 +6,6 @@
+ 
+ **/
+ #include "Platform.h"
+-#include "test.asi"
+ DefinitionBlock ("Dsdt.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+   //
+   // System Sleep States
+@@ -115,9 +114,9 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+             ReadWrite,
+             0x00000000,          // Granularity
+             0x8000000000,        // Min
+-            MAX_QWordMemory,     // Max
++            0xFFFFFFFFFE,     // Max
+             0x00000000,          // Translation
+-            0x8000000000,        // Range Length
++            0x7FFFFFFFFF,        // Range Length
+             ,                    // ResourceSourceIndex
+             ,                    // ResourceSource
+             PW64                 // DescriptorName
+-- 
+2.27.0.windows.1
+

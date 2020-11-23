@@ -1,0 +1,15 @@
+---
+name: Test case2-E for Add new Include in DEC file
+description: Add a new Include in DEC file ("Library\BrotliCustomDecompressLib\brotli\research\libdivsufsort\include") in MdeModulePkg/MdeModulePkg.dec.
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+input:
+  type: repo
+  source: edk2
+
+change:
+  - 0001-Test-case2-for-Add-new-Include-in-DEC-file.patch
+
+output:
+  - edk2\Build
+    

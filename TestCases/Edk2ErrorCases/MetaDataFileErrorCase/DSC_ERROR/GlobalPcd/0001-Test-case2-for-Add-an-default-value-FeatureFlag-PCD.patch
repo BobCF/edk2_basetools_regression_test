@@ -1,0 +1,28 @@
+From f4a32663de2d76deafceb5ecce76f151cebc8cfe Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 09:54:33 +0800
+Subject: [PATCH] Test case2-E for Add an default value FeatureFlag PCD
+
+Description: Add the FeatureFlag PCD with the default value ("gEfiMdePkgTokenSpaceGuid.PcdVerifyNodeInList|FALSE") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 532d084223..8e1e941a1e 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -178,6 +178,7 @@
+ [PcdsFeatureFlag]
+ gUefiOvmfPkgTokenSpaceGuid.PcdSmmSmramRequire|TRUE
+ gEfiMdeModulePkgTokenSpaceGuid.PcdPeiFullPcdDatabaseEnable|TRUE
++gEfiMdePkgTokenSpaceGuid.PcdVerifyNodeInList|FLSE
+ 
+ 
+ [PcdsFixedAtBuild]
+-- 
+2.27.0.windows.1
+

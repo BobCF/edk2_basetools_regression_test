@@ -1,0 +1,20 @@
+---
+name: Test case8 for Change value of PcdsDynamicVpd PCD
+description: Change value of PcdsDynamicVpd PCD to ("gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase64|0x8000002") in TestPkg/TestPkg32X64.dsc.
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+init:
+  - 
+    src:
+    dest: edk2
+
+input:
+  type: repo
+  repo: edk2
+
+change:
+  - 0001-Test-case8-for-Change-value-of-PcdsDynamicVpd-PCD.patch | edk2
+
+output:
+  - edk2\Build
+    

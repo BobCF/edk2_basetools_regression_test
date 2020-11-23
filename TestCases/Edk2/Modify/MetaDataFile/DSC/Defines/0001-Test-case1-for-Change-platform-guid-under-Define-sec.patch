@@ -1,0 +1,29 @@
+From 4be478c164a20c95a886e2b35ae2e8b3aafbceb9 Mon Sep 17 00:00:00 2001
+From: mliang2x <mingyuex.liang@intel.com>
+Date: Tue, 25 Aug 2020 10:10:16 +0800
+Subject: [PATCH] Test case1 for Change platform guid under Define section
+
+Description: Change platform guid under Define section (to "4b9e7456-c82b-49ec-85bd-65eca7b1679d") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 8c881de93b..95b965dc24 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -14,7 +14,7 @@
+ ################################################################################
+ [Defines]
+   PLATFORM_NAME                  = Ovmf
+-  PLATFORM_GUID                  = 5a9e7754-d81b-49ea-85ad-69eaa7b1539b
++  PLATFORM_GUID                  = 4b9e7456-c82b-49ec-85bd-65eca7b1679d
+   PLATFORM_VERSION               = 0.1
+   DSC_SPECIFICATION              = 0x00010005
+   VPD_TOOL_GUID                  = 8C3D856A-9BE6-468E-850A-24F7A8D38E08
+-- 
+2.25.1.windows.1
+

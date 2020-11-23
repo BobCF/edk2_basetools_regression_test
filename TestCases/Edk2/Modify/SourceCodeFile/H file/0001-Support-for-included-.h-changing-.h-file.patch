@@ -1,0 +1,38 @@
+From 6164f338606e5b605ffa348789ab1403f6c516d5 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 23 Sep 2020 10:17:05 +0800
+Subject: [PATCH] Support for included .h changing - .h file
+
+Description: Change the ForHIncludedH.h files which included in the TestPkg/AcpiTables/Platform.h.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/Platform.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/TestPkg/AcpiTables/Platform.h b/TestPkg/AcpiTables/Platform.h
+index b1341ee2a4..3ca3741ca3 100644
+--- a/TestPkg/AcpiTables/Platform.h
++++ b/TestPkg/AcpiTables/Platform.h
+@@ -12,6 +12,7 @@
+ 
+ #include <PiDxe.h>
+ #include <IndustryStandard/Acpi.h>
++#include "ForHIncludedH.h"
+ 
+ //
+ // ACPI table information used to initialize tables.
+@@ -28,7 +29,7 @@
+ #define ACPI_DISABLE    0xF0
+ #define S4BIOS_REQ      0x00
+ #define PM1a_EVT_BLK    0x0000b000
+-#define PM1a_CNT_BLK    0x0000b004
++#define PM1a_CNT_BLK    ATestAddrH
+ #define PM_TMR_BLK      0x0000b008
+ #define GPE0_BLK        0x0000afe0
+ #define PM1_EVT_LEN     0x04
+-- 
+2.27.0.windows.1
+

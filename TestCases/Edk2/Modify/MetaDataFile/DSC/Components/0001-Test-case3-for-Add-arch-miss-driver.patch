@@ -1,0 +1,41 @@
+From 6b5a1a2307730eeaa2875d0f87b98c68b5144845 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 29 Jul 2020 11:39:53 +0800
+Subject: [PATCH] Test case3 for Add arch miss driver
+
+Description: Add the driver (MdeModulePkg\Universal\EbcDxe\EbcDebugger.inf) in X64 section, while command only build IA32.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf  | 1 +
+ TestPkg/TestPkg32X64.dsc | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 230250f210..2125417ce0 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -193,6 +193,7 @@ INF  UefiCpuPkg\CpuDxe\CpuDxe.inf
+ 
+ INF  MdeModulePkg/Logo/LogoDxe.inf
+ INF  TestPkg\FakeLogo\JpegLogoDxe.inf
++INF  MdeModulePkg\Universal\EbcDxe\EbcDebugger.inf
+ 
+ ################################################################################
+ 
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index b24f19fc5f..0141f18b27 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -154,6 +154,7 @@
+ 
+   MdeModulePkg/Logo/LogoDxe.inf
+   TestPkg\FakeLogo\JpegLogoDxe.inf
++  MdeModulePkg\Universal\EbcDxe\EbcDebugger.inf
+   MdeModulePkg/Application/UiApp/UiApp.inf {
+     <LibraryClasses>
+       NULL|MdeModulePkg/Library/DeviceManagerUiLib/DeviceManagerUiLib.inf
+-- 
+2.27.0.windows.1
+

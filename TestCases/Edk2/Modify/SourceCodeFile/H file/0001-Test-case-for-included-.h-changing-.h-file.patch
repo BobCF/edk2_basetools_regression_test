@@ -1,0 +1,29 @@
+From e586a65a23662fdcb34c22460955a0f6ab328ad4 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 23 Sep 2020 10:34:09 +0800
+Subject: [PATCH] Test case for included .h changing - .h file
+
+Description: Change the ForHIncludedH.h files which included in the TestPkg/AcpiTables/Platform.h.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/ForHIncludedH.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/AcpiTables/ForHIncludedH.h b/TestPkg/AcpiTables/ForHIncludedH.h
+index ee74452f3d..239970ebee 100644
+--- a/TestPkg/AcpiTables/ForHIncludedH.h
++++ b/TestPkg/AcpiTables/ForHIncludedH.h
+@@ -7,4 +7,4 @@
+ 
+ **/
+ 
+-#define ATestAddrH 0x0000b004
+\ No newline at end of file
++#define ATestAddrH 0x0000b006
+\ No newline at end of file
+-- 
+2.27.0.windows.1
+

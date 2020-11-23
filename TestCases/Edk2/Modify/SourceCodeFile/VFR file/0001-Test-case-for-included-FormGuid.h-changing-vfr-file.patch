@@ -1,0 +1,29 @@
+From 693be048b2f99a1c86dd681d77eb459450dfb9ce Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 28 Jul 2020 08:53:52 +0800
+Subject: [PATCH] Test case for included FormGuid.h changing - vfr file
+
+Description: Change the FormGuid.h files which included in the MdeModulePkg\Library\BootMaintenanceManagerUiLib\BootMaintenanceManager.vfr.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Library/BootMaintenanceManagerUiLib/FormGuid.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Library/BootMaintenanceManagerUiLib/FormGuid.h b/MdeModulePkg/Library/BootMaintenanceManagerUiLib/FormGuid.h
+index 3031242923..68dda5cf1b 100644
+--- a/MdeModulePkg/Library/BootMaintenanceManagerUiLib/FormGuid.h
++++ b/MdeModulePkg/Library/BootMaintenanceManagerUiLib/FormGuid.h
+@@ -10,7 +10,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
+ 
+ #define BOOT_MAINT_FORMSET_GUID \
+   { \
+-  0x642237c7, 0x35d4, 0x472d, {0x83, 0x65, 0x12, 0xe0, 0xcc, 0xf2, 0x7a, 0x22} \
++  0x642237c7, 0x35d4, 0x472d, {0x83, 0x65, 0x12, 0xe0, 0xcc, 0xe2, 0x6a, 0x19} \
+   }
+ 
+ #define FORM_MAIN_ID                         0x1001
+-- 
+2.27.0.windows.1
+

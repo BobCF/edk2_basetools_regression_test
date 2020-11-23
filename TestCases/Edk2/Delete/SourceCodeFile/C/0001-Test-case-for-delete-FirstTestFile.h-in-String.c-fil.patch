@@ -1,0 +1,35 @@
+From 01950e2302da70a5dd636e097904c45be7e4935a Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 23 Sep 2020 11:12:57 +0800
+Subject: [PATCH] Test case for delete FirstTestFile.h in String.c file.
+
+Description: Delete FirstTestFile.h in the MdeModulePkg/Application/UiApp/String.c
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Application/UiApp/String.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/MdeModulePkg/Application/UiApp/String.c b/MdeModulePkg/Application/UiApp/String.c
+index 2a9b9b5c62..f37d3f64d9 100644
+--- a/MdeModulePkg/Application/UiApp/String.c
++++ b/MdeModulePkg/Application/UiApp/String.c
+@@ -8,12 +8,11 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
+ 
+ #include "Ui.h"
+ #include "FrontPage.h"
+-#include "FirstTestFile.h"
+ 
+ EFI_HII_HANDLE gStringPackHandle;
+ 
+ EFI_GUID mUiStringPackGuid = {
+-  efi_guid_testaddr, 0x752a, 0x4bf6, { 0xa7, 0x57, 0x9, 0x36, 0x11, 0x95, 0x38, 0xed }
++  0x136d3403, 0x752a, 0x4bf6, { 0xa7, 0x57, 0x9, 0x36, 0x11, 0x95, 0x38, 0xed }
+ };
+ 
+ EFI_GUID  mFontPackageGuid = {
+-- 
+2.27.0.windows.1
+

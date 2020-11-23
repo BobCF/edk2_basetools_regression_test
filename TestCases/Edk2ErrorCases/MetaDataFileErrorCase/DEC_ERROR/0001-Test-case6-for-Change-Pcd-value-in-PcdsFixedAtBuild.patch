@@ -1,0 +1,30 @@
+From a2e2986fc11f1c7696195a538329f2c2b1cc0df4 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Fri, 28 Aug 2020 13:17:56 +0800
+Subject: [PATCH] Test case6-E for Change Pcd value in PcdsFixedAtBuild
+
+Description: Change Pcd value in PcdsFixedAtBuild section in MdeModulePkg/MdeModulePkg.dec.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/MdeModulePkg.dec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/MdeModulePkg.dec b/MdeModulePkg/MdeModulePkg.dec
+index 843e963ad3..aa6cd9d463 100644
+--- a/MdeModulePkg/MdeModulePkg.dec
++++ b/MdeModulePkg/MdeModulePkg.dec
+@@ -1049,7 +1049,7 @@
+ 
+   ## Maximum stack size for PeiCore.
+   # @Prompt Maximum stack size for PeiCore.
+-  gEfiMdeModulePkgTokenSpaceGuid.PcdPeiCoreMaxPeiStackSize|0x20000|UINT32|0x00010032
++  gEfiMdeModulePkgTokenSpaceGuid.PcPeiCoreMaxPeiStackSize|0x20100|UINT32|0x00010032
+ 
+   ## The maximum size of a single non-HwErr type variable.
+   # @Prompt Maximum variable size.
+-- 
+2.27.0.windows.1
+

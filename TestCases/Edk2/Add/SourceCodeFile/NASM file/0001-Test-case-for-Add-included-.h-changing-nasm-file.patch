@@ -1,0 +1,39 @@
+From b27b84fdc6149e4095e817e7c9ca3e81b6ee5734 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 8 Sep 2020 20:56:28 +0800
+Subject: [PATCH] Test case for Add included .h changing - nasm file
+
+Description: Add included ForHAddTest.h file in the MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm b/MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm
+index 4f9b98f18b..38ab5e654a 100644
+--- a/MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm
++++ b/MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm
+@@ -6,7 +6,7 @@
+ ;  SPDX-License-Identifier: BSD-2-Clause-Patent
+ ;
+ ;**/
+-
++#include "ForHAddTest.h"
+     SECTION .text
+ 
+ ;
+@@ -30,7 +30,7 @@ global ASM_PFX(AsmVectorFixup)
+ 
+ global ASM_PFX(AsmGetVectorTemplatInfo)
+ ASM_PFX(AsmGetVectorTemplatInfo):
+-        mov   ecx, [esp + 4]
++        mov   ecx, [esp + testaddr]
+         mov   dword [ecx], @VectorTemplateBase
+         mov   eax, (@VectorTemplateEnd - @VectorTemplateBase)
+         ret
+-- 
+2.27.0.windows.1
+

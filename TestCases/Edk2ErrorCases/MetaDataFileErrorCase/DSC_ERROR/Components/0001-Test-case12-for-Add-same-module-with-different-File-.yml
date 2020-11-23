@@ -1,0 +1,15 @@
+---
+name: Test case12-E for Add same module with different File Guid
+description: Add TestPkg/Sec/SecMain.inf in the dsc component with different File Guid.
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+input:
+  type: repo
+  source: edk2
+
+change:
+  - 0001-Test-case12-for-Add-same-module-with-different-File-.patch
+
+output:
+  - edk2\Build
+    

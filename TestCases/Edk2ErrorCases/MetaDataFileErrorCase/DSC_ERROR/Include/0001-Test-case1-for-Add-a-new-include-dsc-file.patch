@@ -1,0 +1,28 @@
+From 4f90c5b21bc6632a332cd4ecfb5bbd4203d9c4d6 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Thu, 6 Aug 2020 16:58:04 +0800
+Subject: [PATCH] Test case1-E for Add a new include dsc file
+
+Description: Add a new include dsc file ("!NetworkLibs.dsc") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 8c881de93b..2a3aa89d18 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -79,6 +79,7 @@
+ [SkuIds]
+   0|DEFAULT
+ 
++!include NetworkLibs.dscd
+ !include LibraryClass.dsc
+ 
+ [PcdsDynamicDefault]
+-- 
+2.27.0.windows.1
+

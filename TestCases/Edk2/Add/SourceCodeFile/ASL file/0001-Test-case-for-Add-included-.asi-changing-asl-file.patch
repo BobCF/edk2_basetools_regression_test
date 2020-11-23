@@ -1,0 +1,41 @@
+From c39b012c47f976124cee1585b975e0b9ffd35044 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 7 Sep 2020 22:10:39 +0800
+Subject: [PATCH] Test case for Add included .asi changing - asl file
+
+Description: Add a new included ForAddTest.asi files in the TestPkg/AcpiTables/Dsdt.asl.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/Dsdt.asl | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/TestPkg/AcpiTables/Dsdt.asl b/TestPkg/AcpiTables/Dsdt.asl
+index 383d72af54..5df3a6052f 100644
+--- a/TestPkg/AcpiTables/Dsdt.asl
++++ b/TestPkg/AcpiTables/Dsdt.asl
+@@ -7,6 +7,7 @@
+ **/
+ #include "Platform.h"
+ #include "test.asi"
++#include "ForAddTest.asi"
+ DefinitionBlock ("Dsdt.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+   //
+   // System Sleep States
+@@ -68,9 +69,9 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+           EntireRange,
+           0x0000,                // Granularity
+           0x0D00,                // Min
+-          0xFFFF,                // Max
++          MaxRangeForAddTest,                // Max
+           0x0000,                // Translation
+-          0xF300                 // Range Length
++          RangeLengthForAddTest                 // Range Length
+           )
+ 
+         DWORDMEMORY (            // Descriptor for legacy VGA video RAM
+-- 
+2.27.0.windows.1
+

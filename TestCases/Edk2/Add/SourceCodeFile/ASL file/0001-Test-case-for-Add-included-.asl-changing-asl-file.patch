@@ -1,0 +1,27 @@
+From 8eafb8c98f7c585bbf24df07153884f0ccabf73b Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 12:59:31 +0800
+Subject: [PATCH] Test case for Add included .asl changing - asl file
+
+Description: Add the new included ForAddTest.asl files in the TestPkg\AcpiTables\TestPlatform.asl.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/TestPlatform.asl | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/AcpiTables/TestPlatform.asl b/TestPkg/AcpiTables/TestPlatform.asl
+index 16efc78a0b..8b8c6ffdcc 100644
+--- a/TestPkg/AcpiTables/TestPlatform.asl
++++ b/TestPkg/AcpiTables/TestPlatform.asl
+@@ -9,4 +9,5 @@
+ #include "test.asi"
+ DefinitionBlock ("TestPlatform.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+   #include "Dsdt.asl"
++  Include ("ForAddTest.asl")
+ } // end of DSDT
+-- 
+2.27.0.windows.1
+

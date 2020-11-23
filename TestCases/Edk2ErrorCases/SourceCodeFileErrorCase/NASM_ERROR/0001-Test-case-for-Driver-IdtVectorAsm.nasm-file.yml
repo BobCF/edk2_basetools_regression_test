@@ -1,0 +1,15 @@
+---
+name: Test case-E for Driver - IdtVectorAsm.nasm file
+description: Change the address in the MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+input:
+  type: repo
+  source: edk2
+
+change:
+  - 0001-Test-case-for-Driver-IdtVectorAsm.nasm-file.patch
+
+output:
+  - edk2\Build
+    

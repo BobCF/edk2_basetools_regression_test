@@ -1,0 +1,21 @@
+---
+name: Test case9 for delete same library from component
+description: (Invalid)Delete the library (LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf) from dsc component, which also write in Library class with same value.
+type: manual
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+init:
+  - 
+    src:
+    dest: edk2
+
+input:
+  type: repo
+  repo: edk2
+
+change:
+  - 0001-Test-case9-for-delete-same-library-from-component.patch | edk2
+
+output:
+  - edk2\Build
+    

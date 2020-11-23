@@ -1,0 +1,21 @@
+---
+name: Test case for Delete included .inc changing - nasm file
+description: Delete included ForAddTest.inc file in the UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm.
+
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+init:
+  - 
+    src: 0001-Support-for-Delete-included-.inc-changing-nasm-file.patch
+    dest: edk2
+
+input:
+  type: repo
+  repo: edk2
+
+change:
+  - 0001-Test-case-for-Delete-included-.inc-changing-nasm-fil.patch | edk2
+
+output:
+  - edk2\Build
+    

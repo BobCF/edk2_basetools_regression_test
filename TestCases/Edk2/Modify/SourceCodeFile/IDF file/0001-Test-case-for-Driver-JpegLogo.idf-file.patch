@@ -1,0 +1,41 @@
+From fc5e0e4c505e1031762b0c9746164dc20b30fb89 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 26 Aug 2020 08:09:49 +0800
+Subject: [PATCH] Test case for Driver - JpegLogo.idf file
+
+Description: Change the image in the TestPkg/FakeLogo/JpegLogo.idf
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeLogo/JpegLogo.idf    | 2 +-
+ TestPkg/FakeLogo/JpegLogoDxe.inf | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/TestPkg/FakeLogo/JpegLogo.idf b/TestPkg/FakeLogo/JpegLogo.idf
+index a39500e043..b927d57f61 100644
+--- a/TestPkg/FakeLogo/JpegLogo.idf
++++ b/TestPkg/FakeLogo/JpegLogo.idf
+@@ -7,4 +7,4 @@
+ //
+ // **/
+ 
+-#image IMG_LOGO Logo.jpg
++#image IMG_LOGO HaveATest.jpg
+diff --git a/TestPkg/FakeLogo/JpegLogoDxe.inf b/TestPkg/FakeLogo/JpegLogoDxe.inf
+index a3af409553..39f43c067a 100644
+--- a/TestPkg/FakeLogo/JpegLogoDxe.inf
++++ b/TestPkg/FakeLogo/JpegLogoDxe.inf
+@@ -28,7 +28,7 @@
+ #
+ 
+ [Sources.X64]
+-  Logo.jpg
++  HaveATest.jpg
+   Logo.c
+   JpegLogo.idf
+ 
+-- 
+2.27.0.windows.1
+

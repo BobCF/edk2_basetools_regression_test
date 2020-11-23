@@ -1,0 +1,29 @@
+From 402bba355b3b38693eb5818047c41470c705d5c6 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 19:22:09 +0800
+Subject: [PATCH] Test case10 for Change FV_IMAGE in fdf file
+
+Description: Change the section in FILE FV_IMAGE in the fdf file.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 9c1cef54b0..db4e16e673 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -223,7 +223,6 @@ FILE FV_IMAGE = 9E21FD93-9C72-4c15-8C4B-E77F1DB2D792 {
+      # compression operation in order to achieve better overall compression.
+      #
+      SECTION FV_IMAGE = PEIFV
+-     SECTION FV_IMAGE = DXEFV
+    }
+  }
+ 
+-- 
+2.26.1.windows.1
+

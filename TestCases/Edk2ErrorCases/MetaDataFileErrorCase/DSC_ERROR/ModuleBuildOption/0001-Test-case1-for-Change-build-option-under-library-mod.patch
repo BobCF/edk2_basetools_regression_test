@@ -1,0 +1,28 @@
+From 02cd716519be486abb88f5be808caa7b7623a17e Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 11:34:45 +0800
+Subject: [PATCH] Test case1-E for Change build option under library module
+
+Description: Change build option under BuildOptions.common.EDKII.BASE (Add "MSFT:DEBUG_*_*_CC_FLAGS = /D MDEPKG_NDEBUG") in TestPkg/buildoptions.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/buildoptions.dsc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/TestPkg/buildoptions.dsc b/TestPkg/buildoptions.dsc
+index 9ca9e101ff..3bc39e58b4 100644
+--- a/TestPkg/buildoptions.dsc
++++ b/TestPkg/buildoptions.dsc
+@@ -39,4 +39,5 @@
+   GCC:*_*_*_DLINK_FLAGS = -z common-page-size=0x1000
+   
+ [BuildOptions.common.EDKII.BASE]
+-  MSFT:RELEASE_*_*_CC_FLAGS            = /D MDEPKG_NDEBUG
+\ No newline at end of file
++  MSFT:RELEASE_*_*_CC_FLAGS            = /D MDEPKG_NDEBUG
++  MSFT:DEBUG_*_*_CCFLAGS              = /D MDEPKG_NDEBUG
+-- 
+2.27.0.windows.1
+

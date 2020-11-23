@@ -1,0 +1,29 @@
+From 3bdca0ca3fd599ec1bbdd4fd48506829f1889380 Mon Sep 17 00:00:00 2001
+From: mliang2x <mingyuex.liang@intel.com>
+Date: Tue, 25 Aug 2020 11:19:37 +0800
+Subject: [PATCH] Test case1 for Change build option under BuildOptions
+
+Description: Change build option under BuildOptions (Change to"MSFT:RELEASE_*_*_CC_FLAGS            = /D MDEPKG_NDEBUG /arch:IA32 /c /WX") in TestPkg/buildoptions.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/buildoptions.dsc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/buildoptions.dsc b/TestPkg/buildoptions.dsc
+index 9ca9e101ff..163a2b41b9 100644
+--- a/TestPkg/buildoptions.dsc
++++ b/TestPkg/buildoptions.dsc
+@@ -1,7 +1,7 @@
+ [BuildOptions]
+   GCC:RELEASE_*_*_CC_FLAGS             = -DMDEPKG_NDEBUG
+   INTEL:RELEASE_*_*_CC_FLAGS           = /D MDEPKG_NDEBUG
+-  MSFT:RELEASE_*_*_CC_FLAGS            = /D MDEPKG_NDEBUG
++  MSFT:RELEASE_*_*_CC_FLAGS            = /D MDEPKG_NDEBUG /arch:IA32 /c /WX
+ !if $(TOOL_CHAIN_TAG) != "XCODE5" && $(TOOL_CHAIN_TAG) != "CLANGPDB"
+   GCC:*_*_*_CC_FLAGS                   = -mno-mmx -mno-sse
+ !endif
+-- 
+2.25.1.windows.1
+

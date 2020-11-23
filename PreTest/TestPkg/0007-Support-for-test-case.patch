@@ -1,0 +1,51 @@
+From 1fc2fead6aef888974441812dfac0203f7d376e1 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 24 Aug 2020 11:34:34 +0800
+Subject: [Patch 07/10] Support for test case.
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.uni | 2 +-
+ TestPkg/Library/BaseFakeLibraryLib/Extra.uni              | 3 +--
+ 2 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.uni b/TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.uni
+index c048e07141..9eea4286f9 100644
+--- a/TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.uni
++++ b/TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.uni
+@@ -12,9 +12,9 @@
+ // SPDX-License-Identifier: BSD-2-Clause-Patent
+ //
+ // **/
+ 
+ 
+-#string STR_MODULE_ABSTRACT             #language en-US "Fake Library Instance for Incremental Build Test(for I/O APIC library class)."
++#string STR_MODULE_ABSTRACT             #language en-US STR_EXTRA_ABSTRACT
+ 
+ #string STR_MODULE_DESCRIPTION          #language en-US "Fake Library Instance try to test the influence which brought by all types of source code files' changing (Copy from PcAtChipsetPkg\Library\BaseIoApicLib)."
+ 
+diff --git a/TestPkg/Library/BaseFakeLibraryLib/Extra.uni b/TestPkg/Library/BaseFakeLibraryLib/Extra.uni
+index 0620b9afcd..c703a013e6 100644
+--- a/TestPkg/Library/BaseFakeLibraryLib/Extra.uni
++++ b/TestPkg/Library/BaseFakeLibraryLib/Extra.uni
+@@ -12,16 +12,15 @@
+ // SPDX-License-Identifier: BSD-2-Clause-Patent
+ //
+ // **/
+ 
+ #include "UniIncluded.uni"
+-#langdef en-US  "English"
+ 
+ 
+ #string STR_EXTRA_ABSTRACT             
+ #language en-US 
+-"This is the Extra ABSTRACT of the Module"
++EXTRAINC_ABSTRACT
+ 
+ #string STR_EXTRA_DESCRIPTION          
+ #language en-US 
+ "This is the Extra DESCRIPTION of the Module"
+ 
+-- 
+2.29.1.windows.1
+

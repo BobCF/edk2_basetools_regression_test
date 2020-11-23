@@ -1,0 +1,15 @@
+---
+name: Test case6-E for Change VOID* Fixed PCD
+description: Change the max size of VOID* type Fixed PCD to ("gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang|0x0000001b") in TestPkg/TestPkg32X64.dsc.
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+input:
+  type: repo
+  source: edk2
+
+change:
+  - 0001-Test-case6-for-Change-VOID-Fixed-PCD.patch
+
+output:
+  - edk2\Build
+    

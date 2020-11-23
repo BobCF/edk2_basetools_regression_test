@@ -1,0 +1,30 @@
+From 99132a8386a45854d5cbff19dfec035a589b7034 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 29 Jul 2020 11:59:50 +0800
+Subject: [PATCH] Test case9 for delete same library from component
+
+Description: Delete the library (LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf) from dsc component, which also write in Library class with same value.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 8c881de93b..ee36abef72 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -117,7 +117,7 @@
+   TestPkg/Sec/SecMain.inf {
+     <LibraryClasses>
+     NULL|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
+-	LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
++	#LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
+   }
+ 
+   #
+-- 
+2.27.0.windows.1
+

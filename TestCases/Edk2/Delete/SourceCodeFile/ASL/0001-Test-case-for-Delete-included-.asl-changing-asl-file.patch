@@ -1,0 +1,27 @@
+From 9d098fb7fed24f068e08a2332a15c01e7c6bc728 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 13:04:42 +0800
+Subject: [PATCH] Test case for Delete included .asl changing - asl file
+
+Description: Delete the included ForAddTest.asl files in the TestPkg/AcpiTables/TestPlatform.asl.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/TestPlatform.asl | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/TestPkg/AcpiTables/TestPlatform.asl b/TestPkg/AcpiTables/TestPlatform.asl
+index 8b8c6ffdcc..16efc78a0b 100644
+--- a/TestPkg/AcpiTables/TestPlatform.asl
++++ b/TestPkg/AcpiTables/TestPlatform.asl
+@@ -9,5 +9,4 @@
+ #include "test.asi"
+ DefinitionBlock ("TestPlatform.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+   #include "Dsdt.asl"
+-  Include ("ForAddTest.asl")
+ } // end of DSDT
+-- 
+2.27.0.windows.1
+

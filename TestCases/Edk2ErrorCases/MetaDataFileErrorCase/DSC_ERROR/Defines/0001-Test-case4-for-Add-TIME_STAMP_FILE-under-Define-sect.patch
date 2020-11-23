@@ -1,0 +1,28 @@
+From 617eb974cd617173215a4e986802debd24bed6cd Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 12:01:47 +0800
+Subject: [PATCH] Test case4-E for Add TIME_STAMP_FILE under Define section
+
+Description: Add TIME_STAMP_FILE under Define section ("TIME_STAMP_FILE = FakeTimeStamp.txt") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 532d084223..4dcf740cbf 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -23,6 +23,7 @@
+   BUILD_TARGETS                  = NOOPT|DEBUG|RELEASE
+   SKUID_IDENTIFIER               = DEFAULT
+   FLASH_DEFINITION               = TestPkg/TestIa32X64.fdf
++  TIME_STAMP_FILE  FakeTimeStamp.txt
+ 
+   #
+   # Defines for default states.  These can be changed on the command line.
+-- 
+2.27.0.windows.1
+

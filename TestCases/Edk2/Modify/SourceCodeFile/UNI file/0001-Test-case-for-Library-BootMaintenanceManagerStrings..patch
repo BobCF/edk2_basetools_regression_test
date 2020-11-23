@@ -1,0 +1,31 @@
+From 63ea48b8f2bca81b22d6331aa8d48e7bc7500f63 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 7 Sep 2020 21:37:39 +0800
+Subject: [PATCH] Test case for Library - BootMaintenanceManagerStrings.uni
+ file
+
+Description: Change the description in the MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerStrings.uni.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ .../BootMaintenanceManagerStrings.uni                           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerStrings.uni b/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerStrings.uni
+index 3d47473e6c..43e40f5a06 100644
+--- a/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerStrings.uni
++++ b/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerStrings.uni
+@@ -17,7 +17,7 @@
+                                        #language fr-FR  "NONE"
+ #string STR_MISSING_STRING             #language en-US  "Missing String"
+                                        #language fr-FR  "Missing String"
+-#string STR_FORM_MAIN_TITLE            #language en-US  "Boot Maintenance Manager"
++#string STR_FORM_MAIN_TITLE            #language en-US  "For a test: Boot Maintenance Manager"
+                                        #language fr-FR  "Boot Maintenance Manager"
+ #string STR_FORM_BOOT_SETUP_TITLE      #language en-US  "Boot Options"
+                                        #language fr-FR  "Boot Options"
+-- 
+2.27.0.windows.1
+

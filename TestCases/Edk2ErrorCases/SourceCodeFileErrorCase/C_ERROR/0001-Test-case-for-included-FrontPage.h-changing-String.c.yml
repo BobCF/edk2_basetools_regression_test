@@ -1,0 +1,15 @@
+---
+name: Test case-E for included FrontPage.h changing - String.c file
+description: Change the FrontPage.h files which included in the MdeModulePkg\Application\UiApp\String.c.
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+input:
+  type: repo
+  source: edk2
+
+change:
+  - 0001-Test-case-for-included-FrontPage.h-changing-String.c.patch
+
+output:
+  - edk2\Build
+    

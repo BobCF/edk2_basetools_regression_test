@@ -1,0 +1,36 @@
+From 18a9c804ba676c4e7c1df1988eee506722059b32 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Thu, 27 Aug 2020 08:48:02 +0800
+Subject: [PATCH] Test case for included .uni-changing .uni file
+
+Description: Change the description in the MdeModulePkg/Application/UiApp/JustATest.uni which is included in the FrontPageStrings.uni file.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Application/UiApp/JustATest.uni | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/MdeModulePkg/Application/UiApp/JustATest.uni b/MdeModulePkg/Application/UiApp/JustATest.uni
+index 8c1bbb1657..4c7601fc9a 100644
+--- a/MdeModulePkg/Application/UiApp/JustATest.uni
++++ b/MdeModulePkg/Application/UiApp/JustATest.uni
+@@ -9,11 +9,10 @@
+ 
+ /=#
+ 
+-#langdef   en-US "English"
+-#langdef   fr-FR "Français"
++#langdef   en-US "Français"
++#langdef   fr-FR "English"
+ #langdef   en    "Standard English"
+ #langdef   fr    "Standard Français"
+ 
+-#string STR_FRONT_PAGE_TITLE           #language en-US  "Front Page"
+-                                       #language fr-FR  "Front Page"
++
+ 
+-- 
+2.27.0.windows.1
+

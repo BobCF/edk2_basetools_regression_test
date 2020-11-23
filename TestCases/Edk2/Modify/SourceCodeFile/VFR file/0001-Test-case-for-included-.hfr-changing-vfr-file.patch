@@ -1,0 +1,30 @@
+From 4bd779dfbed6664253ced1ee69136ec7884f1821 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 8 Sep 2020 14:16:20 +0800
+Subject: [PATCH] Test case for included .hfr changing - vfr file
+
+Description: Changing included ForAddTest.hfr files(change uni which caused the value of hfr change) in the MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManager.vfr.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ .../BootMaintenanceManagerStrings.uni                           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerStrings.uni b/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerStrings.uni
+index 3d47473e6c..8138f8479a 100644
+--- a/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerStrings.uni
++++ b/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerStrings.uni
+@@ -45,7 +45,7 @@
+                                        #language fr-FR  "Add .EFI Driver as Driver Option"
+ #string STR_FORM_DRV_DEL_TITLE         #language en-US  "Delete Driver Option"
+                                        #language fr-FR  "Delete Driver Option"
+-#string STR_FORM_DRV_CHG_TITLE         #language en-US  "Change Driver Order"
++#string STR_FORM_DRV_CHG_TITLE         #language en-US  "For a test: Change Driver Order"
+                                        #language fr-FR  "Change Driver Order"
+ #string STR_FORM_NEXT_BOOT_HELP        #language en-US  "Will be valid on next boot"
+                                        #language fr-FR  "Will be valid on next boot"
+-- 
+2.27.0.windows.1
+

@@ -1,0 +1,30 @@
+From c9b243e005368dc96c5a065251a2aa8f8c1bdebb Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 19:10:57 +0800
+Subject: [PATCH] Test case7 for Change FvNameGuid in fdf file
+
+Description: Change the FV.SECFV FvNameGuid in fdf file.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 9c1cef54b0..ee48aacfb1 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -90,7 +90,7 @@ FV = DXEFV
+ ################################################################################
+ 
+ [FV.SECFV]
+-FvNameGuid         = 763BED0D-DE9F-48F5-81F1-3E90E1B1A015
++FvNameGuid         = 763BE20D-DEFF-48F5-81F1-3EF0C4B33D15
+ BlockSize          = 0x1000
+ FvAlignment        = 16
+ ERASE_POLARITY     = 1
+-- 
+2.26.1.windows.1
+

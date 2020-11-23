@@ -1,0 +1,20 @@
+---
+name: Test case5 for Change Package section
+description: Add a new package in Package section (Add the "MdeModulePkg.dec") in TestPkg/FakeEmuSec/Sec.inf.
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+init:
+  - 
+    src:
+    dest: edk2
+
+input:
+  type: repo
+  repo: edk2
+
+change:
+  - 0001-Test-case5-for-Change-Package-section.patch | edk2
+
+output:
+  - edk2\Build
+    

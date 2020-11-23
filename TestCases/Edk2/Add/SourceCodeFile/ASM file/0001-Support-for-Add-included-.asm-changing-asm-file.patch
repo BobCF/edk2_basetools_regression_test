@@ -1,0 +1,32 @@
+From aba73aa0241bd9bf3a20cd3e2c21c5ef955847b9 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 8 Sep 2020 15:50:21 +0800
+Subject: [PATCH] Support for Add included .asm changing - asm file
+
+Description: Support for Add included .asm file in the TestPkg/FakeEmuSec/Ia32/SwitchRam.asm.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Ia32/SwitchRam.asm | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+index f90c569784..9a3139de6b 100644
+--- a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
++++ b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+@@ -65,10 +65,6 @@ SecSwitchStack   PROC
+     ;
+     ; Fixup the ebp point to permanent memory
+     ;
+-    mov   eax, ebp
+-    sub   eax, ebx
+-    add   eax, ecx
+-    mov   ebp, eax                ; From now, ebp is pointed to permanent memory
+ 
+     ;
+     ; Fixup callee's ebp point for PeiDispatch
+-- 
+2.27.0.windows.1
+

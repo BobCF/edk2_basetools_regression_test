@@ -1,0 +1,183 @@
+From 8aa67f18b9a8b336dbfdd97823759462fd5760e8 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 09:50:30 +0800
+Subject: [Patch 04/10] Support for Metadata file test cases.
+
+---
+ TestPkg/FakeEmuSec/Ia32/Test_inf.h | 10 ++++++++++
+ TestPkg/FakeEmuSec/X64/Test_Inf.h  | 11 +++++++++++
+ TestPkg/FakeTimeStamp.txt          |  1 +
+ TestPkg/LibraryClass.dsc           |  1 +
+ TestPkg/Sec/SecMain.inf            |  1 +
+ TestPkg/TestIa32X64.fdf            |  1 -
+ TestPkg/TestPkg32X64.dsc           | 26 ++++++++++++++++++++++++++
+ TestPkg/buildoptions.dsc           | 11 ++++++++++-
+ 8 files changed, 60 insertions(+), 2 deletions(-)
+ create mode 100644 TestPkg/FakeEmuSec/Ia32/Test_inf.h
+ create mode 100644 TestPkg/FakeEmuSec/X64/Test_Inf.h
+ create mode 100644 TestPkg/FakeTimeStamp.txt
+
+diff --git a/TestPkg/FakeEmuSec/Ia32/Test_inf.h b/TestPkg/FakeEmuSec/Ia32/Test_inf.h
+new file mode 100644
+index 0000000000..7aabf4b637
+--- /dev/null
++++ b/TestPkg/FakeEmuSec/Ia32/Test_inf.h
+@@ -0,0 +1,10 @@
++/** @file
++
++For a test
++
++Copyright (c) 2006 - 2018, Intel Corporation. All rights reserved.<BR>
++SPDX-License-Identifier: BSD-2-Clause-Patent
++
++**/
++
++#define testaddr1 12
+\ No newline at end of file
+diff --git a/TestPkg/FakeEmuSec/X64/Test_Inf.h b/TestPkg/FakeEmuSec/X64/Test_Inf.h
+new file mode 100644
+index 0000000000..c3fc53ee60
+--- /dev/null
++++ b/TestPkg/FakeEmuSec/X64/Test_Inf.h
+@@ -0,0 +1,11 @@
++/*++ @file
++  Stub SEC that is called from the OS application that is the root of the emulator.
++
++  The OS application will call the SEC with the PEI Entry Point API.
++
++Copyright (c) 2011, Apple Inc. All rights reserved.<BR>
++SPDX-License-Identifier: BSD-2-Clause-Patent
++
++**/
++
++#define testaddr1 028h
+diff --git a/TestPkg/FakeTimeStamp.txt b/TestPkg/FakeTimeStamp.txt
+new file mode 100644
+index 0000000000..5364869e59
+--- /dev/null
++++ b/TestPkg/FakeTimeStamp.txt
+@@ -0,0 +1 @@
++Fri 7/1/ 91013
+\ No newline at end of file
+diff --git a/TestPkg/LibraryClass.dsc b/TestPkg/LibraryClass.dsc
+index 6c471401bc..6530bafbe7 100644
+--- a/TestPkg/LibraryClass.dsc
++++ b/TestPkg/LibraryClass.dsc
+@@ -41,10 +41,11 @@ NvVarsFileLib|TestPkg/Library/NvVarsFileLib/NvVarsFileLib.inf
+   DxeServicesTableLib|MdePkg/Library/DxeServicesTableLib/DxeServicesTableLib.inf
+   SortLib|MdeModulePkg/Library/UefiSortLib/UefiSortLib.inf
+   CpuLib|MdePkg/Library/BaseCpuLib/BaseCpuLib.inf
+   MtrrLib|UefiCpuPkg/Library/MtrrLib/MtrrLib.inf
+   FakeLibraryLib|TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.inf
++  LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
+ 
+ [LibraryClasses.common.SEC]
+   TimerLib|TestPkg/Library/AcpiTimerLib/BaseRomAcpiTimerLib.inf
+   PpiListLib|EmulatorPkg/Library/SecPpiListLib/SecPpiListLib.inf
+   
+diff --git a/TestPkg/Sec/SecMain.inf b/TestPkg/Sec/SecMain.inf
+index b93cc8813a..3066e0d102 100644
+--- a/TestPkg/Sec/SecMain.inf
++++ b/TestPkg/Sec/SecMain.inf
+@@ -49,10 +49,11 @@
+   PeCoffGetEntryPointLib
+   PeCoffExtraActionLib
+   ExtractGuidedSectionLib
+   LocalApicLib
+   FakeLibraryLib
++  LockBoxLib
+ 
+ [Ppis]
+   gEfiTemporaryRamSupportPpiGuid                # PPI ALWAYS_PRODUCED
+ 
+ [Pcd]
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 42d028a2d9..230250f210 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -192,11 +192,10 @@ INF  UefiCpuPkg\CpuDxe\CpuDxe.inf
+ #INF  MdeModulePkg/Universal/StatusCodeHandler/RuntimeDxe/StatusCodeHandlerRuntimeDxe.inf
+ 
+ INF  MdeModulePkg/Logo/LogoDxe.inf
+ INF  TestPkg\FakeLogo\JpegLogoDxe.inf
+ 
+-
+ ################################################################################
+ 
+ [FV.FVMAIN_COMPACT]
+ FvNameGuid         = 48DB5E17-707C-472D-91CD-1613E7EF51B0
+ FvAlignment        = 16
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 496b0d436f..532d084223 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -115,10 +115,11 @@
+   #
+   TestPkg\FakeEmuSec\Sec.inf
+   TestPkg/Sec/SecMain.inf {
+     <LibraryClasses>
+     NULL|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
++	LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
+   }
+ 
+   #
+   # PEI Phase modules
+   #
+@@ -163,5 +164,30 @@
+       NULL|TestPkg/Csm/LegacyBootMaintUiLib/LegacyBootMaintUiLib.inf
+ !endif
+   }
+   FatPkg/EnhancedFatDxe/Fat.inf
+   TestPkg/AcpiTables/AcpiTables.inf
++  MdeModulePkg\Universal\DevicePathDxe\DevicePathDxe.inf
++
++
++
++################################################################################
++#
++# Pcd Section - list of test EDK II PCD Entries defined by this Platform.
++#
++################################################################################
++[PcdsFeatureFlag]
++gUefiOvmfPkgTokenSpaceGuid.PcdSmmSmramRequire|TRUE
++gEfiMdeModulePkgTokenSpaceGuid.PcdPeiFullPcdDatabaseEnable|TRUE
++
++
++[PcdsFixedAtBuild]
++gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang|"en-US"|VOID*|0x0000001f
++
++[PcdsDynamicDefault]
++gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|64
++
++[PcdsDynamicVpd]
++gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase64|0x8000001
++
++[PcdsDynamicHii]
++gEfiMdeModulePkgTokenSpaceGuid.PcdUse1GPageTable|L"1GPageTable"|gEfiGenericVariableGuid|0x0|TRUE
+\ No newline at end of file
+diff --git a/TestPkg/buildoptions.dsc b/TestPkg/buildoptions.dsc
+index b3b68680b7..9ca9e101ff 100644
+--- a/TestPkg/buildoptions.dsc
++++ b/TestPkg/buildoptions.dsc
+@@ -28,6 +28,15 @@
+ # protection of DXE_SMM_DRIVER/SMM_CORE modules
+ [BuildOptions.common.EDKII.DXE_SMM_DRIVER, BuildOptions.common.EDKII.SMM_CORE]
+   GCC:*_*_*_DLINK_FLAGS = -z common-page-size=0x1000
+   XCODE:*_*_*_DLINK_FLAGS = -seg1addr 0x1000 -segalign 0x1000
+   XCODE:*_*_*_MTOC_FLAGS = -align 0x1000
+-  CLANGPDB:*_*_*_DLINK_FLAGS = /ALIGN:4096
+\ No newline at end of file
++  CLANGPDB:*_*_*_DLINK_FLAGS = /ALIGN:4096
++  
++[BuildOptions.IA32]
++  RELEASE_MYTOOLS_IA32_CC_FLAGS        = /D MDEPKG_NDEBUG
++
++[BuildOptions.IA32.EDKII.PEIM]
++  GCC:*_*_*_DLINK_FLAGS = -z common-page-size=0x1000
++  
++[BuildOptions.common.EDKII.BASE]
++  MSFT:RELEASE_*_*_CC_FLAGS            = /D MDEPKG_NDEBUG
+\ No newline at end of file
+-- 
+2.29.1.windows.1
+

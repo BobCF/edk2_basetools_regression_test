@@ -1,0 +1,41 @@
+From 65eecd4e7a162d594c8c18090ad8fcbb8b5a9f73 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 29 Jul 2020 11:43:01 +0800
+Subject: [PATCH] Test case4-E for Add new module only in dsc component
+
+Description: Add the library module (MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf) in component (Sec) section.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/Sec/SecMain.inf  | 1 +
+ TestPkg/TestPkg32X64.dsc | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/TestPkg/Sec/SecMain.inf b/TestPkg/Sec/SecMain.inf
+index 3066e0d102..a8f073f581 100644
+--- a/TestPkg/Sec/SecMain.inf
++++ b/TestPkg/Sec/SecMain.inf
+@@ -52,6 +52,7 @@
+   LocalApicLib
+   FakeLibraryLib
+   LockBoxLib
++  SortLib
+ 
+ [Ppis]
+   gEfiTemporaryRamSupportPpiGuid                # PPI ALWAYS_PRODUCED
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index b24f19fc5f..4e2d1693eb 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -118,6 +118,7 @@
+     <LibraryClasses>
+     NULL|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
+ 	LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
++	SortLib|MdeModulePkg\Library\BaseSortLib\BaseSortLib.in
+   }
+ 
+   #
+-- 
+2.27.0.windows.1
+

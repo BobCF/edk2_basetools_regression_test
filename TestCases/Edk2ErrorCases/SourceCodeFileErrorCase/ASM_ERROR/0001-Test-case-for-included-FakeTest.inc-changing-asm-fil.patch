@@ -1,0 +1,28 @@
+From daa3a35f5afa8fb9b8e27c882c149a8c8cb7d166 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 29 Jul 2020 08:50:52 +0800
+Subject: [PATCH] Test case-E for included FakeTest.inc changing - asm file
+
+Description: Change the FakeTest.inc included in the TestPkg/FakeEmuSec/Ia32/SwitchRam.asm.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Ia32/FakeTest.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/FakeEmuSec/Ia32/FakeTest.inc b/TestPkg/FakeEmuSec/Ia32/FakeTest.inc
+index 2476b1c415..a0945161f7 100644
+--- a/TestPkg/FakeEmuSec/Ia32/FakeTest.inc
++++ b/TestPkg/FakeEmuSec/Ia32/FakeTest.inc
+@@ -9,6 +9,6 @@
+ ;
+ ;**/
+ 
+-#define testaddr0 8
++#define testaddr0 
+  
+ END
+-- 
+2.27.0.windows.1
+

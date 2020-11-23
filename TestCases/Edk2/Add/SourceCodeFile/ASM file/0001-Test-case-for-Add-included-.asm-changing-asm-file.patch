@@ -1,0 +1,29 @@
+From a760050aad5ee4d92d211bbb57b7f4a905407f86 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 8 Sep 2020 15:52:03 +0800
+Subject: [PATCH] Test case for Add included .asm changing - asm file
+
+Description: Add included ForAddTest.asm file in the TestPkg/FakeEmuSec/Ia32/SwitchRam.asm.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Ia32/SwitchRam.asm | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+index 9a3139de6b..0d08a2b82c 100644
+--- a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
++++ b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+@@ -65,6 +65,7 @@ SecSwitchStack   PROC
+     ;
+     ; Fixup the ebp point to permanent memory
+     ;
++	#include "ForAddTest.asm"
+ 
+     ;
+     ; Fixup callee's ebp point for PeiDispatch
+-- 
+2.27.0.windows.1
+

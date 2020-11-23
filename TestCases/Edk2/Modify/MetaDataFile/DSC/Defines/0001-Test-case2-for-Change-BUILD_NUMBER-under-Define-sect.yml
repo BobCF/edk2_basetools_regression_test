@@ -1,0 +1,21 @@
+---
+name: Test case2 for Change BUILD_NUMBER under Define section
+description: (Invalid)Add BUILD_NUMBER under Define section ("BUILD_NUMBER = 2") in TestPkg/TestPkg32X64.dsc.
+type: manual
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+init:
+  - 
+    src:
+    dest: edk2
+
+input:
+  type: repo
+  repo: edk2
+
+change:
+  - 0001-Test-case2-for-Change-BUILD_NUMBER-under-Define-sect.patch | edk2
+
+output:
+  - edk2\Build
+    

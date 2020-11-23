@@ -1,0 +1,38 @@
+From 131f480cf43e7e266fd69ebefa8a151f26130f6f Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 23 Sep 2020 10:22:08 +0800
+Subject: [PATCH] Support for included .h changing - nasm file
+
+Description: Change the ForNASMIncludeH.h files which included in the TestPkg/Sec/Ia32/SecEntry.nasm.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/Sec/Ia32/SecEntry.nasm | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/TestPkg/Sec/Ia32/SecEntry.nasm b/TestPkg/Sec/Ia32/SecEntry.nasm
+index 24b1c20ca8..ff0a026833 100644
+--- a/TestPkg/Sec/Ia32/SecEntry.nasm
++++ b/TestPkg/Sec/Ia32/SecEntry.nasm
+@@ -10,6 +10,7 @@
+ ;------------------------------------------------------------------------------
+ 
+ #include <Base.h>
++#include "ForNASMIncludeH.h"
+ 
+     SECTION .text
+ 
+@@ -42,7 +43,7 @@ ASM_PFX(_ModuleEntryPoint):
+     mov     edi, FixedPcdGet32 (PcdOvmfSecPeiTempRamBase)     ; base address,
+                                                               ;   relative to
+                                                               ;   ES
+-    mov     ecx, FixedPcdGet32 (PcdOvmfSecPeiTempRamSize) / 4 ; dword count
++    mov     ecx, FixedPcdGet32 (PcdOvmfSecPeiTempRamSize) / divnumber ; dword count
+     cld                                                       ; store from base
+                                                               ;   up
+     rep stosd
+-- 
+2.27.0.windows.1
+

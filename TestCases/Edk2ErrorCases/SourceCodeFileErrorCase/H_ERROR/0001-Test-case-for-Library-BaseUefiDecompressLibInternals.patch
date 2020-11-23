@@ -1,0 +1,29 @@
+From 4a15fac40ecc52217249b151de4eea0860e1a43c Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Fri, 24 Jul 2020 10:01:01 +0800
+Subject: [PATCH] Test case-E for Library - BaseUefiDecompressLibInternals.h file
+
+Description: Change the 'MAXPBIT' defined in the MdePkg/Library/BaseUefiDecompressLib/BaseUefiDecompressLibInternals.h.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ .../BaseUefiDecompressLib/BaseUefiDecompressLibInternals.h      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdePkg/Library/BaseUefiDecompressLib/BaseUefiDecompressLibInternals.h b/MdePkg/Library/BaseUefiDecompressLib/BaseUefiDecompressLibInternals.h
+index 4df3fa388d..3d793c2cfd 100644
+--- a/MdePkg/Library/BaseUefiDecompressLib/BaseUefiDecompressLibInternals.h
++++ b/MdePkg/Library/BaseUefiDecompressLib/BaseUefiDecompressLibInternals.h
+@@ -28,7 +28,7 @@
+ //
+ #define NC      (0xff + MAXMATCH + 2 - THRESHOLD)
+ #define CBIT    9
+-#define MAXPBIT 5
++#define MAXPBIT 
+ #define TBIT    5
+ #define MAXNP   ((1U << MAXPBIT) - 1)
+ #define NT      (CODE_BIT + 3)
+-- 
+2.27.0.windows.1
+

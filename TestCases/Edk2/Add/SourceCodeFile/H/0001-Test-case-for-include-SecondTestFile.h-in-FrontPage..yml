@@ -1,0 +1,20 @@
+---
+name: Test case for include SecondTestFile.h in FrontPage.h file.
+description: Include SecondTestFile.h in the MdeModulePkg/Application/UiApp/FrontPage.h
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+init:
+  - 
+    src:
+    dest: edk2
+
+input:
+  type: repo
+  repo: edk2
+
+change:
+  - 0001-Test-case-for-include-SecondTestFile.h-in-FrontPage..patch | edk2
+
+output:
+  - edk2\Build
+    

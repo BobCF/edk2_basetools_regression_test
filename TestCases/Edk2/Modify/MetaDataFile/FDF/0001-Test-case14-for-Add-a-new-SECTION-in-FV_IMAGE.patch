@@ -1,0 +1,29 @@
+From a5a1efa28c79429e77ddfb0935ee15ace94deaed Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Fri, 11 Sep 2020 08:40:57 +0800
+Subject: [PATCH] Test case14 for Add a new SECTION in FV_IMAGE
+
+Description: Add a new SECTION in FV_IMAGE in fdf file.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 9c1cef54b0..bf2cc457ed 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -224,6 +224,7 @@ FILE FV_IMAGE = 9E21FD93-9C72-4c15-8C4B-E77F1DB2D792 {
+      #
+      SECTION FV_IMAGE = PEIFV
+      SECTION FV_IMAGE = DXEFV
++	 SECTION FV_IMAGE = SECFV
+    }
+  }
+ 
+-- 
+2.26.1.windows.1
+

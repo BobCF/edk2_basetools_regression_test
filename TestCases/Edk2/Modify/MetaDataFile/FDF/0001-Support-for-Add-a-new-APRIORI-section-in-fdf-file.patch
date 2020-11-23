@@ -1,0 +1,32 @@
+From 5e7dc2403b10861f5a453c5a250d3e9082f4aef4 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 19:16:32 +0800
+Subject: [PATCH] Support for Add a new APRIORI section in fdf file
+
+Description: Support for Add a new APRIORI section in fdf.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 9c1cef54b0..5295cd54a0 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -141,9 +141,7 @@ READ_STATUS        = TRUE
+ READ_LOCK_CAP      = TRUE
+ READ_LOCK_STATUS   = TRUE
+ 
+-APRIORI PEI {
+-  INF  MdeModulePkg/Universal/PCD/Pei/Pcd.inf
+-}
++
+ 
+ #
+ #  PEI Phase modules
+-- 
+2.26.1.windows.1
+

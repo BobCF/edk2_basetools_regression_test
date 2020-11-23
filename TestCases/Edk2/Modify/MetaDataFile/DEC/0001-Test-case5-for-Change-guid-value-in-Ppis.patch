@@ -1,0 +1,30 @@
+From 8b836a09ab2b439a73ddeb5b63b2230be4717833 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 22 Sep 2020 14:49:31 +0800
+Subject: [PATCH] Test case5 for Change guid value in Ppis
+
+Description: Change guid value in Ppis section (to gEfiVectorHandoffInfoPpiGuid       = { 0x3cdde2b4, 0x6d33, 0x4dce, { 0x76, 0xcb, 0x83, 0xdf, 0x87, 0x66, 0xfc, 0xca }}) in MdePkg/MdePkg.dec which used in MdeModulePkg/Core/Dxe/DxeMain.inf.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdePkg/MdePkg.dec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdePkg/MdePkg.dec b/MdePkg/MdePkg.dec
+index 682e61cb88..e8f259606a 100644
+--- a/MdePkg/MdePkg.dec
++++ b/MdePkg/MdePkg.dec
+@@ -911,7 +911,7 @@
+   gEfiTemporaryRamDonePpiGuid        = { 0xceab683c, 0xec56, 0x4a2d, { 0xa9, 0x6, 0x40, 0x53, 0xfa, 0x4e, 0x9c, 0x16 } }
+ 
+   ## Include/Ppi/VectorHandoffInfo.h
+-  gEfiVectorHandoffInfoPpiGuid       = { 0x3cd652b4, 0x6d33, 0x4dce, { 0x89, 0xdb, 0x83, 0xdf, 0x97, 0x66, 0xfc, 0xca }}
++  gEfiVectorHandoffInfoPpiGuid       = { 0x3cdde2b4, 0x6d33, 0x4dce, { 0x76, 0xcb, 0x83, 0xdf, 0x87, 0x66, 0xfc, 0xca }}
+ 
+   ## Include/Ppi/IsaHc.h
+   gEfiIsaHcPpiGuid                   = { 0x8d48bd70, 0xc8a3, 0x4c06, {0x90, 0x1b, 0x74, 0x79, 0x46, 0xaa, 0xc3, 0x58 } }
+-- 
+2.27.0.windows.1
+

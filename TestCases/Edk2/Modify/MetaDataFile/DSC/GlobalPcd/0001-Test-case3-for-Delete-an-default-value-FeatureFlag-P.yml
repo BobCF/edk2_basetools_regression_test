@@ -1,0 +1,21 @@
+---
+name: Test case3 for Delete an default value FeatureFlag PCD
+description: (Invalid)Delete the FeatureFlag PCD with the same value ("gEfiMdeModulePkgTokenSpaceGuid.PcdPeiFullPcdDatabaseEnable|TRUE") in TestPkg/TestPkg32X64.dsc.
+type: manual
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+init:
+  - 
+    src:
+    dest: edk2
+
+input:
+  type: repo
+  repo: edk2
+
+change:
+  - 0001-Test-case3-for-Delete-an-default-value-FeatureFlag-P.patch | edk2
+
+output:
+  - edk2\Build
+    

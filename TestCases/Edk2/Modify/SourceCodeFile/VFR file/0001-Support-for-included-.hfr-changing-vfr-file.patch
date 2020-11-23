@@ -1,0 +1,36 @@
+From 39c8a5b364a4a5d29fe666fed150bdd2cf03efdf Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 8 Sep 2020 14:09:28 +0800
+Subject: [PATCH] Support for included .hfr changing - asl file
+
+Description: Support for the changing included ForAddTest.hfr files in the MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManager.vfr.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ .../BootMaintenanceManager.vfr                            | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+diff --git a/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManager.vfr b/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManager.vfr
+index 69fb606324..56e0dfe5e2 100644
+--- a/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManager.vfr
++++ b/MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManager.vfr
+@@ -229,13 +229,7 @@ formset
+ 
+   endform;
+ 
+-  form formid = FORM_DRV_CHG_ID,
+-       title = STRING_TOKEN(STR_FORM_DRV_CHG_TITLE);
+-
+-       label FORM_DRV_CHG_ID;
+-       label LABEL_END;
+-
+-  endform;
++  #include "ForAddTest.hfr"
+ 
+   form formid = FORM_CON_MAIN_ID,
+        title = STRING_TOKEN(STR_FORM_CON_MAIN_TITLE);
+-- 
+2.27.0.windows.1
+

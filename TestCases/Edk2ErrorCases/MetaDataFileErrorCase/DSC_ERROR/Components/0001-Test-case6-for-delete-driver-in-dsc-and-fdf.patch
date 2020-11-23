@@ -1,0 +1,43 @@
+From 37fc51e1dd0afb573f3da3c4e7f00e1282acebeb Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 29 Jul 2020 11:48:26 +0800
+Subject: [PATCH] Test case6-E for delete driver in dsc and fdf
+
+Description: Delete the Driver (MdeModulePkg/Logo/LogoDxe.inf) from both dsc section and fdf file.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf  | 2 +-
+ TestPkg/TestPkg32X64.dsc | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 230250f210..5f200a93b4 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -191,7 +191,7 @@ INF  UefiCpuPkg\CpuDxe\CpuDxe.inf
+ #INF  MdeModulePkg/Universal/ReportStatusCodeRouter/RuntimeDxe/ReportStatusCodeRouterRuntimeDxe.inf
+ #INF  MdeModulePkg/Universal/StatusCodeHandler/RuntimeDxe/StatusCodeHandlerRuntimeDxe.inf
+ 
+-INF  MdeModulePkg/Logo/LogoDxe.inf
++#INF  MdeModulePkg/Logo/LogoDxe,inf
+ INF  TestPkg\FakeLogo\JpegLogoDxe.inf
+ 
+ ################################################################################
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index b24f19fc5f..051507ca99 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -152,7 +152,7 @@
+ 
+   MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
+ 
+-  MdeModulePkg/Logo/LogoDxe.inf
++  #MdeModulePkg/Logo/LogoDxe.inf
+   TestPkg\FakeLogo\JpegLogoDxe.inf
+   MdeModulePkg/Application/UiApp/UiApp.inf {
+     <LibraryClasses>
+-- 
+2.27.0.windows.1
+

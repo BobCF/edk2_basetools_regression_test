@@ -1,0 +1,74 @@
+From fa5bba84a280efcc3815a9f98cba1432c9b2cc90 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 19:00:54 +0800
+Subject: [PATCH] Test case4 for Add a new FV section in fdf file
+
+Description: Add a new FV section in fdf file.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf | 38 +++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 37 insertions(+), 1 deletion(-)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index c53d67cc27..db4e16e673 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -85,7 +85,7 @@ FV = PEIFV
+ 
+ 0x100000|0xC00000
+ gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvBase|gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvSize
+-#FV = DXEFV
++FV = DXEFV
+ 
+ ################################################################################
+ 
+@@ -156,7 +156,43 @@ INF UefiCpuPkg\CpuMpPei\CpuMpPei.inf
+ 
+ ################################################################################
+ 
++[FV.DXEFV]
++FvForceRebase      = FALSE
++FvNameGuid         = 7CB8BDC9-F8EB-4F34-AAEA-3EE4AF6516A1
++BlockSize          = 0x10000
++FvAlignment        = 16
++ERASE_POLARITY     = 1
++MEMORY_MAPPED      = TRUE
++STICKY_WRITE       = TRUE
++LOCK_CAP           = TRUE
++LOCK_STATUS        = TRUE
++WRITE_DISABLED_CAP = TRUE
++WRITE_ENABLED_CAP  = TRUE
++WRITE_STATUS       = TRUE
++WRITE_LOCK_CAP     = TRUE
++WRITE_LOCK_STATUS  = TRUE
++READ_DISABLED_CAP  = TRUE
++READ_ENABLED_CAP   = TRUE
++READ_STATUS        = TRUE
++READ_LOCK_CAP      = TRUE
++READ_LOCK_STATUS   = TRUE
+ 
++#
++# DXE Phase modules
++#
++INF  MdeModulePkg/Core/Dxe/DxeMain.inf
++INF  MdeModulePkg/Universal/PCD/Dxe/Pcd.inf
++INF  MdeModulePkg/Application/UiApp/UiApp.inf
++INF  MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
++INF  FatPkg/EnhancedFatDxe/Fat.inf
++INF  RuleOverride=ACPITABLE TestPkg/AcpiTables/AcpiTables.inf
++
++INF  UefiCpuPkg\CpuDxe\CpuDxe.inf
++#INF  MdeModulePkg/Universal/ReportStatusCodeRouter/RuntimeDxe/ReportStatusCodeRouterRuntimeDxe.inf
++#INF  MdeModulePkg/Universal/StatusCodeHandler/RuntimeDxe/StatusCodeHandlerRuntimeDxe.inf
++
++INF  MdeModulePkg/Logo/LogoDxe.inf
++INF  TestPkg\FakeLogo\JpegLogoDxe.inf
+ 
+ ################################################################################
+ 
+-- 
+2.26.1.windows.1
+

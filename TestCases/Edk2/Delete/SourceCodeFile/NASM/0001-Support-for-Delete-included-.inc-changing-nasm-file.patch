@@ -1,0 +1,38 @@
+From 05b48f3a61c178ba6cc4b6b93a736e7a76724920 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 8 Sep 2020 16:48:39 +0800
+Subject: [PATCH] Support for Delete included .inc changing - nasm file
+
+Description: Support for delete included ForAddTest.inc file in the UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm b/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm
+index b74046b76a..f0e2ef933b 100644
+--- a/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm
++++ b/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm
+@@ -13,6 +13,7 @@
+ ;-------------------------------------------------------------------------------
+ 
+ %include "MpEqu.inc"
++%include "ForAddTest.inc"
+ extern ASM_PFX(InitializeFloatingPointUnits)
+ 
+ SECTION .text
+@@ -222,7 +223,7 @@ global ASM_PFX(AsmRelocateApLoop)
+ ASM_PFX(AsmRelocateApLoop):
+ AsmRelocateApLoopStart:
+     mov        eax, esp
+-    mov        esp, [eax + 16]     ; TopOfApStack
++    mov        esp, [eax + Test_TopOfApStack]     ; TopOfApStack
+     push       dword [eax]         ; push return address for stack trace
+     push       ebp
+     mov        ebp, esp
+-- 
+2.27.0.windows.1
+

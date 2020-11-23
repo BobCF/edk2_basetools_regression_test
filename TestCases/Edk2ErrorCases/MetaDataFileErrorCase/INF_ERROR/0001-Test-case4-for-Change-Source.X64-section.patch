@@ -1,0 +1,29 @@
+From 6444975f4878142019bce3ea3b8128ccc0f77de0 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Sun, 6 Sep 2020 12:56:04 +0800
+Subject: [PATCH] Test case4-E for Change Source.X64 section
+
+Description: Change the source in Source.X64 section in TestPkg/FakeLogo/JpegLogo.idf.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeLogo/JpegLogoDxe.inf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/FakeLogo/JpegLogoDxe.inf b/TestPkg/FakeLogo/JpegLogoDxe.inf
+index a3af409553..382fe721f7 100644
+--- a/TestPkg/FakeLogo/JpegLogoDxe.inf
++++ b/TestPkg/FakeLogo/JpegLogoDxe.inf
+@@ -28,7 +28,7 @@
+ #
+ 
+ [Sources.X64]
+-  Logo.jpg
++  HaveATest
+   Logo.c
+   JpegLogo.idf
+ 
+-- 
+2.27.0.windows.1
+

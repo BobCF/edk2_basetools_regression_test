@@ -1,0 +1,28 @@
+From 23a8757dac333ed741c030502412bed0d775a58b Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 11:58:16 +0800
+Subject: [PATCH] Test case3 for Add FIX_LOAD_TOP_MEMORY_ADDRESS
+
+Description: Add FIX_LOAD_TOP_MEMORY_ADDRESS under Define section ("FIX_LOAD_TOP_MEMORY_ADDRESS = 0xF0000000") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 532d084223..d434be182c 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -23,6 +23,7 @@
+   BUILD_TARGETS                  = NOOPT|DEBUG|RELEASE
+   SKUID_IDENTIFIER               = DEFAULT
+   FLASH_DEFINITION               = TestPkg/TestIa32X64.fdf
++  FIX_LOAD_TOP_MEMORY_ADDRESS    = 0xF0000000
+ 
+   #
+   # Defines for default states.  These can be changed on the command line.
+-- 
+2.27.0.windows.1
+

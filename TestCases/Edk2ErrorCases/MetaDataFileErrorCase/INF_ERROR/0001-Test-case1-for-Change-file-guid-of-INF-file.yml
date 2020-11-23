@@ -1,0 +1,16 @@
+---
+name: Test case1-E for Change file guid of INF file
+description: Change file guid of INF file (to "9483ef8b-9a36-32f8-4ca5-5b66e45370ec")in TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.inf.
+
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+input:
+  type: repo
+  source: edk2
+
+change:
+  - 0001-Test-case1-for-Change-file-guid-of-INF-file.patch
+
+output:
+  - edk2\Build
+    

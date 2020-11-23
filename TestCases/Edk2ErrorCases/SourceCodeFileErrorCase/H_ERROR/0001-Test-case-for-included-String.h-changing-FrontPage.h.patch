@@ -1,0 +1,29 @@
+From 77f97565bc43f8e7b241602afda49e8d210b4f63 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Fri, 24 Jul 2020 09:57:46 +0800
+Subject: [PATCH] Test case-E for included String.h changing - FrontPage.h file
+
+Description: Change the String.h files which included in the MdeModulePkg\Application\UiApp\FrontPage.h.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Application/UiApp/String.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Application/UiApp/String.h b/MdeModulePkg/Application/UiApp/String.h
+index 3dc4c3316b..ad6575dbdc 100644
+--- a/MdeModulePkg/Application/UiApp/String.h
++++ b/MdeModulePkg/Application/UiApp/String.h
+@@ -23,7 +23,7 @@ extern UINT8  BdsDxeStrings[];
+ //
+ #define EFI_BDS_PLATFORM_GUID \
+   { \
+-    0x7777E939, 0xD57E, 0x4DCB, 0xA0, 0x8E, 0x64, 0xD7, 0x98, 0x57, 0x1E, 0x0F \
++    07777E939, 0xD57E, 0x4DCB, 0xA0, 0x8E, 0x64, 0xD7, 0x98, 0x57, 0x1E, 0x0E \
+   }
+ 
+ /**
+-- 
+2.27.0.windows.1
+

@@ -1,0 +1,30 @@
+From dc5602c9746ad0906b6ce5c51981522ca8a6ce87 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 22 Sep 2020 16:36:24 +0800
+Subject: [PATCH] Test case for Driver - String.h file
+
+Description: Change the define value ("#define PM_TMR_BLK") in TestPkg/AcpiTables/Platform.h.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/Platform.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/AcpiTables/Platform.h b/TestPkg/AcpiTables/Platform.h
+index b1341ee2a4..f165c788f2 100644
+--- a/TestPkg/AcpiTables/Platform.h
++++ b/TestPkg/AcpiTables/Platform.h
+@@ -29,7 +29,7 @@
+ #define S4BIOS_REQ      0x00
+ #define PM1a_EVT_BLK    0x0000b000
+ #define PM1a_CNT_BLK    0x0000b004
+-#define PM_TMR_BLK      0x0000b008
++#define PM_TMR_BLK      0x0000b0012
+ #define GPE0_BLK        0x0000afe0
+ #define PM1_EVT_LEN     0x04
+ #define PM1_CNT_LEN     0x02
+-- 
+2.27.0.windows.1
+

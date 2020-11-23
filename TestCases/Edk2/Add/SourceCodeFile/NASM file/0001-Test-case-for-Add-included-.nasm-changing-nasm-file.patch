@@ -1,0 +1,103 @@
+From fcfda7ec92fd4dc7cdc2173e9497b21d9551fead Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Thu, 10 Sep 2020 19:54:27 +0800
+Subject: [Patch] Test case for Add %include .nasm changing nasm file
+
+Description: Delete %include "MpEqu.inc" and add %include "MpEqu.nasm" in the MpFuncs.nasm.
+
+Repo: edk2
+
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
+---
+ UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.inf |  2 +-
+ UefiCpuPkg/Library/MpInitLib/X64/MpEqu.nasm   | 43 +++++++++++++++++++
+ UefiCpuPkg/Library/MpInitLib/X64/MpFuncs.nasm |  2 +-
+ 3 files changed, 45 insertions(+), 2 deletions(-)
+ create mode 100644 UefiCpuPkg/Library/MpInitLib/X64/MpEqu.nasm
+
+diff --git a/UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.inf b/UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.inf
+index 9907f4157b..c8179a0700 100644
+--- a/UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.inf
++++ b/UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.inf
+@@ -24,11 +24,11 @@
+ [Sources.IA32]
+   Ia32/MpEqu.inc
+   Ia32/MpFuncs.nasm
+ 
+ [Sources.X64]
+-  X64/MpEqu.inc
++#  X64/MpEqu.inc
+   X64/MpFuncs.nasm
+ 
+ [Sources.common]
+   DxeMpLib.c
+   MpLib.c
+diff --git a/UefiCpuPkg/Library/MpInitLib/X64/MpEqu.nasm b/UefiCpuPkg/Library/MpInitLib/X64/MpEqu.nasm
+new file mode 100644
+index 0000000000..58ef369342
+--- /dev/null
++++ b/UefiCpuPkg/Library/MpInitLib/X64/MpEqu.nasm
+@@ -0,0 +1,43 @@
++;------------------------------------------------------------------------------ ;
++; Copyright (c) 2015 - 2019, Intel Corporation. All rights reserved.<BR>
++; SPDX-License-Identifier: BSD-2-Clause-Patent
++;
++; Module Name:
++;
++;   MpEqu.inc
++;
++; Abstract:
++;
++;   This is the equates file for Multiple Processor support
++;
++;-------------------------------------------------------------------------------
++
++VacantFlag                    equ        00h
++NotVacantFlag                 equ        0ffh
++
++CPU_SWITCH_STATE_IDLE         equ        1
++CPU_SWITCH_STATE_STORED       equ        3
++CPU_SWITCH_STATE_LOADED       equ        2
++
++LockLocation                  equ        (RendezvousFunnelProcEnd - RendezvousFunnelProcStart)
++StackStartAddressLocation     equ        LockLocation + 08h
++StackSizeLocation             equ        LockLocation + 10h
++ApProcedureLocation           equ        LockLocation + 18h
++GdtrLocation                  equ        LockLocation + 20h
++IdtrLocation                  equ        LockLocation + 2Ah
++BufferStartLocation           equ        LockLocation + 34h
++ModeOffsetLocation            equ        LockLocation + 3Ch
++ApIndexLocation               equ        LockLocation + 44h
++CodeSegmentLocation           equ        LockLocation + 4Ch
++DataSegmentLocation           equ        LockLocation + 54h
++EnableExecuteDisableLocation  equ        LockLocation + 5Ch
++Cr3Location                   equ        LockLocation + 64h
++InitFlagLocation              equ        LockLocation + 6Ch
++CpuInfoLocation               equ        LockLocation + 74h
++NumApsExecutingLocation       equ        LockLocation + 7Ch
++InitializeFloatingPointUnitsAddress equ  LockLocation + 8Ch
++ModeTransitionMemoryLocation        equ  LockLocation + 94h
++ModeTransitionSegmentLocation       equ  LockLocation + 98h
++ModeHighMemoryLocation              equ  LockLocation + 9Ah
++ModeHighSegmentLocation             equ  LockLocation + 9Eh
++Enable5LevelPagingLocation          equ  LockLocation + 0A0h
+diff --git a/UefiCpuPkg/Library/MpInitLib/X64/MpFuncs.nasm b/UefiCpuPkg/Library/MpInitLib/X64/MpFuncs.nasm
+index 87f2523e85..549539a7bc 100644
+--- a/UefiCpuPkg/Library/MpInitLib/X64/MpFuncs.nasm
++++ b/UefiCpuPkg/Library/MpInitLib/X64/MpFuncs.nasm
+@@ -10,11 +10,11 @@
+ ;
+ ;   This is the assembly code for MP support
+ ;
+ ;-------------------------------------------------------------------------------
+ 
+-%include "MpEqu.inc"
++%include "MpEqu.nasm"
+ extern ASM_PFX(InitializeFloatingPointUnits)
+ 
+ DEFAULT REL
+ 
+ SECTION .text
+-- 
+2.20.1.windows.1
+

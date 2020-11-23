@@ -1,0 +1,29 @@
+From 5d0e20df908abb3d5e0edefb38cc75078d600b31 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 10:07:17 +0800
+Subject: [PATCH] Test case6-E for Change VOID* Fixed PCD
+
+Description: Change the max size of VOID* type Fixed PCD to ("gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang|0x0000001b") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 532d084223..d9b812525b 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -181,7 +181,7 @@ gEfiMdeModulePkgTokenSpaceGuid.PcdPeiFullPcdDatabaseEnable|TRUE
+ 
+ 
+ [PcdsFixedAtBuild]
+-gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang|"en-US"|VOID*|0x0000001f
++gEfiMdePkgTokenSpaceGuid.dUefiVariableDefaultPlatformLang|"en-US"|VOID*|0x0000001b
+ 
+ [PcdsDynamicDefault]
+ gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|64
+-- 
+2.27.0.windows.1
+

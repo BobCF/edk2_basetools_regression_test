@@ -1,0 +1,29 @@
+From 4785933980d154eba80473931b386a9ffb7cd6d9 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 28 Jul 2020 11:15:46 +0800
+Subject: [PATCH] Test case for included MpEqu.inc changing - nasm file
+
+Description: Change the MpEqu.inc files which included in the UefiCpuPkg\Library\MpInitLib\DxeMpInitLib.inf.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ UefiCpuPkg/Library/MpInitLib/Ia32/MpEqu.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/UefiCpuPkg/Library/MpInitLib/Ia32/MpEqu.inc b/UefiCpuPkg/Library/MpInitLib/Ia32/MpEqu.inc
+index efb1bc2bf7..677beced27 100644
+--- a/UefiCpuPkg/Library/MpInitLib/Ia32/MpEqu.inc
++++ b/UefiCpuPkg/Library/MpInitLib/Ia32/MpEqu.inc
+@@ -25,7 +25,7 @@ StackSizeLocation             equ        LockLocation + 08h
+ ApProcedureLocation           equ        LockLocation + 0Ch
+ GdtrLocation                  equ        LockLocation + 10h
+ IdtrLocation                  equ        LockLocation + 16h
+-BufferStartLocation           equ        LockLocation + 1Ch
++BufferStartLocation           equ        LockLocation + 1Eh
+ ModeOffsetLocation            equ        LockLocation + 20h
+ ApIndexLocation               equ        LockLocation + 24h
+ CodeSegmentLocation           equ        LockLocation + 28h
+-- 
+2.27.0.windows.1
+

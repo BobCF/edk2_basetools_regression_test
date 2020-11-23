@@ -1,0 +1,28 @@
+From cd107e6fdbb2398cb5721363adab90c53af08f4b Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 29 Jul 2020 16:51:41 +0800
+Subject: [PATCH] Test case1-E for Add different library instance
+
+Description: Add a different 'BaseMemoryLib' library instance (BaseMemoryLib|MdePkg\Library\BaseMemoryLibOptDxe\BaseMemoryLibOptDxe.inf) for 'DXE_CORE' class.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/LibraryClass.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/LibraryClass.dsc b/TestPkg/LibraryClass.dsc
+index 6530bafbe7..5b85867da0 100644
+--- a/TestPkg/LibraryClass.dsc
++++ b/TestPkg/LibraryClass.dsc
+@@ -111,6 +111,7 @@ NvVarsFileLib|TestPkg/Library/NvVarsFileLib/NvVarsFileLib.inf
+ 
+ 
+ [LibraryClasses.common.DXE_CORE]
++  BaseMemoryLib|MdePkg\Library\BaseMemoyLibOptDxe\BaseMemoryLibOptDxe.inf
+   HobLib|MdePkg/Library/DxeCoreHobLib/DxeCoreHobLib.inf
+   DxeCoreEntryPoint|MdePkg/Library/DxeCoreEntryPoint/DxeCoreEntryPoint.inf
+   MemoryAllocationLib|MdeModulePkg/Library/DxeCoreMemoryAllocationLib/DxeCoreMemoryAllocationLib.inf
+-- 
+2.27.0.windows.1
+

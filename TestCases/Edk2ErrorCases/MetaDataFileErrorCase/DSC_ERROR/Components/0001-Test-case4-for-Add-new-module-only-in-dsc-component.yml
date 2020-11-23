@@ -1,0 +1,15 @@
+---
+name: Test case4-E for Add new module only in dsc component
+description: Add the library module (MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf) in component (Sec) section.
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+input:
+  type: repo
+  source: edk2
+
+change:
+  - 0001-Test-case4-for-Add-new-module-only-in-dsc-component.patch
+
+output:
+  - edk2\Build
+    

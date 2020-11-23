@@ -1,0 +1,4 @@
+[submodule "edk2"]
+	path = edk2
+	url = https://github.com/BobCF/edk2
+	branch = IncTest

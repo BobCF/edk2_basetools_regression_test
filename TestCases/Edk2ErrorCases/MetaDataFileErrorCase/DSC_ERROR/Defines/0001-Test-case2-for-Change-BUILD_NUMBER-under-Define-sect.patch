@@ -1,0 +1,28 @@
+From 609fc1906d259364858f5cb545ed441620b2a4b2 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 11:55:56 +0800
+Subject: [PATCH] Test case2-E for Change BUILD_NUMBER under Define section
+
+Description: Add BUILD_NUMBER under Define section ("BUILD_NUMBER = 2") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 532d084223..e662606154 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -23,6 +23,7 @@
+   BUILD_TARGETS                  = NOOPT|DEBUG|RELEASE
+   SKUID_IDENTIFIER               = DEFAULT
+   FLASH_DEFINITION               = TestPkg/TestIa32X64.fdf
++  BUILD_NUMBE = 2
+ 
+   #
+   # Defines for default states.  These can be changed on the command line.
+-- 
+2.27.0.windows.1
+

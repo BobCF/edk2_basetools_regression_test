@@ -1,0 +1,38 @@
+From be025fcb8e05f0bf456caa2dd2b1a78041c09ddd Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 10:14:38 +0800
+Subject: [PATCH] Test case8 for Change value of PcdsDynamicVpd PCD
+
+Description: Change value of PcdsDynamicVpd PCD to ("gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase64|0x8000002") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 532d084223..593cf60d77 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -23,6 +23,7 @@
+   BUILD_TARGETS                  = NOOPT|DEBUG|RELEASE
+   SKUID_IDENTIFIER               = DEFAULT
+   FLASH_DEFINITION               = TestPkg/TestIa32X64.fdf
++  VPD_TOOL_GUID                  = 8C3D856A-9BE6-468E-850A-24F7A8D38E08
+ 
+   #
+   # Defines for default states.  These can be changed on the command line.
+@@ -187,7 +188,7 @@ gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang|"en-US"|VOID*|0x0000
+ gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|64
+ 
+ [PcdsDynamicVpd]
+-gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase64|0x8000001
++gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase64|0x8000002
+ 
+ [PcdsDynamicHii]
+ gEfiMdeModulePkgTokenSpaceGuid.PcdUse1GPageTable|L"1GPageTable"|gEfiGenericVariableGuid|0x0|TRUE
+\ No newline at end of file
+-- 
+2.27.0.windows.1
+

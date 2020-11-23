@@ -1,0 +1,30 @@
+From 39ee1a6ec4d2b5ab9e9b3e1ba62198e7621d4998 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 23 Sep 2020 10:10:16 +0800
+Subject: [PATCH] Test case for include ThirdTestFile.uni in
+ FrontPageStrings.uni file.
+
+Description: Include ThirdTestFile.uni in the MdeModulePkg/Application/UiApp/FrontPageStrings.uni
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Application/UiApp/FrontPageStrings.uni | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/MdeModulePkg/Application/UiApp/FrontPageStrings.uni b/MdeModulePkg/Application/UiApp/FrontPageStrings.uni
+index 8662e009bd..81ab1756b0 100644
+--- a/MdeModulePkg/Application/UiApp/FrontPageStrings.uni
++++ b/MdeModulePkg/Application/UiApp/FrontPageStrings.uni
+@@ -10,6 +10,7 @@
+ /=#
+ 
+ #include "JustATest.uni"
++#include "ThirdTestFile.uni"
+ 
+ #string STR_FRONT_PAGE_TITLE           #language en-US  "Front Page"
+                                        #language fr-FR  "Front Page"
+-- 
+2.27.0.windows.1
+

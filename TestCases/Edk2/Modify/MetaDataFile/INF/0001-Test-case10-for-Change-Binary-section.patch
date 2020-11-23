@@ -1,0 +1,26 @@
+From 50a19b3eea2564b2919fc535a207392646bcc5aa Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Thu, 27 Aug 2020 16:29:24 +0800
+Subject: [PATCH] Test case10 for Change Binary section
+
+Description: Change the Binary file as TestPkg/FakeBinary/FakeBinary.txt in TestPkg/FakeBinary/FakeBinary.inf.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeBinary/FakeBinary.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/FakeBinary/FakeBinary.txt b/TestPkg/FakeBinary/FakeBinary.txt
+index fa13c1a8a7..5e237d114a 100644
+--- a/TestPkg/FakeBinary/FakeBinary.txt
++++ b/TestPkg/FakeBinary/FakeBinary.txt
+@@ -1 +1 @@
+-This is a fake binary file.
+\ No newline at end of file
++HHHHH~This is a fake binary file.
+\ No newline at end of file
+-- 
+2.27.0.windows.1
+

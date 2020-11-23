@@ -1,0 +1,65 @@
+From 83464ec408276aa88b24a36da81472d1b3317e6b Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 12:48:07 +0800
+Subject: [PATCH] Test case3 for Change Source.IA32 section
+
+Description: Add a new source in Source.IA32 section (Add the "Test_inf.h") in TestPkg/FakeEmuSec/Sec.inf.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Ia32/SwitchRam.asm | 5 +++--
+ TestPkg/FakeEmuSec/Ia32/Test_inf.h    | 2 +-
+ TestPkg/FakeEmuSec/Sec.inf            | 1 +
+ 3 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+index f90c569784..3687ea6367 100644
+--- a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
++++ b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+@@ -12,6 +12,7 @@
+ ;   Switch the stack from temporary memory to permanent memory.
+ ;
+ ;------------------------------------------------------------------------------
++#include "Test_inf.h"
+ #include "FakeTest.h"
+ #include "FakeTest.i"
+ #include "FakeTest.inc"
+@@ -52,8 +53,8 @@ SecSwitchStack   PROC
+     add   eax, ecx
+     mov   edx, dword ptr [esp]         ; copy pushed register's value to permanent memory
+     mov   dword ptr [eax], edx
+-    mov   edx, dword ptr [esp + 4]
+-    mov   dword ptr [eax + 4], edx
++    mov   edx, dword ptr [esp + testaddr4]
++    mov   dword ptr [eax + testaddr4], edx
+     mov   edx, dword ptr [esp + testaddr0]
+     mov   dword ptr [eax + testaddr0], edx
+     mov   edx, dword ptr [esp + testaddr1]
+diff --git a/TestPkg/FakeEmuSec/Ia32/Test_inf.h b/TestPkg/FakeEmuSec/Ia32/Test_inf.h
+index 7aabf4b637..16260398d5 100644
+--- a/TestPkg/FakeEmuSec/Ia32/Test_inf.h
++++ b/TestPkg/FakeEmuSec/Ia32/Test_inf.h
+@@ -7,4 +7,4 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
+ 
+ **/
+ 
+-#define testaddr1 12
+\ No newline at end of file
++#define testaddr4 8
+\ No newline at end of file
+diff --git a/TestPkg/FakeEmuSec/Sec.inf b/TestPkg/FakeEmuSec/Sec.inf
+index 0a10d74c0b..5244fc7ef5 100644
+--- a/TestPkg/FakeEmuSec/Sec.inf
++++ b/TestPkg/FakeEmuSec/Sec.inf
+@@ -33,6 +33,7 @@
+   Ia32/FakeTest.h
+   Ia32/FakeTest.i
+   Ia32/FakeTest.inc
++  Ia32/Test_inf.h
+ 
+ [Packages]
+   MdePkg/MdePkg.dec
+-- 
+2.27.0.windows.1
+

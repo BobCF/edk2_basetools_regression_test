@@ -1,0 +1,31 @@
+From cb09c47ba5c087a4ddf59acd8d0c89a5b3250c1f Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 13:49:48 +0800
+Subject: [PATCH] Test case2 for Change value of Fixed PCD under library
+
+Description: Change the default value for a fixed PCD under a library (TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.inf) in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 532d084223..61bc4fd2be 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -109,6 +109,10 @@
+ ################################################################################
+ [Components.IA32]
+   TestPkg/ResetVector/ResetVector.inf
++  TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.inf{
++    <PcdsFixedAtBuild>
++    gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress|0x0000001A
++  }
+ 
+   #
+   # SEC Phase modules
+-- 
+2.27.0.windows.1
+

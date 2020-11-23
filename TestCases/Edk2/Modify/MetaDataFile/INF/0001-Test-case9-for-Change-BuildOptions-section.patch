@@ -1,0 +1,29 @@
+From b6b8bebd3db06d78284464fd08fc97fdc1a15501 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Thu, 27 Aug 2020 14:25:29 +0800
+Subject: [PATCH] Test case9 for Change BuildOptions section
+
+Description: Add a build option in BuildOptions section in TestPkg/Sec/SecMain.inf.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/Sec/SecMain.inf | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/TestPkg/Sec/SecMain.inf b/TestPkg/Sec/SecMain.inf
+index 3066e0d102..4edd61fa21 100644
+--- a/TestPkg/Sec/SecMain.inf
++++ b/TestPkg/Sec/SecMain.inf
+@@ -71,3 +71,6 @@
+ 
+ [FeaturePcd]
+   gUefiOvmfPkgTokenSpaceGuid.PcdSmmSmramRequire
++
++[BuildOptions]
++  *_*_*_CC_FLAGS == /nologo /arch:IA32 /c /WX /GS- /W4 /Gs32768 /D UNICODE /O1b2 /GL /FIAutoGen.h /EHs-c- /GR- /GF /Gw /Z7 /Od
+\ No newline at end of file
+-- 
+2.27.0.windows.1
+

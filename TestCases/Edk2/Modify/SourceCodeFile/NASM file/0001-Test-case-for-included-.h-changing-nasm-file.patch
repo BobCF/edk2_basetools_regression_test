@@ -1,0 +1,27 @@
+From 521550541b9cf1d77d0f31170aa3b08b44e25ef2 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 23 Sep 2020 10:31:06 +0800
+Subject: [PATCH] Test case for included .h changing - nasm file
+
+Description: Change the ForNASMIncludeH.h files which included in the TestPkg/Sec/Ia32/SecEntry.nasm.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/Sec/Ia32/ForNASMIncludeH.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/Sec/Ia32/ForNASMIncludeH.h b/TestPkg/Sec/Ia32/ForNASMIncludeH.h
+index 1e3c91f038..6fd612b34d 100644
+--- a/TestPkg/Sec/Ia32/ForNASMIncludeH.h
++++ b/TestPkg/Sec/Ia32/ForNASMIncludeH.h
+@@ -7,4 +7,4 @@
+ 
+ **/
+ 
+-#define divnumber 4
++#define divnumber 2
+-- 
+2.27.0.windows.1
+

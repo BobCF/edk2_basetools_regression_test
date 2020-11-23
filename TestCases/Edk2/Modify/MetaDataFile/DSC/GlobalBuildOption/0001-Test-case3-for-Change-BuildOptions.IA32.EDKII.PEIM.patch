@@ -1,0 +1,29 @@
+From b8e45b508c396aacde29ae452a4e9ba1b1adb1c1 Mon Sep 17 00:00:00 2001
+From: mliang2x <mingyuex.liang@intel.com>
+Date: Wed, 26 Aug 2020 09:04:50 +0800
+Subject: [PATCH] Test case3 for Change BuildOptions.IA32.EDKII.PEIM
+
+Description: Change build option under BuildOptions.IA32.EDKII.PEIM (Add "MSFT:RELEASE_*_*_CC_FLAGS            = /D MDEPKG_NDEBUG") in TestPkg/buildoptions.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/buildoptions.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/buildoptions.dsc b/TestPkg/buildoptions.dsc
+index 9ca9e101ff..5d2be12622 100644
+--- a/TestPkg/buildoptions.dsc
++++ b/TestPkg/buildoptions.dsc
+@@ -37,6 +37,7 @@
+ 
+ [BuildOptions.IA32.EDKII.PEIM]
+   GCC:*_*_*_DLINK_FLAGS = -z common-page-size=0x1000
++  MSFT:RELEASE_*_*_CC_FLAGS            = /D MDEPKG_NDEBUG
+   
+ [BuildOptions.common.EDKII.BASE]
+   MSFT:RELEASE_*_*_CC_FLAGS            = /D MDEPKG_NDEBUG
+\ No newline at end of file
+-- 
+2.25.1.windows.1
+

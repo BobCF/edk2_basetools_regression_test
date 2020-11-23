@@ -1,0 +1,40 @@
+From e2cb91dfed6453e2aec384e250b17fc686582c7a Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 8 Sep 2020 14:58:45 +0800
+Subject: [PATCH] Test case for Add included FakeTest.inc changing - asm file
+
+Description: Add included file FakeTest.inc in the TestPkg/FakeEmuSec/Ia32/SwitchRam.asm.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Ia32/SwitchRam.asm | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+index 140e498d61..f90c569784 100644
+--- a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
++++ b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+@@ -14,6 +14,7 @@
+ ;------------------------------------------------------------------------------
+ #include "FakeTest.h"
+ #include "FakeTest.i"
++#include "FakeTest.inc"
+     .586p
+     .model  flat,C
+     .code
+@@ -53,8 +54,8 @@ SecSwitchStack   PROC
+     mov   dword ptr [eax], edx
+     mov   edx, dword ptr [esp + 4]
+     mov   dword ptr [eax + 4], edx
+-    mov   edx, dword ptr [esp + 6]
+-    mov   dword ptr [eax + 6], edx
++    mov   edx, dword ptr [esp + testaddr0]
++    mov   dword ptr [eax + testaddr0], edx
+     mov   edx, dword ptr [esp + testaddr1]
+     mov   dword ptr [eax + testaddr1], edx
+     mov   edx, dword ptr [esp + testaddr2]    ; Update this function's return address into permanent memory
+-- 
+2.27.0.windows.1
+

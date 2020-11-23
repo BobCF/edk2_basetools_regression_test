@@ -1,0 +1,28 @@
+From 9fc71453b5bbfa1a07f11ca5fec851fa03e7b875 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Thu, 6 Aug 2020 16:39:17 +0800
+Subject: [PATCH] Test case2-E for Add a new include inc file
+
+Description: Add a new include inc file ("!include NetworkPkg/NetworkLibs.dsc.inc") in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 8c881de93b..7d2890a5a1 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -80,6 +80,7 @@
+   0|DEFAULT
+ 
+ !include LibraryClass.dsc
++!include NetworkPkg/NetworkLibs.dsc.inc.l
+ 
+ [PcdsDynamicDefault]
+   gEfiMdeModulePkgTokenSpaceGuid.PcdSmbiosVersion|0x0208
+-- 
+2.27.0.windows.1
+

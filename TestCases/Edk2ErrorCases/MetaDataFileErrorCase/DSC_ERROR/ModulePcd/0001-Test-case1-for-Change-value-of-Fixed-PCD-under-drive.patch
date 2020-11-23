@@ -1,0 +1,32 @@
+From 7eec41a1b8eaa85b7f29df95ed7d182633ef7a8f Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 10:41:37 +0800
+Subject: [PATCH] Test case1-E for Change value of Fixed PCD under driver
+
+Description: Change  the default value for a fixed PCD under a driver (TestPkg\FakeEmuSec\Sec.inf) in TestPkg/TestPkg32X64.dsc.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 532d084223..b79830089f 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -113,7 +113,10 @@
+   #
+   # SEC Phase modules
+   #
+-  TestPkg\FakeEmuSec\Sec.inf
++  TestPkg\FakeEmuSec\Sec.inf
++    <PcdsFixedAtBuild>
++	gEmulatorPkgTokenSpaceGuid.PcdPeiServicesTablePage|0x1012000000|UINT64|0x0000101e
++  }
+   TestPkg/Sec/SecMain.inf {
+     <LibraryClasses>
+     NULL|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
+-- 
+2.27.0.windows.1
+

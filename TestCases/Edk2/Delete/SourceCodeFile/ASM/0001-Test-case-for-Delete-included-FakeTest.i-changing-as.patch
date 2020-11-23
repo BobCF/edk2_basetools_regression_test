@@ -1,0 +1,40 @@
+From fde5a98abd3ae6c1ae991e74da20d3add56045f2 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Tue, 8 Sep 2020 16:00:14 +0800
+Subject: [PATCH] Test case for Delete included FakeTest.i changing - asm file
+
+Description: Delete included file FakeTest.i in the TestPkg/FakeEmuSec/Ia32/SwitchRam.asm.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/FakeEmuSec/Ia32/SwitchRam.asm | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+index f90c569784..78188dae89 100644
+--- a/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
++++ b/TestPkg/FakeEmuSec/Ia32/SwitchRam.asm
+@@ -13,7 +13,6 @@
+ ;
+ ;------------------------------------------------------------------------------
+ #include "FakeTest.h"
+-#include "FakeTest.i"
+ #include "FakeTest.inc"
+     .586p
+     .model  flat,C
+@@ -58,8 +57,8 @@ SecSwitchStack   PROC
+     mov   dword ptr [eax + testaddr0], edx
+     mov   edx, dword ptr [esp + testaddr1]
+     mov   dword ptr [eax + testaddr1], edx
+-    mov   edx, dword ptr [esp + testaddr2]    ; Update this function's return address into permanent memory
+-    mov   dword ptr [eax + testaddr2], edx
++    mov   edx, dword ptr [esp + 14]    ; Update this function's return address into permanent memory
++    mov   dword ptr [eax + 14], edx
+     mov   esp, eax                     ; From now, esp is pointed to permanent memory
+ 
+     ;
+-- 
+2.27.0.windows.1
+

@@ -1,0 +1,82 @@
+From 6adcc733d51254ac2be3c76f21960727d8797dde Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 18:51:36 +0800
+Subject: [PATCH] Support for Add a new FV section in fdf file
+
+Description: Support for Add a new FV section in fdf file.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf | 39 +--------------------------------------
+ 1 file changed, 1 insertion(+), 38 deletions(-)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 9c1cef54b0..c53d67cc27 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -85,7 +85,7 @@ FV = PEIFV
+ 
+ 0x100000|0xC00000
+ gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvBase|gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvSize
+-FV = DXEFV
++#FV = DXEFV
+ 
+ ################################################################################
+ 
+@@ -156,43 +156,7 @@ INF UefiCpuPkg\CpuMpPei\CpuMpPei.inf
+ 
+ ################################################################################
+ 
+-[FV.DXEFV]
+-FvForceRebase      = FALSE
+-FvNameGuid         = 7CB8BDC9-F8EB-4F34-AAEA-3EE4AF6516A1
+-BlockSize          = 0x10000
+-FvAlignment        = 16
+-ERASE_POLARITY     = 1
+-MEMORY_MAPPED      = TRUE
+-STICKY_WRITE       = TRUE
+-LOCK_CAP           = TRUE
+-LOCK_STATUS        = TRUE
+-WRITE_DISABLED_CAP = TRUE
+-WRITE_ENABLED_CAP  = TRUE
+-WRITE_STATUS       = TRUE
+-WRITE_LOCK_CAP     = TRUE
+-WRITE_LOCK_STATUS  = TRUE
+-READ_DISABLED_CAP  = TRUE
+-READ_ENABLED_CAP   = TRUE
+-READ_STATUS        = TRUE
+-READ_LOCK_CAP      = TRUE
+-READ_LOCK_STATUS   = TRUE
+-
+-#
+-# DXE Phase modules
+-#
+-INF  MdeModulePkg/Core/Dxe/DxeMain.inf
+-INF  MdeModulePkg/Universal/PCD/Dxe/Pcd.inf
+-INF  MdeModulePkg/Application/UiApp/UiApp.inf
+-INF  MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
+-INF  FatPkg/EnhancedFatDxe/Fat.inf
+-INF  RuleOverride=ACPITABLE TestPkg/AcpiTables/AcpiTables.inf
+-
+-INF  UefiCpuPkg\CpuDxe\CpuDxe.inf
+-#INF  MdeModulePkg/Universal/ReportStatusCodeRouter/RuntimeDxe/ReportStatusCodeRouterRuntimeDxe.inf
+-#INF  MdeModulePkg/Universal/StatusCodeHandler/RuntimeDxe/StatusCodeHandlerRuntimeDxe.inf
+ 
+-INF  MdeModulePkg/Logo/LogoDxe.inf
+-INF  TestPkg\FakeLogo\JpegLogoDxe.inf
+ 
+ ################################################################################
+ 
+@@ -223,7 +187,6 @@ FILE FV_IMAGE = 9E21FD93-9C72-4c15-8C4B-E77F1DB2D792 {
+      # compression operation in order to achieve better overall compression.
+      #
+      SECTION FV_IMAGE = PEIFV
+-     SECTION FV_IMAGE = DXEFV
+    }
+  }
+ 
+-- 
+2.26.1.windows.1
+

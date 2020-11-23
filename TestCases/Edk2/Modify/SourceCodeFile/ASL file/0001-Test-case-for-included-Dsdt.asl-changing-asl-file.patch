@@ -1,0 +1,32 @@
+From 8cf9e77e3bafb5c4066ece9eb4c69e0ff999b527 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Fri, 7 Aug 2020 13:22:05 +0800
+Subject: [PATCH] Test case for included Dsdt.asl changing - asl file
+
+Description: Change the Dsdt.asl files which included in the TestPkg\AcpiTables\TestPlatform.asl.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/AcpiTables/Dsdt.asl | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/TestPkg/AcpiTables/Dsdt.asl b/TestPkg/AcpiTables/Dsdt.asl
+index 383d72af54..75983ecd8f 100644
+--- a/TestPkg/AcpiTables/Dsdt.asl
++++ b/TestPkg/AcpiTables/Dsdt.asl
+@@ -55,9 +55,9 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 1, "INTEL ", "OVMF    ", 4) {
+           EntireRange,
+           0x0000,                // Granularity
+           0x0000,                // Min
+-          0x0CF7,                // Max
++          0x0CE7,                // Max
+           0x0000,                // Translation
+-          0x0CF8                 // Range Length
++          0x0CE8                 // Range Length
+           )
+ 
+         WORDIO (                 // Consumed-and-produced resource (all I/O above CFF)
+-- 
+2.27.0.windows.1
+

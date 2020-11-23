@@ -1,0 +1,28 @@
+From 05aac2b857275ce32ef27f931e6b9a9c4391ffab Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 29 Jul 2020 15:49:45 +0800
+Subject: [PATCH] Test case2-E for Add an unused library instance
+
+Description: Add the library instance (MdeModulePkg\Library\BaseMemoryAllocationLibNull\BaseMemoryAllocationLibNull.inf)to global library class.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/LibraryClass.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/LibraryClass.dsc b/TestPkg/LibraryClass.dsc
+index 6530bafbe7..6c297ad6d7 100644
+--- a/TestPkg/LibraryClass.dsc
++++ b/TestPkg/LibraryClass.dsc
+@@ -44,6 +44,7 @@ NvVarsFileLib|TestPkg/Library/NvVarsFileLib/NvVarsFileLib.inf
+   MtrrLib|UefiCpuPkg/Library/MtrrLib/MtrrLib.inf
+   FakeLibraryLib|TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.inf
+   LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
++  MemoryAllocationLib|MdeModulePkgLibrary\BaseMemoryAllocationLibNull\BaseMemoryAllocationLibNull.inf
+ 
+ [LibraryClasses.common.SEC]
+   TimerLib|TestPkg/Library/AcpiTimerLib/BaseRomAcpiTimerLib.inf
+-- 
+2.27.0.windows.1
+

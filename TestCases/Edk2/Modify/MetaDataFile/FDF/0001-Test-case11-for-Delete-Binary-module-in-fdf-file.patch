@@ -1,0 +1,32 @@
+From 4a60988176a7c4bea243439503d34449b544b43f Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 9 Sep 2020 19:24:54 +0800
+Subject: [PATCH] Test case11 for Delete Binary module in fdf file
+
+Description: Delete the Binary module in fdf.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 9c1cef54b0..3ada58437b 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -229,9 +229,7 @@ FILE FV_IMAGE = 9E21FD93-9C72-4c15-8C4B-E77F1DB2D792 {
+ 
+ !include FvmainCompactScratchEnd.fdf.inc
+ 
+-FILE RAW = 7BB24689-61AB-11D5-9A5D-0090DE4CC14D {
+-    SECTION RAW = TestPkg\FakeBinary\FakeBinary.txt
+-}
++
+ ################################################################################
+ 
+ [Rule.Common.SEC]
+-- 
+2.26.1.windows.1
+

@@ -1,0 +1,29 @@
+From 85341158e4aec235301679b7e7f4f3e5bae2aa74 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 16 Sep 2020 16:42:26 +0800
+Subject: [PATCH] Test case5 for Add module in component&library class
+
+Description: Add the library module (MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf) in component (Sec) section which already in library class.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkg32X64.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
+index 8c881de93b..4f167ae720 100644
+--- a/TestPkg/TestPkg32X64.dsc
++++ b/TestPkg/TestPkg32X64.dsc
+@@ -118,6 +118,7 @@
+     <LibraryClasses>
+     NULL|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
+ 	LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
++	SortLib|MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf
+   }
+ 
+   #
+-- 
+2.27.0.windows.1
+

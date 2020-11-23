@@ -1,0 +1,29 @@
+From 2fc5a02944ecab4554fa13ac62311e8201aeeb4f Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Sun, 6 Sep 2020 13:02:04 +0800
+Subject: [PATCH] Test case8-E for Change Guids section
+
+Description: Delete a Guid in Guids section in MdeModulePkg/Application/UiApp/UiApp.inf.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Application/UiApp/UiApp.inf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Application/UiApp/UiApp.inf b/MdeModulePkg/Application/UiApp/UiApp.inf
+index 3b9e048851..a41bdd3ffb 100644
+--- a/MdeModulePkg/Application/UiApp/UiApp.inf
++++ b/MdeModulePkg/Application/UiApp/UiApp.inf
+@@ -57,7 +57,7 @@
+ 
+ [Guids]
+   gEfiIfrTianoGuid                              ## CONSUMES ## GUID (Extended IFR Guid Opcode)
+-  gEfiIfrFrontPageGuid                          ## CONSUMES ## GUID
++  fiIfrFrontPageGuid                          ## CONSUMES ## GUID
+ 
+ [Protocols]
+   gEfiSmbiosProtocolGuid                        ## CONSUMES
+-- 
+2.27.0.windows.1
+

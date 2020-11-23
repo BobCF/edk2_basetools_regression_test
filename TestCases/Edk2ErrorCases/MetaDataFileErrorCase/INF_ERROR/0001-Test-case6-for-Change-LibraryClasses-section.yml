@@ -1,0 +1,15 @@
+---
+name: Test case6-E for Change LibraryClasses section
+description: Add a new library in LibraryClasses section (Add the "CpuLib") in TestPkg/FakeEmuSec/Sec.inf.
+
+command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
+input:
+  type: repo
+  source: edk2
+
+change:
+  - 0001-Test-case6-for-Change-LibraryClasses-section.patch
+
+output:
+  - edk2\Build
+    

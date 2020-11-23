@@ -1,0 +1,28 @@
+From 5752e5efb7cbcff354f7fb418879076df7063075 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Mon, 3 Aug 2020 12:22:05 +0800
+Subject: [PATCH] Test case2-E for Add new Include in DEC file
+
+Description: Add a new Include in DEC file ("Library\BrotliCustomDecompressLib\brotli\research\libdivsufsort\include") in MdeModulePkg/MdeModulePkg.dec.
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/MdeModulePkg.dec | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/MdeModulePkg/MdeModulePkg.dec b/MdeModulePkg/MdeModulePkg.dec
+index 843e963ad3..dfd313c1f8 100644
+--- a/MdeModulePkg/MdeModulePkg.dec
++++ b/MdeModulePkg/MdeModulePkg.dec
+@@ -26,6 +26,7 @@
+ 
+ [Includes.Common.Private]
+   Library/BrotliCustomDecompressLib/brotli/c/include
++  Library\BrotliCustomDecompresib\brotli\research\libdivsufsort\include
+ 
+ [LibraryClasses]
+   ##  @libraryclass  Defines a set of methods to reset whole system.
+-- 
+2.27.0.windows.1
+

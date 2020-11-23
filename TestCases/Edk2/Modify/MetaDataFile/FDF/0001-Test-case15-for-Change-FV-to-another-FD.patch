@@ -1,0 +1,75 @@
+From c549bde41076e870d62060c3e658e41d7309f3e6 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Fri, 11 Sep 2020 10:09:03 +0800
+Subject: [PATCH] Test case15 for Change FV to another FD
+
+Description: Change SECFV FV to from FD.OVMF_CODE to FD.MEMFD in fdf file.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestIa32X64.fdf        |  8 ++++----
+ TestPkg/TestPkgDefines.fdf.inc | 10 +++++-----
+ 2 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+index 9c1cef54b0..171c652bf9 100644
+--- a/TestPkg/TestIa32X64.fdf
++++ b/TestPkg/TestIa32X64.fdf
+@@ -55,17 +55,15 @@ NumBlocks     = $(CODE_BLOCKS)
+ 0x00000000|$(FVMAIN_SIZE)
+ FV = FVMAIN_COMPACT
+ 
+-$(FVMAIN_SIZE)|$(SECFV_SIZE)
+-FV = SECFV
+ 
+ ################################################################################
+ 
+ [FD.MEMFD]
+ BaseAddress   = $(MEMFD_BASE_ADDRESS)
+-Size          = 0xD00000
++Size          = 0xD40000
+ ErasePolarity = 1
+ BlockSize     = 0x10000
+-NumBlocks     = 0xD0
++NumBlocks     = 0xD4
+ 
+ 0x000000|0x006000
+ gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPageTablesBase|gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPageTablesSize
+@@ -87,6 +85,8 @@ FV = PEIFV
+ gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvBase|gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvSize
+ FV = DXEFV
+ 
++0xD00000|$(SECFV_SIZE)
++FV = SECFV
+ ################################################################################
+ 
+ [FV.SECFV]
+diff --git a/TestPkg/TestPkgDefines.fdf.inc b/TestPkg/TestPkgDefines.fdf.inc
+index ae26cdcbdb..8c6a9b6177 100644
+--- a/TestPkg/TestPkgDefines.fdf.inc
++++ b/TestPkg/TestPkgDefines.fdf.inc
+@@ -56,14 +56,14 @@ DEFINE VARS_LIVE_SIZE    = 0x40000
+ DEFINE VARS_SPARE_SIZE   = 0x42000
+ 
+ DEFINE FW_BASE_ADDRESS   = 0xFFC00000
+-DEFINE FW_SIZE           = 0x00400000
+-DEFINE FW_BLOCKS         = 0x400
++DEFINE FW_SIZE           = 0x0040C000
++DEFINE FW_BLOCKS         = 0x40C
+ DEFINE CODE_BASE_ADDRESS = 0xFFC84000
+-DEFINE CODE_SIZE         = 0x0037C000
+-DEFINE CODE_BLOCKS       = 0x37C
++DEFINE CODE_SIZE         = 0x00348000
++DEFINE CODE_BLOCKS       = 0x348
+ DEFINE FVMAIN_SIZE       = 0x00348000
+ DEFINE SECFV_OFFSET      = 0x003CC000
+-DEFINE SECFV_SIZE        = 0x34000
++DEFINE SECFV_SIZE        = 0x40000
+ !endif
+ 
+ SET gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFdBaseAddress     = $(FW_BASE_ADDRESS)
+-- 
+2.26.1.windows.1
+

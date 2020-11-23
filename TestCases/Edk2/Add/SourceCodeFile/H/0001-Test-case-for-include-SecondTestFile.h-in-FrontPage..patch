@@ -1,0 +1,38 @@
+From c55baeaf7402834904a5d60af0b0331e449b22fc Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Wed, 23 Sep 2020 09:56:28 +0800
+Subject: [PATCH] Test case for include SecondTestFile.h in FrontPage.h file.
+
+Description: Include SecondTestFile.h in the MdeModulePkg/Application/UiApp/FrontPage.h
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Application/UiApp/FrontPage.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Application/UiApp/FrontPage.h b/MdeModulePkg/Application/UiApp/FrontPage.h
+index 36207287b9..a29a17987e 100644
+--- a/MdeModulePkg/Application/UiApp/FrontPage.h
++++ b/MdeModulePkg/Application/UiApp/FrontPage.h
+@@ -11,6 +11,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
+ 
+ #include "String.h"
+ #include "Ui.h"
++#include "SecondTestFile.h"
+ 
+ #include <Protocol/BootLogo.h>
+ //
+@@ -39,7 +40,7 @@ extern EFI_FORM_BROWSER2_PROTOCOL      *gFormBrowser2;
+ 
+ #define FRONT_PAGE_FORMSET_GUID \
+   { \
+-    0x9e0c30bc, 0x3f06, 0x4ba6, {0x82, 0x88, 0x9, 0x17, 0x9b, 0x85, 0x5d, 0xbe} \
++    front_page_guid, 0x3f06, 0x4ba6, {0x82, 0x88, 0x9, 0x17, 0x9b, 0x85, 0x5d, 0xbe} \
+   }
+ 
+ #define FRONT_PAGE_CALLBACK_DATA_SIGNATURE  SIGNATURE_32 ('F', 'P', 'C', 'B')
+-- 
+2.27.0.windows.1
+

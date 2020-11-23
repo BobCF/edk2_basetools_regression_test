@@ -1,0 +1,29 @@
+From ef1220c9c14aeb24798268e6497a5e98c5841cb5 Mon Sep 17 00:00:00 2001
+From: Yuwei Chen <yuwei.chen@intel.com>
+Date: Sun, 6 Sep 2020 13:29:05 +0800
+Subject: [PATCH] Test case-E for Driver - FrontPageStrings.uni file
+
+Description: Change the description in the MdeModulePkg/Application/UiApp/FrontPageStrings.uni
+
+Repo: edk2
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ MdeModulePkg/Application/UiApp/FrontPageStrings.uni | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MdeModulePkg/Application/UiApp/FrontPageStrings.uni b/MdeModulePkg/Application/UiApp/FrontPageStrings.uni
+index 8662e009bd..a35db8dae4 100644
+--- a/MdeModulePkg/Application/UiApp/FrontPageStrings.uni
++++ b/MdeModulePkg/Application/UiApp/FrontPageStrings.uni
+@@ -12,7 +12,7 @@
+ #include "JustATest.uni"
+ 
+ #string STR_FRONT_PAGE_TITLE           #language en-US  "Front Page"
+-                                       #language fr-FR  "Front Page"
++                                       #language fr-FR  For a test Front Page"
+ #string STR_FRONT_PAGE_COMPUTER_MODEL  #language en-US  ""
+                                        #language fr-FR  ""
+ #string STR_FRONT_PAGE_CPU_MODEL       #language en-US  ""
+-- 
+2.27.0.windows.1
+
