@@ -1,0 +1,1815 @@
+From bfcc4eaccef96ec34782b958759be157543ec0ca Mon Sep 17 00:00:00 2001
+From: Matthew Carlson <matthewfcarlson@gmail.com>
+Date: Tue, 29 Sep 2020 17:02:28 -0700
+Subject: [PATCH] BaseTools: Use pip module if available, CI uses it by default
+
+Use the new edk2-basetools pip module.
+Includes a helpful message in setup to let users know which has been
+selected.
+
+Cc: Bob Feng <bob.c.feng@intel.com>
+Cc: Liming Gao <gaoliming@byosoft.com.cn>
+Cc: Yuwei Chen <yuwei.chen@intel.com>
+
+Signed-off-by: Matthew Carlson <matthewfcarlson@gmail.com>
+---
+ .pytool/CISettings.py                         |  20 +-
+ BaseTools/BinPipWrappers/PosixLike/AmlToC     |  14 +
+ BaseTools/BinPipWrappers/PosixLike/BPDG       |  12 +
+ BaseTools/BinPipWrappers/PosixLike/Brotli     |  29 +
+ .../BinPipWrappers/PosixLike/BrotliCompress   |  34 ++
+ BaseTools/BinPipWrappers/PosixLike/DevicePath |  29 +
+ BaseTools/BinPipWrappers/PosixLike/Ecc        |  13 +
+ BaseTools/BinPipWrappers/PosixLike/EfiRom     |  29 +
+ BaseTools/BinPipWrappers/PosixLike/GenCrc32   |  29 +
+ BaseTools/BinPipWrappers/PosixLike/GenDepex   |  12 +
+ BaseTools/BinPipWrappers/PosixLike/GenFds     |  12 +
+ BaseTools/BinPipWrappers/PosixLike/GenFfs     |  29 +
+ BaseTools/BinPipWrappers/PosixLike/GenFv      |  29 +
+ BaseTools/BinPipWrappers/PosixLike/GenFw      |  29 +
+ .../BinPipWrappers/PosixLike/GenPatchPcdTable |  12 +
+ BaseTools/BinPipWrappers/PosixLike/GenSec     |  29 +
+ .../BinPipWrappers/PosixLike/GenerateCapsule  |  12 +
+ .../BinPipWrappers/PosixLike/LzmaCompress     |  29 +
+ .../BinPipWrappers/PosixLike/LzmaF86Compress  |  19 +
+ .../BinPipWrappers/PosixLike/PatchPcdValue    |  12 +
+ BaseTools/BinPipWrappers/PosixLike/Pkcs7Sign  |  12 +
+ .../PosixLike/Rsa2048Sha256GenerateKeys       |  12 +
+ .../PosixLike/Rsa2048Sha256Sign               |  12 +
+ BaseTools/BinPipWrappers/PosixLike/Split      |  29 +
+ BaseTools/BinPipWrappers/PosixLike/TargetTool |  12 +
+ .../BinPipWrappers/PosixLike/TianoCompress    |  29 +
+ BaseTools/BinPipWrappers/PosixLike/Trim       |  13 +
+ BaseTools/BinPipWrappers/PosixLike/UPT        |  12 +
+ BaseTools/BinPipWrappers/PosixLike/VfrCompile |  29 +
+ BaseTools/BinPipWrappers/PosixLike/VolInfo    |  29 +
+ BaseTools/BinPipWrappers/PosixLike/build      |  12 +
+ .../PosixLike/posix_path_env.yaml             |  11 +
+ .../BinPipWrappers/WindowsLike/AmlToC.bat     |   3 +
+ BaseTools/BinPipWrappers/WindowsLike/BPDG.bat |   3 +
+ .../WindowsLike/BrotliCompress.bat            |  55 ++
+ BaseTools/BinPipWrappers/WindowsLike/Ecc.bat  |   3 +
+ .../BinPipWrappers/WindowsLike/GenDepex.bat   |   3 +
+ .../BinPipWrappers/WindowsLike/GenFds.bat     |   3 +
+ .../WindowsLike/GenPatchPcdTable.bat          |   3 +
+ .../WindowsLike/GenerateCapsule.bat           |   1 +
+ .../WindowsLike/PatchPcdValue.bat             |   3 +
+ .../BinPipWrappers/WindowsLike/Pkcs7Sign.bat  |   3 +
+ .../WindowsLike/Rsa2048Sha256GenerateKeys.bat |   1 +
+ .../WindowsLike/Rsa2048Sha256Sign.bat         |   3 +
+ .../BinPipWrappers/WindowsLike/TargetTool.bat |   3 +
+ BaseTools/BinPipWrappers/WindowsLike/Trim.bat |   3 +
+ BaseTools/BinPipWrappers/WindowsLike/UPT.bat  |   3 +
+ .../BinPipWrappers/WindowsLike/build.bat      |   3 +
+ .../WindowsLike/win_build_tools_path_env.yaml |  11 +
+ .../BinWrappers/PosixLike/posix_path_env.yaml |   1 +
+ .../WindowsLike/win_build_tools_path_env.yaml |   1 +
+ BaseTools/BuildEnv                            | 548 +++++++++---------
+ BaseTools/Scripts/PatchCheck.py               |   1 +
+ BaseTools/toolsetup.bat                       |  19 +
+ pip-requirements.txt                          |   1 +
+ 55 files changed, 1053 insertions(+), 270 deletions(-)
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/AmlToC
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/BPDG
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/Brotli
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/BrotliCompress
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/DevicePath
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/Ecc
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/EfiRom
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/GenCrc32
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/GenDepex
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/GenFds
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/GenFfs
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/GenFv
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/GenFw
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/GenPatchPcdTable
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/GenSec
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/GenerateCapsule
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/LzmaCompress
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/LzmaF86Compress
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/PatchPcdValue
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/Pkcs7Sign
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256GenerateKeys
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256Sign
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/Split
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/TargetTool
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/TianoCompress
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/Trim
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/UPT
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/VfrCompile
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/VolInfo
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/build
+ create mode 100644 BaseTools/BinPipWrappers/PosixLike/posix_path_env.yaml
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/AmlToC.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/BPDG.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/BrotliCompress.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/Ecc.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/GenDepex.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/GenFds.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/GenPatchPcdTable.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/GenerateCapsule.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/PatchPcdValue.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/Pkcs7Sign.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256GenerateKeys.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256Sign.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/TargetTool.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/Trim.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/UPT.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/build.bat
+ create mode 100644 BaseTools/BinPipWrappers/WindowsLike/win_build_tools_path_env.yaml
+
+diff --git a/.pytool/CISettings.py b/.pytool/CISettings.py
+index b337d046ae0..e0e106d8e65 100644
+--- a/.pytool/CISettings.py
++++ b/.pytool/CISettings.py
+@@ -22,6 +22,7 @@ def __init__(self):
+         self.ActualTargets = []
+         self.ActualArchitectures = []
+         self.ActualToolChainTag = ""
++        self.UseBuiltInBaseTools = None
+ 
+     # ####################################################################################### #
+     #                             Extra CmdLine configuration                                 #
+@@ -131,7 +132,24 @@ def GetActiveScopes(self):
+ 
+         self.ActualToolChainTag = shell_environment.GetBuildVars().GetValue("TOOL_CHAIN_TAG", "")
+ 
+-        if GetHostInfo().os.upper() == "LINUX" and self.ActualToolChainTag.upper().startswith("GCC"):
++        is_linux = GetHostInfo().os.upper() == "LINUX"
++
++        if self.UseBuiltInBaseTools is None:
++            is_linux = GetHostInfo().os.upper() == "LINUX"
++            # try and import the pip module for basetools
++            try:
++                import edk2basetools
++                self.UseBuiltInBaseTools = True
++                logging.info("Using Pip Tools based BaseTools")
++            except ImportError:
++                logging.warning("Falling back to using in-tree BaseTools")
++                self.UseBuiltInBaseTools = False
++                pass
++
++        if self.UseBuiltInBaseTools == True:
++            scopes += ('pipbuild-unix',) if is_linux else ('pipbuild-win',)
++
++        if is_linux and self.ActualToolChainTag.upper().startswith("GCC"):
+             if "AARCH64" in self.ActualArchitectures:
+                 scopes += ("gcc_aarch64_linux",)
+             if "ARM" in self.ActualArchitectures:
+diff --git a/BaseTools/BinPipWrappers/PosixLike/AmlToC b/BaseTools/BinPipWrappers/PosixLike/AmlToC
+new file mode 100644
+index 00000000000..1dd28e96628
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/AmlToC
+@@ -0,0 +1,14 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++exe=$(basename "$full_cmd")
++
++export PYTHONPATH="$dir/../../Source/Python${PYTHONPATH:+:"$PYTHONPATH"}"
++exec "${python_exe:-python}" "$dir/../../Source/Python/$exe/$exe.py" "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/BPDG b/BaseTools/BinPipWrappers/PosixLike/BPDG
+new file mode 100644
+index 00000000000..a2b901c084d
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/BPDG
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.$cmd.EccMain "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/Brotli b/BaseTools/BinPipWrappers/PosixLike/Brotli
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/Brotli
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/BrotliCompress b/BaseTools/BinPipWrappers/PosixLike/BrotliCompress
+new file mode 100644
+index 00000000000..b5fd1beb555
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/BrotliCompress
+@@ -0,0 +1,34 @@
++#!/usr/bin/env bash
++#
++# This script will exec Brotli tool with -e/-d options.
++#
++# Copyright (c) 2017 - 2018, Intel Corporation. All rights reserved.<BR>
++# SPDX-License-Identifier: BSD-2-Clause-Patent
++#
++QLT="-q 9 -w 22"
++ARGS=
++
++while test $# -gt 0
++do
++  case $1 in
++    -e)
++      ;;
++    -d)
++      ARGS+="$1 "
++      ;;
++    -o|-g)
++      ARGS+="$1 $2 "
++      shift
++      ;;
++    -q)
++      QLT="$1 $2 "
++      shift
++      ;;
++    *)
++      ARGS+="$1 "
++      ;;
++  esac
++  shift
++done
++
++exec Brotli $QLT $ARGS
+diff --git a/BaseTools/BinPipWrappers/PosixLike/DevicePath b/BaseTools/BinPipWrappers/PosixLike/DevicePath
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/DevicePath
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/Ecc b/BaseTools/BinPipWrappers/PosixLike/Ecc
+new file mode 100644
+index 00000000000..59872891509
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/Ecc
+@@ -0,0 +1,13 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++export PYTHONPATH="$dir/../../Source/Python${PYTHONPATH:+:"$PYTHONPATH"}"
++exec "${python_exe:-python}" -m $cmd.EccMain "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/EfiRom b/BaseTools/BinPipWrappers/PosixLike/EfiRom
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/EfiRom
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/GenCrc32 b/BaseTools/BinPipWrappers/PosixLike/GenCrc32
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/GenCrc32
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/GenDepex b/BaseTools/BinPipWrappers/PosixLike/GenDepex
+new file mode 100644
+index 00000000000..ab29450aa1a
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/GenDepex
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.AutoGen.$cmd "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/GenFds b/BaseTools/BinPipWrappers/PosixLike/GenFds
+new file mode 100644
+index 00000000000..14e8d8af712
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/GenFds
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.$cmd "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/GenFfs b/BaseTools/BinPipWrappers/PosixLike/GenFfs
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/GenFfs
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/GenFv b/BaseTools/BinPipWrappers/PosixLike/GenFv
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/GenFv
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/GenFw b/BaseTools/BinPipWrappers/PosixLike/GenFw
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/GenFw
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/GenPatchPcdTable b/BaseTools/BinPipWrappers/PosixLike/GenPatchPcdTable
+new file mode 100644
+index 00000000000..14b8903232c
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/GenPatchPcdTable
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/GenSec b/BaseTools/BinPipWrappers/PosixLike/GenSec
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/GenSec
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/GenerateCapsule b/BaseTools/BinPipWrappers/PosixLike/GenerateCapsule
+new file mode 100644
+index 00000000000..44e234d433f
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/GenerateCapsule
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.Capsule.$cmd "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/LzmaCompress b/BaseTools/BinPipWrappers/PosixLike/LzmaCompress
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/LzmaCompress
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/LzmaF86Compress b/BaseTools/BinPipWrappers/PosixLike/LzmaF86Compress
+new file mode 100644
+index 00000000000..b1ba8ed1e7a
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/LzmaF86Compress
+@@ -0,0 +1,19 @@
++#!/usr/bin/env bash
++#
++# This script will exec LzmaCompress tool with --f86 option that enables converter for x86 code.
++#
++# (C) Copyright 2016 Hewlett Packard Enterprise Development LP<BR>
++# Copyright (c) 2012, Intel Corporation. All rights reserved.<BR>
++# SPDX-License-Identifier: BSD-2-Clause-Patent
++#
++
++for arg; do
++  case $arg in
++    -e|-d)
++      set -- "$@" --f86
++      break
++    ;;
++  esac
++done
++
++exec LzmaCompress "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/PatchPcdValue b/BaseTools/BinPipWrappers/PosixLike/PatchPcdValue
+new file mode 100644
+index 00000000000..14b8903232c
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/PatchPcdValue
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/Pkcs7Sign b/BaseTools/BinPipWrappers/PosixLike/Pkcs7Sign
+new file mode 100644
+index 00000000000..14b8903232c
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/Pkcs7Sign
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256GenerateKeys b/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256GenerateKeys
+new file mode 100644
+index 00000000000..c8b31202554
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256GenerateKeys
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.Rsa2048Sha256Sign.$cmd "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256Sign b/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256Sign
+new file mode 100644
+index 00000000000..75b934a5d0b
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256Sign
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
+\ No newline at end of file
+diff --git a/BaseTools/BinPipWrappers/PosixLike/Split b/BaseTools/BinPipWrappers/PosixLike/Split
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/Split
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/TargetTool b/BaseTools/BinPipWrappers/PosixLike/TargetTool
+new file mode 100644
+index 00000000000..9d143c7fc6c
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/TargetTool
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/TianoCompress b/BaseTools/BinPipWrappers/PosixLike/TianoCompress
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/TianoCompress
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/Trim b/BaseTools/BinPipWrappers/PosixLike/Trim
+new file mode 100644
+index 00000000000..0bd14ee0387
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/Trim
+@@ -0,0 +1,13 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=$(basename "$full_cmd")
++
++exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/UPT b/BaseTools/BinPipWrappers/PosixLike/UPT
+new file mode 100644
+index 00000000000..75b934a5d0b
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/UPT
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
+\ No newline at end of file
+diff --git a/BaseTools/BinPipWrappers/PosixLike/VfrCompile b/BaseTools/BinPipWrappers/PosixLike/VfrCompile
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/VfrCompile
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/VolInfo b/BaseTools/BinPipWrappers/PosixLike/VolInfo
+new file mode 100644
+index 00000000000..a244ecc095e
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/VolInfo
+@@ -0,0 +1,29 @@
++#!/usr/bin/env bash
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++dir=$(dirname "$full_cmd")
++cmd=${full_cmd##*/}
++
++if [ -n "$WORKSPACE" ] && [ -e "$WORKSPACE/Conf/BaseToolsCBinaries" ]
++then
++  exec "$WORKSPACE/Conf/BaseToolsCBinaries/$cmd"
++elif [ -n "$WORKSPACE" ] && [ -e "$EDK_TOOLS_PATH/Source/C" ]
++then
++  if [ ! -e "$EDK_TOOLS_PATH/Source/C/bin/$cmd" ]
++  then
++    echo "BaseTools C Tool binary was not found ($cmd)"
++    echo "You may need to run:"
++    echo "  make -C $EDK_TOOLS_PATH/Source/C"
++  else
++    exec "$EDK_TOOLS_PATH/Source/C/bin/$cmd" "$@"
++  fi
++elif [ -e "$dir/../../Source/C/bin/$cmd" ]
++then
++  exec "$dir/../../Source/C/bin/$cmd" "$@"
++else
++  echo "Unable to find the real '$cmd' to run"
++  echo "This message was printed by"
++  echo "  $0"
++  exit 127
++fi
++
+diff --git a/BaseTools/BinPipWrappers/PosixLike/build b/BaseTools/BinPipWrappers/PosixLike/build
+new file mode 100644
+index 00000000000..9d143c7fc6c
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/build
+@@ -0,0 +1,12 @@
++#!/usr/bin/env bash
++#python `dirname $0`/RunToolFromSource.py `basename $0` $*
++
++# If a ${PYTHON_COMMAND} command is available, use it in preference to python
++if command -v ${PYTHON_COMMAND} >/dev/null 2>&1; then
++    python_exe=${PYTHON_COMMAND}
++fi
++
++full_cmd=${BASH_SOURCE:-$0} # see http://mywiki.wooledge.org/BashFAQ/028 for a discussion of why $0 is not a good choice here
++cmd=${full_cmd##*/}
++
++exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
+diff --git a/BaseTools/BinPipWrappers/PosixLike/posix_path_env.yaml b/BaseTools/BinPipWrappers/PosixLike/posix_path_env.yaml
+new file mode 100644
+index 00000000000..eb1db9eb251
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/PosixLike/posix_path_env.yaml
+@@ -0,0 +1,11 @@
++## @file
++# Set this folder on the path for all linux builds
++#
++# Copyright (c) Microsoft Corporation.
++# SPDX-License-Identifier: BSD-2-Clause-Patent
++##
++{
++  "scope": "pipbuild-unix",
++  "override_id": "binwrappers",
++  "flags": ["set_path"]
++}
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/AmlToC.bat b/BaseTools/BinPipWrappers/WindowsLike/AmlToC.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/AmlToC.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/BPDG.bat b/BaseTools/BinPipWrappers/WindowsLike/BPDG.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/BPDG.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/BrotliCompress.bat b/BaseTools/BinPipWrappers/WindowsLike/BrotliCompress.bat
+new file mode 100644
+index 00000000000..788c99a1307
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/BrotliCompress.bat
+@@ -0,0 +1,55 @@
++@REM @file
++@REM This script will exec Brotli tool with -e/-d options.
++@REM
++@REM Copyright (c) 2017 - 2018, Intel Corporation. All rights reserved.<BR>
++@REM SPDX-License-Identifier: BSD-2-Clause-Patent
++@REM
++
++@echo off
++@setlocal
++
++set QLT=-q 9 -w 22
++set ARGS=
++
++:Begin
++if "%1"=="" goto End
++
++if "%1"=="-d" (
++  set ARGS=%ARGS% %1
++  shift
++  goto Begin
++)
++
++if "%1"=="-e" (
++  shift
++  goto Begin
++)
++
++if "%1"=="-g" (
++  set ARGS=%ARGS% %1 %2
++  shift
++  shift
++  goto Begin
++)
++
++if "%1"=="-o" (
++  set ARGS=%ARGS% %1 %2
++  shift
++  shift
++  goto Begin
++)
++
++if "%1"=="-q" (
++  set QLT=%1 %2
++  shift
++  shift
++  goto Begin
++)
++
++set ARGS=%ARGS% %1
++shift
++goto Begin
++
++:End
++Brotli %QLT% %ARGS%
++@echo on
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/Ecc.bat b/BaseTools/BinPipWrappers/WindowsLike/Ecc.bat
+new file mode 100644
+index 00000000000..16a0a799a43
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/Ecc.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.EccMain %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/GenDepex.bat b/BaseTools/BinPipWrappers/WindowsLike/GenDepex.bat
+new file mode 100644
+index 00000000000..481b5ac47d2
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/GenDepex.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.AutoGen.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/GenFds.bat b/BaseTools/BinPipWrappers/WindowsLike/GenFds.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/GenFds.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/GenPatchPcdTable.bat b/BaseTools/BinPipWrappers/WindowsLike/GenPatchPcdTable.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/GenPatchPcdTable.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/GenerateCapsule.bat b/BaseTools/BinPipWrappers/WindowsLike/GenerateCapsule.bat
+new file mode 100644
+index 00000000000..34c43ac7fc9
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/GenerateCapsule.bat
+@@ -0,0 +1 @@
++@%PYTHON_COMMAND% -m edk2basetools.Capsule.GenerateCapsule %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/PatchPcdValue.bat b/BaseTools/BinPipWrappers/WindowsLike/PatchPcdValue.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/PatchPcdValue.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/Pkcs7Sign.bat b/BaseTools/BinPipWrappers/WindowsLike/Pkcs7Sign.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/Pkcs7Sign.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256GenerateKeys.bat b/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256GenerateKeys.bat
+new file mode 100644
+index 00000000000..cdc2e3ea373
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256GenerateKeys.bat
+@@ -0,0 +1 @@
++@%PYTHON_COMMAND% -m edk2basetools.Rsa2048Sha256Sign.Rsa2048Sha256GenerateKeys %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256Sign.bat b/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256Sign.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256Sign.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/TargetTool.bat b/BaseTools/BinPipWrappers/WindowsLike/TargetTool.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/TargetTool.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/Trim.bat b/BaseTools/BinPipWrappers/WindowsLike/Trim.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/Trim.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/UPT.bat b/BaseTools/BinPipWrappers/WindowsLike/UPT.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/UPT.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/build.bat b/BaseTools/BinPipWrappers/WindowsLike/build.bat
+new file mode 100644
+index 00000000000..d347d648446
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/build.bat
+@@ -0,0 +1,3 @@
++@setlocal
++@set ToolName=%~n0%
++@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
+diff --git a/BaseTools/BinPipWrappers/WindowsLike/win_build_tools_path_env.yaml b/BaseTools/BinPipWrappers/WindowsLike/win_build_tools_path_env.yaml
+new file mode 100644
+index 00000000000..9fdbe1bcb06
+--- /dev/null
++++ b/BaseTools/BinPipWrappers/WindowsLike/win_build_tools_path_env.yaml
+@@ -0,0 +1,11 @@
++## @file
++# Add this folder to the path on Windows
++#
++# Copyright (c) Microsoft Corporation.
++# SPDX-License-Identifier: BSD-2-Clause-Patent
++##
++{
++  "scope": "pipbuild-win",
++  "override_id": "binwrappers",
++  "flags": ["set_path"]
++}
+diff --git a/BaseTools/BinWrappers/PosixLike/posix_path_env.yaml b/BaseTools/BinWrappers/PosixLike/posix_path_env.yaml
+index 8b32e010bb1..99529235ec9 100644
+--- a/BaseTools/BinWrappers/PosixLike/posix_path_env.yaml
++++ b/BaseTools/BinWrappers/PosixLike/posix_path_env.yaml
+@@ -5,6 +5,7 @@
+ # SPDX-License-Identifier: BSD-2-Clause-Patent
+ ##
+ {
++  "id": "binwrappers",
+   "scope": "global-nix",
+   "flags": ["set_path"]
+ }
+diff --git a/BaseTools/BinWrappers/WindowsLike/win_build_tools_path_env.yaml b/BaseTools/BinWrappers/WindowsLike/win_build_tools_path_env.yaml
+index 83f5856e75c..43da76f354e 100644
+--- a/BaseTools/BinWrappers/WindowsLike/win_build_tools_path_env.yaml
++++ b/BaseTools/BinWrappers/WindowsLike/win_build_tools_path_env.yaml
+@@ -5,6 +5,7 @@
+ # SPDX-License-Identifier: BSD-2-Clause-Patent
+ ##
+ {
++  "id": "binwrappers",
+   "scope": "global-win",
+   "flags": ["set_path"]
+ }
+diff --git a/BaseTools/BuildEnv b/BaseTools/BuildEnv
+index 5943bb9ef90..cc8e92db655 100755
+--- a/BaseTools/BuildEnv
++++ b/BaseTools/BuildEnv
+@@ -1,269 +1,279 @@
+-## @file
+-# Setup the environment for unix-like systems running a bash-like shell.
+-# This file must be "sourced" not merely executed. For example: ". edksetup.sh"
+-#
+-# Copyright (c) 2006 - 2016, Intel Corporation. All rights reserved.<BR>
+-# Copyright (c) 2016, Linaro Ltd. All rights reserved.<BR>
+-# SPDX-License-Identifier: BSD-2-Clause-Patent
+-#
+-
+-SetWorkspace() {
+-
+-  #
+-  # If WORKSPACE is already set, then we can return right now
+-  #
+-  if [ -n "$WORKSPACE" ]
+-  then
+-    return 0
+-  fi
+-
+-  #
+-  # Set $WORKSPACE
+-  #
+-  export WORKSPACE=`pwd`
+-
+-  return 0
+-
+-}
+-
+-RestorePreviousConfiguration() {
+-  #
+-  # Restore previous configuration
+-  #
+-  if [ -z "$CONF_PATH" ]
+-  then
+-    export CONF_PATH=$WORKSPACE/Conf
+-    if [ ! -d $WORKSPACE/Conf ] && [ -n "$PACKAGES_PATH" ]
+-    then
+-      PATH_LIST=${PACKAGES_PATH//:/ }
+-      for DIR in $PATH_LIST
+-      do
+-        if [ -d $DIR/Conf ]
+-        then
+-          export CONF_PATH=$DIR/Conf
+-          break
+-        fi
+-      done
+-    fi
+-  fi
+-  
+-  PREVIOUS_CONF_FILE=$CONF_PATH/BuildEnv.sh
+-  if [ -e $PREVIOUS_CONF_FILE ]
+-  then
+-    echo Loading previous configuration from $PREVIOUS_CONF_FILE
+-    . $PREVIOUS_CONF_FILE
+-  fi
+-}
+-
+-GenerateShellCodeToSetVariable() {
+-  VARIABLE=$1
+-  OUTPUT_FILE=$2
+-  VAR_VALUE="echo \${${VARIABLE}}"
+-  VAR_VALUE=`eval $VAR_VALUE`
+-  echo "if [ -z \"\$${VARIABLE}\" ]"             >> $OUTPUT_FILE
+-  echo "then"                                    >> $OUTPUT_FILE
+-  echo "  export ${VARIABLE}=${VAR_VALUE}"       >> $OUTPUT_FILE
+-  echo "fi"                                      >> $OUTPUT_FILE
+-}
+-
+-GenerateShellCodeToUpdatePath() {
+-  OUTPUT_FILE=$1
+-  echo "if [ -e $EDK_TOOLS_PATH_BIN ]"                        >> $OUTPUT_FILE
+-  echo "then"                                                 >> $OUTPUT_FILE
+-  echo "  if [ "\${PATH/$EDK_TOOLS_PATH_BIN/}" == "\$PATH" ]" >> $OUTPUT_FILE
+-  echo "  then"                                               >> $OUTPUT_FILE
+-  echo "    export PATH=$EDK_TOOLS_PATH_BIN:\$PATH"           >> $OUTPUT_FILE
+-  echo "  fi"                                                 >> $OUTPUT_FILE
+-  echo "fi"                                                   >> $OUTPUT_FILE
+-}
+-
+-StoreCurrentConfiguration() {
+-  #
+-  # Write configuration to a shell script to allow for configuration to be
+-  # easily reloaded.
+-  #
+-  OUTPUT_FILE=$CONF_PATH/BuildEnv.sh
+-  #echo Storing current configuration into $OUTPUT_FILE
+-  echo "# Auto-generated by ${BASH_SOURCE[0]}" >| $OUTPUT_FILE
+-  GenerateShellCodeToSetVariable WORKSPACE $OUTPUT_FILE
+-  GenerateShellCodeToSetVariable EDK_TOOLS_PATH $OUTPUT_FILE
+-  GenerateShellCodeToUpdatePath $OUTPUT_FILE
+-}
+-
+-SetEdkToolsPath() {
+-
+-  #
+-  # If EDK_TOOLS_PATH is already set, then we can return right now
+-  #
+-  if [ -n "$EDK_TOOLS_PATH" ]
+-  then
+-    return 0
+-  fi
+-
+-  #
+-  # Try $CONF_PATH/EdkTools
+-  #
+-  if [ -e $CONF_PATH/EdkTools ]
+-  then
+-    export EDK_TOOLS_PATH=$CONF_PATH/EdkTools
+-    return 0
+-  fi
+-
+-  #
+-  # Try $CONF_PATH/BaseToolsSource
+-  #
+-  if [ -e $CONF_PATH/BaseToolsSource ]
+-  then
+-    export EDK_TOOLS_PATH=$CONF_PATH/BaseToolsSource
+-    return 0
+-  fi
+-
+-  #
+-  # Try $WORKSPACE/BaseTools
+-  #
+-  if [ -e $WORKSPACE/BaseTools ]
+-  then
+-    export EDK_TOOLS_PATH=$WORKSPACE/BaseTools
+-    return 0
+-  fi
+-
+-  #
+-  # Try $PACKAGES_PATH
+-  #
+-  if [ -n "$PACKAGES_PATH"]
+-  then
+-    PATH_LIST=${PACKAGES_PATH//:/ }
+-    for DIR in $PATH_LIST
+-    do
+-      if [ -d $DIR/BaseTools ]
+-      then
+-        export EDK_TOOLS_PATH=$DIR/BaseTools
+-        return 0
+-      fi
+-    done
+-  fi
+-
+-  echo "Unable to determine EDK_TOOLS_PATH"
+-  echo
+-  echo "You may need to download the 'BaseTools' from buildtools.tianocore.org."
+-  echo "After downloading, either create a symbolic link to the source at"
+-  echo "\$WORKSPACE/Conf/BaseToolsSource, or set the EDK_TOOLS_PATH environment"
+-  echo "variable."
+-
+-}
+-
+-GetBaseToolsBinSubDir() {
+-  #
+-  # Figure out a uniq directory name from the uname command
+-  #
+-  UNAME_DIRNAME=`uname -sm`
+-  UNAME_DIRNAME=${UNAME_DIRNAME// /-}
+-  UNAME_DIRNAME=${UNAME_DIRNAME//\//-}
+-  echo $UNAME_DIRNAME
+-}
+-
+-GetEdkToolsPathBinDirectory() {
+-  #
+-  # Figure out a uniq directory name from the uname command
+-  #
+-  BIN_SUB_DIR=`GetBaseToolsBinSubDir`
+-
+-  if [ -e $EDK_TOOLS_PATH/BinWrappers/$BIN_SUB_DIR ]
+-  then
+-    EDK_TOOLS_PATH_BIN=$EDK_TOOLS_PATH/BinWrappers/$BIN_SUB_DIR
+-  else
+-    EDK_TOOLS_PATH_BIN=$EDK_TOOLS_PATH/Bin/$BIN_SUB_DIR
+-  fi
+-
+-  echo $EDK_TOOLS_PATH_BIN
+-}
+-
+-AddDirToStartOfPath() {
+-  DIRNAME=$1
+-  PATH=$DIRNAME:$DIRNAME:$DIRNAME:$PATH
+-  PATH=${PATH//$DIRNAME:/}
+-  PATH=$DIRNAME:$PATH
+-  export PATH
+-}
+-
+-AddEdkToolsToPath() {
+-
+-  #
+-  # If EDK_TOOLS_PATH is not set, then we cannot update PATH
+-  #
+-  if [ -z "$EDK_TOOLS_PATH" ]
+-  then
+-    return 1
+-  fi
+-
+-  EDK_TOOLS_PATH_BIN=`GetEdkToolsPathBinDirectory`
+-
+-  AddDirToStartOfPath $EDK_TOOLS_PATH/BinWrappers/PosixLike
+-  AddDirToStartOfPath $EDK_TOOLS_PATH_BIN
+-
+-}
+-
+-CopySingleTemplateFile() {
+-
+-  SRC_FILENAME=Conf/$1.template
+-  DST_FILENAME=$CONF_PATH/$1.txt
+-
+-  if [ -e $DST_FILENAME ]
+-  then
+-    [ $RECONFIG != TRUE ] && return
+-  fi
+-
+-  echo "Copying \$EDK_TOOLS_PATH/$SRC_FILENAME"
+-  echo "     to $DST_FILENAME"
+-  SRC_FILENAME=$EDK_TOOLS_PATH/$SRC_FILENAME
+-  cp $SRC_FILENAME $DST_FILENAME
+-
+-}
+-
+-CopyTemplateFiles() {
+-
+-  CopySingleTemplateFile build_rule
+-  CopySingleTemplateFile tools_def
+-  CopySingleTemplateFile target
+-
+-}
+-
+-ScriptMain() {
+-
+-  SetWorkspace
+-  if [ -z $WORKSPACE ]
+-  then
+-    echo "Failure setting WORKSPACE"
+-    return 1
+-  fi
+-
+-  RestorePreviousConfiguration
+-
+-  SetEdkToolsPath
+-  if [ -z $EDK_TOOLS_PATH ]
+-  then
+-    return 1
+-  fi
+-
+-  AddEdkToolsToPath
+-  if [ $? -ne 0 ]
+-  then
+-    echo "Failure adding EDK Tools into PATH!"
+-    return 1
+-  fi
+-
+-  StoreCurrentConfiguration
+-
+-  echo WORKSPACE: $WORKSPACE
+-  echo EDK_TOOLS_PATH: $EDK_TOOLS_PATH
+-  echo CONF_PATH: $CONF_PATH
+-
+-  CopyTemplateFiles
+-
+-}
+-
+-#
+-# Run the main function
+-#
+-ScriptMain
+-
++## @file
++# Setup the environment for unix-like systems running a bash-like shell.
++# This file must be "sourced" not merely executed. For example: ". edksetup.sh"
++#
++# Copyright (c) 2006 - 2016, Intel Corporation. All rights reserved.<BR>
++# Copyright (c) 2016, Linaro Ltd. All rights reserved.<BR>
++# SPDX-License-Identifier: BSD-2-Clause-Patent
++#
++
++SetWorkspace() {
++
++  #
++  # If WORKSPACE is already set, then we can return right now
++  #
++  if [ -n "$WORKSPACE" ]
++  then
++    return 0
++  fi
++
++  #
++  # Set $WORKSPACE
++  #
++  export WORKSPACE=`pwd`
++
++  return 0
++
++}
++
++RestorePreviousConfiguration() {
++  #
++  # Restore previous configuration
++  #
++  if [ -z "$CONF_PATH" ]
++  then
++    export CONF_PATH=$WORKSPACE/Conf
++    if [ ! -d $WORKSPACE/Conf ] && [ -n "$PACKAGES_PATH" ]
++    then
++      PATH_LIST=${PACKAGES_PATH//:/ }
++      for DIR in $PATH_LIST
++      do
++        if [ -d $DIR/Conf ]
++        then
++          export CONF_PATH=$DIR/Conf
++          break
++        fi
++      done
++    fi
++  fi
++
++  PREVIOUS_CONF_FILE=$CONF_PATH/BuildEnv.sh
++  if [ -e $PREVIOUS_CONF_FILE ]
++  then
++    echo Loading previous configuration from $PREVIOUS_CONF_FILE
++    . $PREVIOUS_CONF_FILE
++  fi
++}
++
++GenerateShellCodeToSetVariable() {
++  VARIABLE=$1
++  OUTPUT_FILE=$2
++  VAR_VALUE="echo \${${VARIABLE}}"
++  VAR_VALUE=`eval $VAR_VALUE`
++  echo "if [ -z \"\$${VARIABLE}\" ]"             >> $OUTPUT_FILE
++  echo "then"                                    >> $OUTPUT_FILE
++  echo "  export ${VARIABLE}=${VAR_VALUE}"       >> $OUTPUT_FILE
++  echo "fi"                                      >> $OUTPUT_FILE
++}
++
++GenerateShellCodeToUpdatePath() {
++  OUTPUT_FILE=$1
++  echo "if [ -e $EDK_TOOLS_PATH_BIN ]"                        >> $OUTPUT_FILE
++  echo "then"                                                 >> $OUTPUT_FILE
++  echo "  if [ "\${PATH/$EDK_TOOLS_PATH_BIN/}" == "\$PATH" ]" >> $OUTPUT_FILE
++  echo "  then"                                               >> $OUTPUT_FILE
++  echo "    export PATH=$EDK_TOOLS_PATH_BIN:\$PATH"           >> $OUTPUT_FILE
++  echo "  fi"                                                 >> $OUTPUT_FILE
++  echo "fi"                                                   >> $OUTPUT_FILE
++}
++
++StoreCurrentConfiguration() {
++  #
++  # Write configuration to a shell script to allow for configuration to be
++  # easily reloaded.
++  #
++  OUTPUT_FILE=$CONF_PATH/BuildEnv.sh
++  #echo Storing current configuration into $OUTPUT_FILE
++  echo "# Auto-generated by ${BASH_SOURCE[0]}" >| $OUTPUT_FILE
++  GenerateShellCodeToSetVariable WORKSPACE $OUTPUT_FILE
++  GenerateShellCodeToSetVariable EDK_TOOLS_PATH $OUTPUT_FILE
++  GenerateShellCodeToUpdatePath $OUTPUT_FILE
++}
++
++SetEdkToolsPath() {
++
++  #
++  # If EDK_TOOLS_PATH is already set, then we can return right now
++  #
++  if [ -n "$EDK_TOOLS_PATH" ]
++  then
++    return 0
++  fi
++
++  #
++  # Try $CONF_PATH/EdkTools
++  #
++  if [ -e $CONF_PATH/EdkTools ]
++  then
++    export EDK_TOOLS_PATH=$CONF_PATH/EdkTools
++    return 0
++  fi
++
++  #
++  # Try $CONF_PATH/BaseToolsSource
++  #
++  if [ -e $CONF_PATH/BaseToolsSource ]
++  then
++    export EDK_TOOLS_PATH=$CONF_PATH/BaseToolsSource
++    return 0
++  fi
++
++  #
++  # Try $WORKSPACE/BaseTools
++  #
++  if [ -e $WORKSPACE/BaseTools ]
++  then
++    export EDK_TOOLS_PATH=$WORKSPACE/BaseTools
++    return 0
++  fi
++
++  #
++  # Try $PACKAGES_PATH
++  #
++  if [ -n "$PACKAGES_PATH"]
++  then
++    PATH_LIST=${PACKAGES_PATH//:/ }
++    for DIR in $PATH_LIST
++    do
++      if [ -d $DIR/BaseTools ]
++      then
++        export EDK_TOOLS_PATH=$DIR/BaseTools
++        return 0
++      fi
++    done
++  fi
++
++  echo "Unable to determine EDK_TOOLS_PATH"
++  echo
++  echo "You may need to download the 'BaseTools' from buildtools.tianocore.org."
++  echo "After downloading, either create a symbolic link to the source at"
++  echo "\$WORKSPACE/Conf/BaseToolsSource, or set the EDK_TOOLS_PATH environment"
++  echo "variable."
++
++}
++
++GetBaseToolsBinSubDir() {
++  #
++  # Figure out a uniq directory name from the uname command
++  #
++  UNAME_DIRNAME=`uname -sm`
++  UNAME_DIRNAME=${UNAME_DIRNAME// /-}
++  UNAME_DIRNAME=${UNAME_DIRNAME//\//-}
++  echo $UNAME_DIRNAME
++}
++
++GetEdkToolsPathBinDirectory() {
++  #
++  # Figure out a uniq directory name from the uname command
++  #
++  BIN_SUB_DIR=`GetBaseToolsBinSubDir`
++
++  if [ -e $EDK_TOOLS_PATH/BinWrappers/$BIN_SUB_DIR ]
++  then
++    EDK_TOOLS_PATH_BIN=$EDK_TOOLS_PATH/BinWrappers/$BIN_SUB_DIR
++  else
++    EDK_TOOLS_PATH_BIN=$EDK_TOOLS_PATH/Bin/$BIN_SUB_DIR
++  fi
++
++  echo $EDK_TOOLS_PATH_BIN
++}
++
++AddDirToStartOfPath() {
++  DIRNAME=$1
++  PATH=$DIRNAME:$DIRNAME:$DIRNAME:$PATH
++  PATH=${PATH//$DIRNAME:/}
++  PATH=$DIRNAME:$PATH
++  export PATH
++}
++
++AddEdkToolsToPath() {
++
++  #
++  # If EDK_TOOLS_PATH is not set, then we cannot update PATH
++  #
++  if [ -z "$EDK_TOOLS_PATH" ]
++  then
++    return 1
++  fi
++
++  EDK_TOOLS_PATH_BIN=`GetEdkToolsPathBinDirectory`
++
++  # check if the edk2basetools pip package is available
++  if $PYTHON_COMMAND -c "import edk2basetools" &> /dev/null; then
++    # if it is, use the pip version of the wrappers
++    echo "Using Pip Basetools"
++    AddDirToStartOfPath $EDK_TOOLS_PATH/BinPipWrappers/PosixLike
++  else
++    echo "Using EDK2 in-source Basetools"
++    AddDirToStartOfPath $EDK_TOOLS_PATH/BinWrappers/PosixLike
++  fi
++
++
++  AddDirToStartOfPath $EDK_TOOLS_PATH_BIN
++
++}
++
++CopySingleTemplateFile() {
++
++  SRC_FILENAME=Conf/$1.template
++  DST_FILENAME=$CONF_PATH/$1.txt
++
++  if [ -e $DST_FILENAME ]
++  then
++    [ $RECONFIG != TRUE ] && return
++  fi
++
++  echo "Copying \$EDK_TOOLS_PATH/$SRC_FILENAME"
++  echo "     to $DST_FILENAME"
++  SRC_FILENAME=$EDK_TOOLS_PATH/$SRC_FILENAME
++  cp $SRC_FILENAME $DST_FILENAME
++
++}
++
++CopyTemplateFiles() {
++
++  CopySingleTemplateFile build_rule
++  CopySingleTemplateFile tools_def
++  CopySingleTemplateFile target
++
++}
++
++ScriptMain() {
++
++  SetWorkspace
++  if [ -z $WORKSPACE ]
++  then
++    echo "Failure setting WORKSPACE"
++    return 1
++  fi
++
++  RestorePreviousConfiguration
++
++  SetEdkToolsPath
++  if [ -z $EDK_TOOLS_PATH ]
++  then
++    return 1
++  fi
++
++  AddEdkToolsToPath
++  if [ $? -ne 0 ]
++  then
++    echo "Failure adding EDK Tools into PATH!"
++    return 1
++  fi
++
++  StoreCurrentConfiguration
++
++  echo WORKSPACE: $WORKSPACE
++  echo EDK_TOOLS_PATH: $EDK_TOOLS_PATH
++  echo CONF_PATH: $CONF_PATH
++
++  CopyTemplateFiles
++
++}
++
++#
++# Run the main function
++#
++ScriptMain
++
+diff --git a/BaseTools/Scripts/PatchCheck.py b/BaseTools/Scripts/PatchCheck.py
+index 68c984ed0e4..80754e763c5 100755
+--- a/BaseTools/Scripts/PatchCheck.py
++++ b/BaseTools/Scripts/PatchCheck.py
+@@ -359,6 +359,7 @@ def run(self):
+                 self.force_notabs = True
+                 if self.filename.endswith('.sh') or \
+                     self.filename.startswith('BaseTools/BinWrappers/PosixLike/') or \
++                    self.filename.startswith('BaseTools/BinPipWrappers/PosixLike/') or \
+                     self.filename.startswith('BaseTools/Bin/CYGWIN_NT-5.1-i686/') or \
+                     self.filename == 'BaseTools/BuildEnv':
+                     #
+diff --git a/BaseTools/toolsetup.bat b/BaseTools/toolsetup.bat
+index 61ebf4ae09b..4b5256ab6e9 100755
+--- a/BaseTools/toolsetup.bat
++++ b/BaseTools/toolsetup.bat
+@@ -393,12 +393,31 @@ goto end
+     goto check_freezer_path
+   )
+ 
++
++
+ :check_freezer_path
+   endlocal
++
++  %PYTHON_COMMAND% -c "import edk2basetools" >NUL 2>NUL
++  if %ERRORLEVEL% EQU 0 (
++    goto use_pip_basetools
++  ) else (
++    goto use_builtin_basetools
++  )
++
++:use_builtin_basetools
++  @echo Using EDK2 in-source Basetools
+   if defined BASETOOLS_PYTHON_SOURCE goto print_python_info
+   set "PATH=%BASE_TOOLS_PATH%\BinWrappers\WindowsLike;%PATH%"
+   set BASETOOLS_PYTHON_SOURCE=%BASE_TOOLS_PATH%\Source\Python
+   set PYTHONPATH=%BASETOOLS_PYTHON_SOURCE%;%PYTHONPATH%
++  goto print_python_info
++
++:use_pip_basetools
++  @echo Using Pip Basetools
++  set "PATH=%BASE_TOOLS_PATH%\BinPipWrappers\WindowsLike;%PATH%"
++  set BASETOOLS_PYTHON_SOURCE=edk2basetools
++  goto print_python_info
+ 
+ :print_python_info
+   echo                PATH = %PATH%
+diff --git a/pip-requirements.txt b/pip-requirements.txt
+index 0fecd37f2a8..b634106bead 100644
+--- a/pip-requirements.txt
++++ b/pip-requirements.txt
+@@ -14,4 +14,5 @@
+ 
+ edk2-pytool-library==0.10.*
+ edk2-pytool-extensions~=0.13.3
++edk2-basetools==0.1.0
+ antlr4-python3-runtime==4.7.1

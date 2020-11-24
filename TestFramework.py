@@ -28,6 +28,39 @@ class INPUT():
     def __init__(self,source,dest):
         self.source = source
         self.dest = dest
+        
+def git_cmd(work_dir, *args):
+    if not os.path.exists(work_dir):
+        raise git_error(message = "work dir does not exist.")
+    with cd(work_dir):
+        error, lines = cli_cmd('git', *args)
+        if error:
+            raise git_error(message = get_giterror(['git']+list(args), error, lines))
+        return lines
+
+def cli_cmd(command, *args):
+    """Run a shell command and return its error code and the lines it
+    printed to stdout or stderr.
+    """
+    cmdline = [command] + list(args)
+    p = subprocess.Popen(cmdline,
+                     stdout=subprocess.PIPE,
+                     stderr=subprocess.STDOUT,
+                     shell=False,
+                     universal_newlines=True,
+                     encoding='ascii',
+                     errors="ignore")
+
+    lines = []
+    for line in p.stdout:
+        lines.append(line)
+    return p.wait(), lines
+
+def get_giterror(cmd, error_code, subprocess_lines):
+    "Format and returns error message received from subprocess."
+    git_command = " ".join([argument for argument in  cmd])
+    error_message = " ".join([line for line in  subprocess_lines])
+    return "\n Command:{} \n Code:{} \n Message:{}".format(git_command, error_code, error_message)
 
 class git_error(Exception):
     """Error to raise when Git commands fail."""
@@ -157,6 +190,8 @@ class Edk2TestEnv(IncTestEnv):
         return self.case_list
     
     def set_env(self,case):
+        return
+
         LOGGER.info("do edk2 set_env")
         cmds = ['edksetup.bat','Rebuild']
         env_dict = os.environ.copy()
@@ -185,23 +220,11 @@ class RepoEnv():
     repo_locations = {
         'Tiano':{
             'edk2': os.path.join(edk2_proj_root,"edk2")
-            },
-        'Egs':{
-            "edk2": os.path.join(egs_proj_root,'Edk2'),
-            "intel": os.path.join(egs_proj_root,'Intel'),
-            "fdbin": os.path.join(egs_proj_root,'FDbin'),
-            "edk2platforms":os.path.join(egs_proj_root,'Edk2Platforms')
             }
         }
     repo_version = {
         'Tiano':{
             'edk2': os.environ.get("TIANO_EDK2_VER")
-            },
-        'Egs':{
-            "edk2": os.environ.get("EGS_EDK2_VER"),
-            "intel": os.environ.get("EGS_INTEL_VER"),
-            "fdbin": os.environ.get("EGS_FDBIN_VER"),
-            "edk2platforms":os.environ.get("EGS_EDK2_P_VER")
             }
         }
 
@@ -254,14 +277,14 @@ class RepoEnv():
                     continue
                 repo_localtion = proj_repos[change_com[1].lower()]
                 try:
-                    self.git_cmd(repo_localtion,"reset", "--hard")
+                    git_cmd(repo_localtion,"reset", "--hard")
                 except git_error as ge:
                     LOGGER.info(str(ge))
                 try:
-                    self.git_cmd(repo_localtion,"am", "--3way", "--ignore-space-change", "--keep-cr", change_com[0])
+                    git_cmd(repo_localtion,"am", "--3way", "--ignore-space-change", "--keep-cr", change_com[0])
                 except git_error as ge:
                     LOGGER.info(str(ge))
-                    self.git_cmd(repo_localtion,"am", "--abort")
+                    git_cmd(repo_localtion,"am", "--abort")
             else:
                 change = change_com[0]
                 dest = source_map.get(os.path.basename(change))   
@@ -278,17 +301,13 @@ class RepoEnv():
     def clean(self):
         for comp in self.repo_components:
             version = self.repo_components[comp]
-            try:
-                self.git_cmd(comp, "clean","-xffd")
-            except Exception as e:
-                LOGGER.warning(str(e))
 
             try:
-                self.git_cmd(comp,"reset",version,"--hard")
+                git_cmd(comp,"reset",version,"--hard")
             except Exception as e:
-                self.git_cmd(comp,"pull")
+                git_cmd(comp,"pull")
                 try:
-                    self.git_cmd(comp,"reset",version,"--hard")
+                    git_cmd(comp,"reset",version,"--hard")
                 except Exception as se:
                     LOGGER.warning(str(se))
 
@@ -296,11 +315,11 @@ class RepoEnv():
         for comp in self.repo_components:
             version = self.repo_components[comp]
             try:
-                self.git_cmd(comp,"reset",version,"--hard")
+                git_cmd(comp,"reset",version,"--hard")
             except Exception as e:
-                self.git_cmd(comp,"pull")
+                git_cmd(comp,"pull")
                 try:
-                    self.git_cmd(comp,"reset",version,"--hard")
+                    git_cmd(comp,"reset",version,"--hard")
                 except Exception as se:
                     LOGGER.warning(str(se))
         self.init()
@@ -311,9 +330,9 @@ class RepoEnv():
             if init_s.endswith(".patch"):
                 repo_localtion = proj_repos[init_d.lower()]
                 try:
-                    self.git_cmd(repo_localtion,"am", "--3way", "--ignore-space-change", "--keep-cr", init_s)
+                    git_cmd(repo_localtion,"am", "--3way", "--ignore-space-change", "--keep-cr", init_s)
                 except git_error as ge:
-                    self.git_cmd(repo_localtion,"am", "--abort")
+                    git_cmd(repo_localtion,"am", "--abort")
                     LOGGER.info(str(ge))
             else:
                 if os.path.isdir(init_s):
@@ -326,39 +345,6 @@ class RepoEnv():
                         os.makedirs(os.path.dirname(init_d))
                     LOGGER.info("clean copy %s" % init_s)
                     shutil.copy(init_s,init_d)
-
-    def git_cmd(self, work_dir, *args):
-        if not os.path.exists(work_dir):
-            raise git_error(message = "work dir does not exist.")
-        with cd(work_dir):
-            error, lines = self.cli_cmd('git', *args)
-            if error:
-                raise git_error(message = self.get_giterror(['git']+list(args), error, lines))
-            return lines
-
-    def cli_cmd(self,command, *args):
-        """Run a shell command and return its error code and the lines it
-        printed to stdout or stderr.
-        """
-        cmdline = [command] + list(args)
-        p = subprocess.Popen(cmdline,
-                         stdout=subprocess.PIPE,
-                         stderr=subprocess.STDOUT,
-                         shell=False,
-                         universal_newlines=True,
-                         encoding='ascii',
-                         errors="ignore")
-
-        lines = []
-        for line in p.stdout:
-            lines.append(line)
-        return p.wait(), lines
-
-    def get_giterror(self, cmd, error_code, subprocess_lines):
-        "Format and returns error message received from subprocess."
-        git_command = " ".join([argument for argument in  cmd])
-        error_message = " ".join([line for line in  subprocess_lines])
-        return "\n Command:{} \n Code:{} \n Message:{}".format(git_command, error_code, error_message)
 
 class Case():
     def __init__(self):
@@ -376,7 +362,7 @@ class Case():
         self.Results_dir = os.path.join(self.tmp_dir,".Results")
         self.OriLine_dir = os.path.join(self.tmp_dir,".OrnLine")
         self.path = ""
-        self.env_dict = {}
+        self.env_dict = os.environ
         self.valid = True
         self.exclude_filelist_type = []
         self.case_file = ""
@@ -404,7 +390,8 @@ class Case():
         cmds = self.__splitcommand(self.command)
         LOGGER.info(cmds)
         begin = time.time()
-        rt = subprocess.run(cmds,capture_output=True,cwd=PlatformWorkingPath,shell=True,text=True,env=self.env_dict)
+        print(PlatformWorkingPath)
+        rt = subprocess.run(cmds,cwd=PlatformWorkingPath,shell=True,text=True,env=self.env_dict)
         end = time.time()
         #rt = subprocess.run(cmds,cwd=PlatformWorkingPath,env=env_dict) # py36 on linux
 
@@ -534,20 +521,52 @@ class Case():
 
 # -------------------------- Test ---------------------------#
 
-edk2_testenv = Edk2TestEnv(edk2_proj_root,os.path.join(os.path.abspath("."),r"TestCases\Edk2"),os.path.join(edk2_proj_root,"edk2"))
+edk2_testenv = Edk2TestEnv(edk2_proj_root,os.path.join(os.path.abspath("."),r"TestCases\pilot"),os.path.join(edk2_proj_root,"edk2"))
 
 @pytest.mark.edk2_inc_test
 class Test_Edk2PlatformIncremental():
+
+    @pytest.fixture(scope='session')
+    def PreTest(self):
+        oldversion = git_cmd("./edk2","rev-parse", "HEAD")[0].strip()
+        PreTestConf = r"./PreTest/*/*.yml"
+        for f in glob.glob(PreTestConf):
+            with open(os.path.abspath(f),"r") as fd:
+                data = yaml.load(fd.read(),Loader=yaml.FullLoader)
+            for line in data['init']:
+                if line.strip().endswith(".patch"):
+                    git_cmd("./edk2","am", "--3way", "--ignore-space-change", "--keep-cr", os.path.join(os.path.dirname(os.path.abspath(f)),line.strip()))
+        version = git_cmd("./edk2","rev-parse", "HEAD")[0]
+        cmds = r"py -3 BaseTools\Edk2ToolsBuild.py -t VS2017".split()
+        rt = subprocess.run(cmds,capture_output=True,cwd="./edk2",shell=True,text=True)
+        print(rt.stdout)
+        if rt.returncode != 0:
+            LOGGER.info(rt.stderr)
+            LOGGER.info(rt.stdout)
+        cmds = r"stuart_setup -c TestPkg\PlatformBuild.py -a IA32,X64 TOOL_CHAIN_TAG=VS2017".split()
+        rt = subprocess.run(cmds,capture_output=True,cwd="./edk2",shell=True,text=True)
+        if rt.returncode != 0:
+            LOGGER.info(rt.stderr)
+            LOGGER.info(rt.stdout)
+        cmds = r"stuart_update -c TestPkg\PlatformBuild.py -a IA32,X64 TOOL_CHAIN_TAG=VS2017".split()
+        rt = subprocess.run(cmds,capture_output=True,cwd="./edk2",shell=True,text=True)
+        if rt.returncode != 0:
+            LOGGER.info(rt.stderr)
+            LOGGER.info(rt.stdout)
+        yield version.strip()
+        git_cmd("./edk2","reset",oldversion,"--hard")
+        
     @pytest.fixture(
                     params = edk2_testenv.collect_cases,
                     ids = ["%s -- %s -- | %s" % (case.name, case.type, case.case_file) for case in edk2_testenv.collect_cases])
-    def setup_cases(self,request,caplog):
+    def setup_cases(self,request,caplog,PreTest):
         caplog.set_level(logging.INFO)
         LOGGER.info("before run EDK2 cases")
         case = request.param
         case.exclude_filelist_type = [".obj", ".map", ".lib", ".dll", ".bin",".tmp",".inf"]
         LOGGER.info("Prepare EGS case %s" % case.name)
         repo = RepoEnv(edk2_testenv.build_workspace,'Tiano',case.inputs,case.repo)
+        repo.repo_version['Tiano']['edk2'] = PreTest
 
         case.clean_env()
         LOGGER.info("Test environment is cleaned")
@@ -580,7 +599,7 @@ class Test_Edk2PlatformIncremental():
         yield case
         case.clean_env()
         repo.clean()
-        case.clean_temp()
+#        case.clean_temp()
         
         LOGGER.info("Test Environment is cleand for case %s",case.name)
 
