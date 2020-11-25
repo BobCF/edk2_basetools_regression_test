@@ -528,34 +528,9 @@ class Test_Edk2PlatformIncremental():
 
     @pytest.fixture(scope='session')
     def PreTest(self):
-        oldversion = git_cmd("./edk2","rev-parse", "HEAD")[0].strip()
-        PreTestConf = r"./PreTest/*/*.yml"
-        for f in glob.glob(PreTestConf):
-            with open(os.path.abspath(f),"r") as fd:
-                data = yaml.load(fd.read(),Loader=yaml.FullLoader)
-            for line in data['init']:
-                if line.strip().endswith(".patch"):
-                    git_cmd("./edk2","am", "--3way", "--ignore-space-change", "--keep-cr", os.path.join(os.path.dirname(os.path.abspath(f)),line.strip()))
         version = git_cmd("./edk2","rev-parse", "HEAD")[0]
-        cmds = r"py -3 BaseTools\Edk2ToolsBuild.py -t VS2017".split()
-        rt = subprocess.run(cmds,capture_output=True,cwd="./edk2",shell=True,text=True)
-        print(rt.stdout)
-        if rt.returncode != 0:
-            LOGGER.info(rt.stderr)
-            LOGGER.info(rt.stdout)
-        cmds = r"stuart_setup -c TestPkg\PlatformBuild.py -a IA32,X64 TOOL_CHAIN_TAG=VS2017".split()
-        rt = subprocess.run(cmds,capture_output=True,cwd="./edk2",shell=True,text=True)
-        if rt.returncode != 0:
-            LOGGER.info(rt.stderr)
-            LOGGER.info(rt.stdout)
-        cmds = r"stuart_update -c TestPkg\PlatformBuild.py -a IA32,X64 TOOL_CHAIN_TAG=VS2017".split()
-        rt = subprocess.run(cmds,capture_output=True,cwd="./edk2",shell=True,text=True)
-        if rt.returncode != 0:
-            LOGGER.info(rt.stderr)
-            LOGGER.info(rt.stdout)
         yield version.strip()
-        git_cmd("./edk2","reset",oldversion,"--hard")
-        
+
     @pytest.fixture(
                     params = edk2_testenv.collect_cases,
                     ids = ["%s -- %s -- | %s" % (case.name, case.type, case.case_file) for case in edk2_testenv.collect_cases])
