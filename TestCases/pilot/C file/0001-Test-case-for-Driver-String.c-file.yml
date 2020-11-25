@@ -1,0 +1,20 @@
+---
+name: Test case for Driver - String.c file
+description: Change the value of 'Narrow Glyphs' in the MdeModulePkg/Application/UiApp/String.c
+
+command: stuart_build -c TestPkg\PlatformBuild.py -a IA32,X64 TOOL_CHAIN_TAG=VS2017 TARGET=RELEASE
+init:
+  - 
+    src:
+    dest: edk2
+
+input:
+  type: repo
+  repo: edk2
+
+change:
+  - 0001-Test-case-for-Driver-String.c-file.patch | edk2
+
+output:
+  - edk2\Build
+    
