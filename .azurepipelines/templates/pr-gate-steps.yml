@@ -32,13 +32,6 @@ steps:
   displayName: 'Install/Upgrade pip modules'
 
 # Build repo
-- task: CmdLine@1
-  displayName: PreTest ${{ parameters.build_archs}}
-  inputs:
-    workingDirectory: $(Pipeline.Workspace)/edk2
-    filename: python
-    arguments: PreTest.py -c PreTest\TestPkg\TestPkg.yml 
-
 
 - task: CmdLine@1
   displayName: Setup ${{ parameters.build_archs}}
