@@ -18,6 +18,9 @@ steps:
   submodules: true
   fetchDepth: 1
   persistCredentials: true
+- script: |
+  git config --global user.email "bob.c.feng@intel.com"
+  git config --global user.name "Bob Feng"
 
 - task: UsePythonVersion@0
   inputs:
