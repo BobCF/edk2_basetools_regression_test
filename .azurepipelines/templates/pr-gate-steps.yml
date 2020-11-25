@@ -1,0 +1,57 @@
+## @file
+# File templates/pr-gate-steps.yml
+#
+# template file containing the steps to build
+#
+# Copyright (c) Microsoft Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+parameters:
+  tool_chain_tag: ''
+  build_targets: ''
+  build_archs: ''
+
+steps:
+- checkout: self
+  clean: true
+  fetchDepth: 1
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.8.x'
+    architecture: 'x64'
+
+- script: pip install -r pip-requirements.txt --upgrade
+  displayName: 'Install/Upgrade pip modules'
+
+# Build repo
+- task: CmdLine@1
+  displayName: Setup ${{ parameters.build_archs}}
+  inputs:
+    workingDirectory: $(Pipeline.Workspace)/edk2
+    filename: stuart_setup
+    arguments: -c TestPkg\PlatformBuild.py -t ${{ parameters.build_targets}} -a ${{ parameters.build_archs}} TOOL_CHAIN_TAG=${{ parameters.tool_chain_tag}}
+
+
+- task: CmdLine@1
+  displayName: Update ${{ parameters.build_archs}}
+  inputs:
+    workingDirectory: $(Pipeline.Workspace)/edk2
+    filename: stuart_update
+    arguments: -c TestPkg\PlatformBuild.py  -t ${{ parameters.build_targets}} -a ${{ parameters.build_archs}} TOOL_CHAIN_TAG=${{ parameters.tool_chain_tag}}
+
+
+# build basetools
+#   do this after setup and update so that code base dependencies
+#   are all resolved.
+- template: basetools-build-steps.yml
+  parameters:
+    tool_chain_tag: ${{ parameters.tool_chain_tag }}
+
+- task: CmdLine@1
+  displayName: Build and Test ${{ parameters.build_archs}}
+  inputs:
+    filename: python
+    arguments: -m pytest -q --html=report\test_report.html --self-contained-html TestFramework.py
+
