@@ -19,8 +19,9 @@ steps:
   fetchDepth: 1
   persistCredentials: true
 - script: |
-  git config --global user.email "bob.c.feng@intel.com"
-  git config --global user.name "Bob Feng"
+      git config --global user.email "bob.c.feng@intel.com"
+      git config --global user.name "Bob Feng"
+  displayName: Set Git UserName
 
 - task: UsePythonVersion@0
   inputs:
