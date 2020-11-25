@@ -1,7 +1,7 @@
-From db58a87770647cbc355a0748d2a6d3976313b39e Mon Sep 17 00:00:00 2001
+From ad1762de7f04160ad6cf063f85946f9be0f5b69b Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
 Date: Fri, 7 Aug 2020 10:20:03 +0800
-Subject: [Patch 06/10] Support for DSC include test case.
+Subject: [Patch 07/12] Support for DSC include test case.
 
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---

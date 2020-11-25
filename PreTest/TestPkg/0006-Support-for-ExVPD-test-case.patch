@@ -1,7 +1,7 @@
-From 807204a5db63a1c618def7c58dec52c293173966 Mon Sep 17 00:00:00 2001
+From 98ea6797578ca4556de43143b4a3dbdcbceff428 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
 Date: Mon, 3 Aug 2020 14:14:40 +0800
-Subject: [Patch 05/10] Support for ExVPD test case.
+Subject: [Patch 06/12] Support for ExVPD test case.
 
 ---
  TestPkg/TestPkg32X64.dsc | 7 +++++--

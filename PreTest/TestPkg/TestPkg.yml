@@ -1,13 +1,13 @@
 init:
-  - PipBaseTools.patch
-  - 0001-Add-TestPkg.patch
-  - 0002-Add-fake-library-and-drivers-in-TestPkg-in-order-to-.patch
-  - 0003-Support-for-test-case-1.include-.h-and-.asi-in-asl-f.patch
-  - 0004-Support-for-Metadata-file-test-cases.patch
-  - 0005-Support-for-ExVPD-test-case.patch
-  - 0006-Support-for-DSC-include-test-case.patch
-  - 0007-Support-for-test-case.patch
-  - 0008-Support-for-INF-Sources.X64-test-cases.patch
-  - 0009-Support-for-INF-Binary-test-cases.patch
-  - 0010-Support-for-UNI-test-cases-Add-De.patch
-  - 00011-Add-Pytools-support.patch
+  - 0001-BaseTools-Use-pip-module-if-available-CI-uses-it-by-.patch
+  - 0002-Add-TestPkg.patch
+  - 0003-Add-fake-library-and-drivers-in-TestPkg-in-order-to-.patch
+  - 0004-Support-for-test-case-1.include-.h-and-.asi-in-asl-f.patch
+  - 0005-Support-for-Metadata-file-test-cases.patch
+  - 0006-Support-for-ExVPD-test-case.patch
+  - 0007-Support-for-DSC-include-test-case.patch
+  - 0008-Support-for-test-case.patch
+  - 0009-Support-for-INF-Sources.X64-test-cases.patch
+  - 0010-Support-for-INF-Binary-test-cases.patch
+  - 0011-Support-for-UNI-test-cases.patch
+  - 0012-Add-Pytools-support.patch

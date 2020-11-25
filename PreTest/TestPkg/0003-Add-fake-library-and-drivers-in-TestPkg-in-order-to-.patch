@@ -1,7 +1,7 @@
-From 7658fb86dfe39ca9f9ffdcc17514d54fc3830320 Mon Sep 17 00:00:00 2001
+From 7e98db16cb685b7e92a5c5e069eab868c09a3539 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
 Date: Mon, 27 Jul 2020 16:19:59 +0800
-Subject: [Patch 02/10] Add fake library and drivers in TestPkg in order to
+Subject: [Patch 03/12] Add fake library and drivers in TestPkg in order to
  create test case.
 
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>

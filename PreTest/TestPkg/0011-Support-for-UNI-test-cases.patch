@@ -1,7 +1,7 @@
-From d900243025c31db276e795c4af66420b8afbce2e Mon Sep 17 00:00:00 2001
+From 07babbb068472445a114bb9749096170813305bb Mon Sep 17 00:00:00 2001
 From: Bob Feng <bob.c.feng@intel.com>
 Date: Mon, 23 Nov 2020 16:59:59 +0800
-Subject: [Patch 10/10] 1. Support for UNI test cases. 2. Support for Add &
+Subject: [Patch 11/12] 1. Support for UNI test cases. 2. Support for Add &
  Delete test cases. 1.ASL 2.ASM 3.NASM 3. Support for edk2 test cases: 1. Add
  - C, H, UNI 2.Modify - H include H, NASM include H
 

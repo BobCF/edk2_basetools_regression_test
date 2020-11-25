@@ -66,6 +66,7 @@ if __name__ == "__main__":
             data = yaml.load(fd.read(),Loader=yaml.FullLoader)
             for line in data['init']:
                 if line.strip().endswith(".patch"):
+                    print(line)
                     git_cmd("./edk2","am", "--3way", "--ignore-space-change", "--keep-cr", os.path.join(os.path.dirname(os.path.abspath(f)),line.strip()))
     else:
         exit(1)

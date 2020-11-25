@@ -1,7 +1,7 @@
-From 3f6bcc094f0ddc6ecc8f855ee67db8060db4abf8 Mon Sep 17 00:00:00 2001
+From 402cf6202ba4220f5b64ae9b80e9108c561675b8 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
 Date: Wed, 29 Jul 2020 08:55:38 +0800
-Subject: [Patch 03/10] Support for test case: 1.include .h and .asi in asl
+Subject: [Patch 04/12] Support for test case: 1.include .h and .asi in asl
  files; 2.include .asl in asl files; 3.include .h in nasm files; 4.include
  .asm in asm files; 5.include .h and .i in asm files; 6.include .inc in asm
  files;

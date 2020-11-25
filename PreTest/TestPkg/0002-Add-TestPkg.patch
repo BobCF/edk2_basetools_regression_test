@@ -1,7 +1,7 @@
-From 3b70e51b03df4417c9bf72764ccc0b16ace279c9 Mon Sep 17 00:00:00 2001
+From c51e8d275ff047ad22fe28c26b7a763b800617a1 Mon Sep 17 00:00:00 2001
 From: Bob Feng <bob.c.feng@intel.com>
 Date: Mon, 23 Nov 2020 17:55:56 +0800
-Subject: [Patch 01/10] Add TestPkg
+Subject: [Patch 02/12] Add TestPkg
 
 Signed-off-by: Bob Feng <bob.c.feng@intel.com>
 ---

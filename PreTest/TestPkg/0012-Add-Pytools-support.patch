@@ -1,21 +1,21 @@
-From 6ea8d1f07474a965162f725f83cb7a38298594b8 Mon Sep 17 00:00:00 2001
+From 0c7c0d19e90690d7d4025fb085eeaa12f0fb08a3 Mon Sep 17 00:00:00 2001
 From: Bob Feng <bob.c.feng@intel.com>
 Date: Tue, 24 Nov 2020 12:07:50 +0800
-Subject: [Patch] Add Pytools support
+Subject: [Patch 12/12] Add Pytools support
 
 Signed-off-by: Bob Feng <bob.c.feng@intel.com>
 ---
  TestPkg/PlatformBuild.py                      | 156 ++++++++++++++++++
  .../{TestPkg32X64.dsc => TestPkgIA32X64.dsc}  |   4 +-
  TestPkg/iasl_ext_dep.yaml                     |  21 +++
- 3 files changed, 171 insertions(+), 2 deletions(-)
+ 3 files changed, 179 insertions(+), 2 deletions(-)
  create mode 100644 TestPkg/PlatformBuild.py
  rename TestPkg/{TestPkg32X64.dsc => TestPkgIA32X64.dsc} (97%)
  create mode 100644 TestPkg/iasl_ext_dep.yaml
 
 diff --git a/TestPkg/PlatformBuild.py b/TestPkg/PlatformBuild.py
 new file mode 100644
-index 0000000000..3da88ba551
+index 0000000000..852fad4639
 --- /dev/null
 +++ b/TestPkg/PlatformBuild.py
 @@ -0,0 +1,156 @@

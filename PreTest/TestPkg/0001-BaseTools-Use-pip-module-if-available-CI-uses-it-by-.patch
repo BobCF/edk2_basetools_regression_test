@@ -1,7 +1,8 @@
-From bfcc4eaccef96ec34782b958759be157543ec0ca Mon Sep 17 00:00:00 2001
+From bc2fe8f51cc2039d6343918e66c068e22c92eabe Mon Sep 17 00:00:00 2001
 From: Matthew Carlson <matthewfcarlson@gmail.com>
 Date: Tue, 29 Sep 2020 17:02:28 -0700
-Subject: [PATCH] BaseTools: Use pip module if available, CI uses it by default
+Subject: [Patch 01/12] BaseTools: Use pip module if available, CI uses it by
+ default
 
 Use the new edk2-basetools pip module.
 Includes a helpful message in setup to let users know which has been
@@ -119,10 +120,12 @@ Signed-off-by: Matthew Carlson <matthewfcarlson@gmail.com>
  create mode 100644 BaseTools/BinPipWrappers/WindowsLike/win_build_tools_path_env.yaml
 
 diff --git a/.pytool/CISettings.py b/.pytool/CISettings.py
-index b337d046ae0..e0e106d8e65 100644
+index b337d046ae..e0e106d8e6 100644
 --- a/.pytool/CISettings.py
 +++ b/.pytool/CISettings.py
-@@ -22,6 +22,7 @@ def __init__(self):
+@@ -20,10 +20,11 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
+     def __init__(self):
+         self.ActualPackages = []
          self.ActualTargets = []
          self.ActualArchitectures = []
          self.ActualToolChainTag = ""
@@ -130,7 +133,11 @@ index b337d046ae0..e0e106d8e65 100644
  
      # ####################################################################################### #
      #                             Extra CmdLine configuration                                 #
-@@ -131,7 +132,24 @@ def GetActiveScopes(self):
+     # ####################################################################################### #
+ 
+@@ -129,11 +130,28 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
+         ''' return tuple containing scopes that should be active for this process '''
+         scopes = ("cibuild", "edk2-build", "host-based-test")
  
          self.ActualToolChainTag = shell_environment.GetBuildVars().GetValue("TOOL_CHAIN_TAG", "")
  
@@ -156,9 +163,11 @@ index b337d046ae0..e0e106d8e65 100644
              if "AARCH64" in self.ActualArchitectures:
                  scopes += ("gcc_aarch64_linux",)
              if "ARM" in self.ActualArchitectures:
+                 scopes += ("gcc_arm_linux",)
+             if "RISCV64" in self.ActualArchitectures:
 diff --git a/BaseTools/BinPipWrappers/PosixLike/AmlToC b/BaseTools/BinPipWrappers/PosixLike/AmlToC
 new file mode 100644
-index 00000000000..1dd28e96628
+index 0000000000..1dd28e9662
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/AmlToC
 @@ -0,0 +1,14 @@
@@ -178,7 +187,7 @@ index 00000000000..1dd28e96628
 +exec "${python_exe:-python}" "$dir/../../Source/Python/$exe/$exe.py" "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/BPDG b/BaseTools/BinPipWrappers/PosixLike/BPDG
 new file mode 100644
-index 00000000000..a2b901c084d
+index 0000000000..a2b901c084
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/BPDG
 @@ -0,0 +1,12 @@
@@ -196,7 +205,7 @@ index 00000000000..a2b901c084d
 +exec "${python_exe:-python}" -m edk2basetools.$cmd.EccMain "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/Brotli b/BaseTools/BinPipWrappers/PosixLike/Brotli
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/Brotli
 @@ -0,0 +1,29 @@
@@ -231,7 +240,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/BrotliCompress b/BaseTools/BinPipWrappers/PosixLike/BrotliCompress
 new file mode 100644
-index 00000000000..b5fd1beb555
+index 0000000000..b5fd1beb55
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/BrotliCompress
 @@ -0,0 +1,34 @@
@@ -271,7 +280,7 @@ index 00000000000..b5fd1beb555
 +exec Brotli $QLT $ARGS
 diff --git a/BaseTools/BinPipWrappers/PosixLike/DevicePath b/BaseTools/BinPipWrappers/PosixLike/DevicePath
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/DevicePath
 @@ -0,0 +1,29 @@
@@ -306,7 +315,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/Ecc b/BaseTools/BinPipWrappers/PosixLike/Ecc
 new file mode 100644
-index 00000000000..59872891509
+index 0000000000..5987289150
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/Ecc
 @@ -0,0 +1,13 @@
@@ -325,7 +334,7 @@ index 00000000000..59872891509
 +exec "${python_exe:-python}" -m $cmd.EccMain "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/EfiRom b/BaseTools/BinPipWrappers/PosixLike/EfiRom
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/EfiRom
 @@ -0,0 +1,29 @@
@@ -360,7 +369,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/GenCrc32 b/BaseTools/BinPipWrappers/PosixLike/GenCrc32
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/GenCrc32
 @@ -0,0 +1,29 @@
@@ -395,7 +404,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/GenDepex b/BaseTools/BinPipWrappers/PosixLike/GenDepex
 new file mode 100644
-index 00000000000..ab29450aa1a
+index 0000000000..ab29450aa1
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/GenDepex
 @@ -0,0 +1,12 @@
@@ -413,7 +422,7 @@ index 00000000000..ab29450aa1a
 +exec "${python_exe:-python}" -m edk2basetools.AutoGen.$cmd "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/GenFds b/BaseTools/BinPipWrappers/PosixLike/GenFds
 new file mode 100644
-index 00000000000..14e8d8af712
+index 0000000000..14e8d8af71
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/GenFds
 @@ -0,0 +1,12 @@
@@ -431,7 +440,7 @@ index 00000000000..14e8d8af712
 +exec "${python_exe:-python}" -m edk2basetools.$cmd "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/GenFfs b/BaseTools/BinPipWrappers/PosixLike/GenFfs
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/GenFfs
 @@ -0,0 +1,29 @@
@@ -466,7 +475,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/GenFv b/BaseTools/BinPipWrappers/PosixLike/GenFv
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/GenFv
 @@ -0,0 +1,29 @@
@@ -501,7 +510,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/GenFw b/BaseTools/BinPipWrappers/PosixLike/GenFw
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/GenFw
 @@ -0,0 +1,29 @@
@@ -536,7 +545,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/GenPatchPcdTable b/BaseTools/BinPipWrappers/PosixLike/GenPatchPcdTable
 new file mode 100644
-index 00000000000..14b8903232c
+index 0000000000..14b8903232
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/GenPatchPcdTable
 @@ -0,0 +1,12 @@
@@ -554,7 +563,7 @@ index 00000000000..14b8903232c
 +exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/GenSec b/BaseTools/BinPipWrappers/PosixLike/GenSec
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/GenSec
 @@ -0,0 +1,29 @@
@@ -589,7 +598,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/GenerateCapsule b/BaseTools/BinPipWrappers/PosixLike/GenerateCapsule
 new file mode 100644
-index 00000000000..44e234d433f
+index 0000000000..44e234d433
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/GenerateCapsule
 @@ -0,0 +1,12 @@
@@ -607,7 +616,7 @@ index 00000000000..44e234d433f
 +exec "${python_exe:-python}" -m edk2basetools.Capsule.$cmd "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/LzmaCompress b/BaseTools/BinPipWrappers/PosixLike/LzmaCompress
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/LzmaCompress
 @@ -0,0 +1,29 @@
@@ -642,7 +651,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/LzmaF86Compress b/BaseTools/BinPipWrappers/PosixLike/LzmaF86Compress
 new file mode 100644
-index 00000000000..b1ba8ed1e7a
+index 0000000000..b1ba8ed1e7
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/LzmaF86Compress
 @@ -0,0 +1,19 @@
@@ -667,7 +676,7 @@ index 00000000000..b1ba8ed1e7a
 +exec LzmaCompress "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/PatchPcdValue b/BaseTools/BinPipWrappers/PosixLike/PatchPcdValue
 new file mode 100644
-index 00000000000..14b8903232c
+index 0000000000..14b8903232
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/PatchPcdValue
 @@ -0,0 +1,12 @@
@@ -685,7 +694,7 @@ index 00000000000..14b8903232c
 +exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/Pkcs7Sign b/BaseTools/BinPipWrappers/PosixLike/Pkcs7Sign
 new file mode 100644
-index 00000000000..14b8903232c
+index 0000000000..14b8903232
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/Pkcs7Sign
 @@ -0,0 +1,12 @@
@@ -703,7 +712,7 @@ index 00000000000..14b8903232c
 +exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256GenerateKeys b/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256GenerateKeys
 new file mode 100644
-index 00000000000..c8b31202554
+index 0000000000..c8b3120255
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256GenerateKeys
 @@ -0,0 +1,12 @@
@@ -721,7 +730,7 @@ index 00000000000..c8b31202554
 +exec "${python_exe:-python}" -m edk2basetools.Rsa2048Sha256Sign.$cmd "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256Sign b/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256Sign
 new file mode 100644
-index 00000000000..75b934a5d0b
+index 0000000000..75b934a5d0
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/Rsa2048Sha256Sign
 @@ -0,0 +1,12 @@
@@ -740,7 +749,7 @@ index 00000000000..75b934a5d0b
 \ No newline at end of file
 diff --git a/BaseTools/BinPipWrappers/PosixLike/Split b/BaseTools/BinPipWrappers/PosixLike/Split
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/Split
 @@ -0,0 +1,29 @@
@@ -775,7 +784,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/TargetTool b/BaseTools/BinPipWrappers/PosixLike/TargetTool
 new file mode 100644
-index 00000000000..9d143c7fc6c
+index 0000000000..9d143c7fc6
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/TargetTool
 @@ -0,0 +1,12 @@
@@ -793,7 +802,7 @@ index 00000000000..9d143c7fc6c
 +exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/TianoCompress b/BaseTools/BinPipWrappers/PosixLike/TianoCompress
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/TianoCompress
 @@ -0,0 +1,29 @@
@@ -828,7 +837,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/Trim b/BaseTools/BinPipWrappers/PosixLike/Trim
 new file mode 100644
-index 00000000000..0bd14ee0387
+index 0000000000..0bd14ee038
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/Trim
 @@ -0,0 +1,13 @@
@@ -847,7 +856,7 @@ index 00000000000..0bd14ee0387
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/UPT b/BaseTools/BinPipWrappers/PosixLike/UPT
 new file mode 100644
-index 00000000000..75b934a5d0b
+index 0000000000..75b934a5d0
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/UPT
 @@ -0,0 +1,12 @@
@@ -866,7 +875,7 @@ index 00000000000..75b934a5d0b
 \ No newline at end of file
 diff --git a/BaseTools/BinPipWrappers/PosixLike/VfrCompile b/BaseTools/BinPipWrappers/PosixLike/VfrCompile
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/VfrCompile
 @@ -0,0 +1,29 @@
@@ -901,7 +910,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/VolInfo b/BaseTools/BinPipWrappers/PosixLike/VolInfo
 new file mode 100644
-index 00000000000..a244ecc095e
+index 0000000000..a244ecc095
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/VolInfo
 @@ -0,0 +1,29 @@
@@ -936,7 +945,7 @@ index 00000000000..a244ecc095e
 +
 diff --git a/BaseTools/BinPipWrappers/PosixLike/build b/BaseTools/BinPipWrappers/PosixLike/build
 new file mode 100644
-index 00000000000..9d143c7fc6c
+index 0000000000..9d143c7fc6
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/build
 @@ -0,0 +1,12 @@
@@ -954,7 +963,7 @@ index 00000000000..9d143c7fc6c
 +exec "${python_exe:-python}" -m edk2basetools.$cmd.$cmd "$@"
 diff --git a/BaseTools/BinPipWrappers/PosixLike/posix_path_env.yaml b/BaseTools/BinPipWrappers/PosixLike/posix_path_env.yaml
 new file mode 100644
-index 00000000000..eb1db9eb251
+index 0000000000..eb1db9eb25
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/PosixLike/posix_path_env.yaml
 @@ -0,0 +1,11 @@
@@ -971,7 +980,7 @@ index 00000000000..eb1db9eb251
 +}
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/AmlToC.bat b/BaseTools/BinPipWrappers/WindowsLike/AmlToC.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/AmlToC.bat
 @@ -0,0 +1,3 @@
@@ -980,7 +989,7 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/BPDG.bat b/BaseTools/BinPipWrappers/WindowsLike/BPDG.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/BPDG.bat
 @@ -0,0 +1,3 @@
@@ -989,7 +998,7 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/BrotliCompress.bat b/BaseTools/BinPipWrappers/WindowsLike/BrotliCompress.bat
 new file mode 100644
-index 00000000000..788c99a1307
+index 0000000000..788c99a130
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/BrotliCompress.bat
 @@ -0,0 +1,55 @@
@@ -1050,7 +1059,7 @@ index 00000000000..788c99a1307
 +@echo on
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/Ecc.bat b/BaseTools/BinPipWrappers/WindowsLike/Ecc.bat
 new file mode 100644
-index 00000000000..16a0a799a43
+index 0000000000..16a0a799a4
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/Ecc.bat
 @@ -0,0 +1,3 @@
@@ -1059,7 +1068,7 @@ index 00000000000..16a0a799a43
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.EccMain %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/GenDepex.bat b/BaseTools/BinPipWrappers/WindowsLike/GenDepex.bat
 new file mode 100644
-index 00000000000..481b5ac47d2
+index 0000000000..481b5ac47d
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/GenDepex.bat
 @@ -0,0 +1,3 @@
@@ -1068,7 +1077,7 @@ index 00000000000..481b5ac47d2
 +@%PYTHON_COMMAND% -m edk2basetools.AutoGen.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/GenFds.bat b/BaseTools/BinPipWrappers/WindowsLike/GenFds.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/GenFds.bat
 @@ -0,0 +1,3 @@
@@ -1077,7 +1086,7 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/GenPatchPcdTable.bat b/BaseTools/BinPipWrappers/WindowsLike/GenPatchPcdTable.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/GenPatchPcdTable.bat
 @@ -0,0 +1,3 @@
@@ -1086,14 +1095,14 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/GenerateCapsule.bat b/BaseTools/BinPipWrappers/WindowsLike/GenerateCapsule.bat
 new file mode 100644
-index 00000000000..34c43ac7fc9
+index 0000000000..34c43ac7fc
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/GenerateCapsule.bat
 @@ -0,0 +1 @@
 +@%PYTHON_COMMAND% -m edk2basetools.Capsule.GenerateCapsule %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/PatchPcdValue.bat b/BaseTools/BinPipWrappers/WindowsLike/PatchPcdValue.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/PatchPcdValue.bat
 @@ -0,0 +1,3 @@
@@ -1102,7 +1111,7 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/Pkcs7Sign.bat b/BaseTools/BinPipWrappers/WindowsLike/Pkcs7Sign.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/Pkcs7Sign.bat
 @@ -0,0 +1,3 @@
@@ -1111,14 +1120,14 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256GenerateKeys.bat b/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256GenerateKeys.bat
 new file mode 100644
-index 00000000000..cdc2e3ea373
+index 0000000000..cdc2e3ea37
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256GenerateKeys.bat
 @@ -0,0 +1 @@
 +@%PYTHON_COMMAND% -m edk2basetools.Rsa2048Sha256Sign.Rsa2048Sha256GenerateKeys %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256Sign.bat b/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256Sign.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/Rsa2048Sha256Sign.bat
 @@ -0,0 +1,3 @@
@@ -1127,7 +1136,7 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/TargetTool.bat b/BaseTools/BinPipWrappers/WindowsLike/TargetTool.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/TargetTool.bat
 @@ -0,0 +1,3 @@
@@ -1136,7 +1145,7 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/Trim.bat b/BaseTools/BinPipWrappers/WindowsLike/Trim.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/Trim.bat
 @@ -0,0 +1,3 @@
@@ -1145,7 +1154,7 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/UPT.bat b/BaseTools/BinPipWrappers/WindowsLike/UPT.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/UPT.bat
 @@ -0,0 +1,3 @@
@@ -1154,7 +1163,7 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/build.bat b/BaseTools/BinPipWrappers/WindowsLike/build.bat
 new file mode 100644
-index 00000000000..d347d648446
+index 0000000000..d347d64844
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/build.bat
 @@ -0,0 +1,3 @@
@@ -1163,7 +1172,7 @@ index 00000000000..d347d648446
 +@%PYTHON_COMMAND% -m edk2basetools.%ToolName%.%ToolName% %*
 diff --git a/BaseTools/BinPipWrappers/WindowsLike/win_build_tools_path_env.yaml b/BaseTools/BinPipWrappers/WindowsLike/win_build_tools_path_env.yaml
 new file mode 100644
-index 00000000000..9fdbe1bcb06
+index 0000000000..9fdbe1bcb0
 --- /dev/null
 +++ b/BaseTools/BinPipWrappers/WindowsLike/win_build_tools_path_env.yaml
 @@ -0,0 +1,11 @@
@@ -1179,10 +1188,12 @@ index 00000000000..9fdbe1bcb06
 +  "flags": ["set_path"]
 +}
 diff --git a/BaseTools/BinWrappers/PosixLike/posix_path_env.yaml b/BaseTools/BinWrappers/PosixLike/posix_path_env.yaml
-index 8b32e010bb1..99529235ec9 100644
+index 8b32e010bb..99529235ec 100644
 --- a/BaseTools/BinWrappers/PosixLike/posix_path_env.yaml
 +++ b/BaseTools/BinWrappers/PosixLike/posix_path_env.yaml
-@@ -5,6 +5,7 @@
+@@ -3,8 +3,9 @@
+ #
+ # Copyright (c) Microsoft Corporation.
  # SPDX-License-Identifier: BSD-2-Clause-Patent
  ##
  {
@@ -1191,10 +1202,12 @@ index 8b32e010bb1..99529235ec9 100644
    "flags": ["set_path"]
  }
 diff --git a/BaseTools/BinWrappers/WindowsLike/win_build_tools_path_env.yaml b/BaseTools/BinWrappers/WindowsLike/win_build_tools_path_env.yaml
-index 83f5856e75c..43da76f354e 100644
+index 83f5856e75..43da76f354 100644
 --- a/BaseTools/BinWrappers/WindowsLike/win_build_tools_path_env.yaml
 +++ b/BaseTools/BinWrappers/WindowsLike/win_build_tools_path_env.yaml
-@@ -5,6 +5,7 @@
+@@ -3,8 +3,9 @@
+ #
+ # Copyright (c) Microsoft Corporation.
  # SPDX-License-Identifier: BSD-2-Clause-Patent
  ##
  {
@@ -1203,7 +1216,7 @@ index 83f5856e75c..43da76f354e 100644
    "flags": ["set_path"]
  }
 diff --git a/BaseTools/BuildEnv b/BaseTools/BuildEnv
-index 5943bb9ef90..cc8e92db655 100755
+index 5943bb9ef9..cc8e92db65 100755
 --- a/BaseTools/BuildEnv
 +++ b/BaseTools/BuildEnv
 @@ -1,269 +1,279 @@
@@ -1756,10 +1769,12 @@ index 5943bb9ef90..cc8e92db655 100755
 +ScriptMain
 +
 diff --git a/BaseTools/Scripts/PatchCheck.py b/BaseTools/Scripts/PatchCheck.py
-index 68c984ed0e4..80754e763c5 100755
+index 68c984ed0e..80754e763c 100755
 --- a/BaseTools/Scripts/PatchCheck.py
 +++ b/BaseTools/Scripts/PatchCheck.py
-@@ -359,6 +359,7 @@ def run(self):
+@@ -357,10 +357,11 @@ class GitDiffCheck:
+                 self.is_newfile = False
+                 self.force_crlf = True
                  self.force_notabs = True
                  if self.filename.endswith('.sh') or \
                      self.filename.startswith('BaseTools/BinWrappers/PosixLike/') or \
@@ -1767,11 +1782,15 @@ index 68c984ed0e4..80754e763c5 100755
                      self.filename.startswith('BaseTools/Bin/CYGWIN_NT-5.1-i686/') or \
                      self.filename == 'BaseTools/BuildEnv':
                      #
+                     # Do not enforce CR/LF line endings for linux shell scripts.
+                     # Some linux shell scripts don't end with the ".sh" extension,
 diff --git a/BaseTools/toolsetup.bat b/BaseTools/toolsetup.bat
-index 61ebf4ae09b..4b5256ab6e9 100755
+index 61ebf4ae09..4b5256ab6e 100755
 --- a/BaseTools/toolsetup.bat
 +++ b/BaseTools/toolsetup.bat
-@@ -393,12 +393,31 @@ goto end
+@@ -391,16 +391,35 @@ goto end
+     goto end
+   ) else (
      goto check_freezer_path
    )
  
@@ -1803,13 +1822,20 @@ index 61ebf4ae09b..4b5256ab6e9 100755
  
  :print_python_info
    echo                PATH = %PATH%
+   if defined PYTHON3_ENABLE if "%PYTHON3_ENABLE%" EQU "TRUE" (
+     echo      PYTHON3_ENABLE = %PYTHON3_ENABLE%
 diff --git a/pip-requirements.txt b/pip-requirements.txt
-index 0fecd37f2a8..b634106bead 100644
+index 0fecd37f2a..b634106bea 100644
 --- a/pip-requirements.txt
 +++ b/pip-requirements.txt
-@@ -14,4 +14,5 @@
+@@ -12,6 +12,7 @@
+ # https://www.python.org/dev/peps/pep-0440/#version-specifiers
+ ##
  
  edk2-pytool-library==0.10.*
  edk2-pytool-extensions~=0.13.3
 +edk2-basetools==0.1.0
  antlr4-python3-runtime==4.7.1
+-- 
+2.29.1.windows.1
+

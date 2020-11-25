@@ -1,7 +1,7 @@
-From 1fc2fead6aef888974441812dfac0203f7d376e1 Mon Sep 17 00:00:00 2001
+From b93f4f7bac63bce57e2cec7aaa624b905775ac68 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
 Date: Mon, 24 Aug 2020 11:34:34 +0800
-Subject: [Patch 07/10] Support for test case.
+Subject: [Patch 08/12] Support for test case.
 
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---

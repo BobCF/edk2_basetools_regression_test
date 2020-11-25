@@ -1,7 +1,7 @@
-From fba8b564fde70384b98d09009286ffd4e63eb175 Mon Sep 17 00:00:00 2001
+From 9e611501b90eeaee412fba776d89c7fdd0a2a712 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
 Date: Wed, 26 Aug 2020 08:08:05 +0800
-Subject: [Patch 08/10] Support for INF [Sources.X64] test cases.
+Subject: [Patch 09/12] Support for INF [Sources.X64] test cases.
 
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---

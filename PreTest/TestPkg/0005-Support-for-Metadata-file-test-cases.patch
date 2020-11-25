@@ -1,7 +1,7 @@
-From 8aa67f18b9a8b336dbfdd97823759462fd5760e8 Mon Sep 17 00:00:00 2001
+From 336a8c0a057e16825d62dd87f23d247f678d82b0 Mon Sep 17 00:00:00 2001
 From: Yuwei Chen <yuwei.chen@intel.com>
 Date: Mon, 3 Aug 2020 09:50:30 +0800
-Subject: [Patch 04/10] Support for Metadata file test cases.
+Subject: [Patch 05/12] Support for Metadata file test cases.
 
 ---
  TestPkg/FakeEmuSec/Ia32/Test_inf.h | 10 ++++++++++
