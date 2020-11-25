@@ -17,6 +17,7 @@ steps:
   clean: true
   submodules: true
   fetchDepth: 1
+  persistCredentials: true
 
 - task: UsePythonVersion@0
   inputs:
