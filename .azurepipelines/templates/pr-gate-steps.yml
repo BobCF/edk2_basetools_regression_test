@@ -55,5 +55,24 @@ steps:
   displayName: Build and Test ${{ parameters.build_archs}}
   inputs:
     filename: python
-    arguments: -m pytest -q --html=report\test_report.html --self-contained-html TestFramework.py
+    arguments: -m pytest -s -q --html=report\test_report.html --self-contained-html TestFramework.py
 
+# Copy the build logs to the artifact staging directory
+- task: CopyFiles@2
+  displayName: "Copy build logs"
+  inputs:
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+    SourceFolder: 'report'
+    contents: |
+      test_report.html
+    flattenFolders: true
+  condition: succeededOrFailed()
+
+# Publish build artifacts to Azure Artifacts/TFS or a file share
+- task: PublishBuildArtifacts@1
+  continueOnError: true
+  displayName: "Publish test report"
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'Test Report $(System.JobName)'
+  condition: succeededOrFailed()
