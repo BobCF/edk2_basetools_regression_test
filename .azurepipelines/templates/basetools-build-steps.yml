@@ -22,13 +22,13 @@ steps:
   displayName: Build Base Tools from source
   inputs:
     filename: python
-    workingDirectory: $(Pipeline.Workspace)/edk2
+    workingDirectory: $(Build.SourcesDirectory)/edk2
     arguments: BaseTools/Edk2ToolsBuild.py -t ${{ parameters.tool_chain_tag }}
 
 - task: CopyFiles@2
   displayName: "Copy base tools build log"
   inputs:
-    workingDirectory: $(Pipeline.Workspace)/edk2
+    workingDirectory: $(Build.SourcesDirectory)/edk2
     targetFolder: '$(Build.ArtifactStagingDirectory)'
     SourceFolder: 'BaseTools/BaseToolsBuild'
     contents: |
