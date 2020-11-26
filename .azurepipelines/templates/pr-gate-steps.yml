@@ -28,17 +28,20 @@ steps:
     versionSpec: '3.8.x'
     architecture: 'x64'
 
-- script: pip install -r pip-requirements.txt --upgrade
-  displayName: 'Install/Upgrade pip modules'
-
-# Build repo
 - script: |
       cd edk2
   displayName: Change edk2 folder
 - script: |
       echo %cd%
+      file TestPkg\PlatformBuild.py
   displayName: check current dir
   workingDirectory: $(Build.SourcesDirectory)/edk2
+
+- script: pip install -r pip-requirements.txt --upgrade
+  displayName: 'Install/Upgrade pip modules'
+
+# Build repo
+
 
 - task: CmdLine@1
   displayName: Setup ${{ parameters.build_archs}}
