@@ -538,7 +538,7 @@ class Test_Edk2PlatformIncremental():
         caplog.set_level(logging.INFO)
         LOGGER.info("before run EDK2 cases")
         case = request.param
-        case.exclude_filelist_type = [".obj", ".map", ".lib", ".dll", ".bin",".tmp",".inf"]
+        case.exclude_filelist_type = [".obj", ".map", ".lib", ".dll", ".bin",".tmp",".inf",".md",".txt"]
         LOGGER.info("Prepare EGS case %s" % case.name)
         repo = RepoEnv(edk2_testenv.build_workspace,'Tiano',case.inputs,case.repo)
         repo.repo_version['Tiano']['edk2'] = PreTest
