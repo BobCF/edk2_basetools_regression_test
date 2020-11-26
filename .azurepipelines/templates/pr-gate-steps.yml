@@ -36,6 +36,11 @@ steps:
       cd edk2
   displayName: Change edk2 folder
 - task: CmdLine@1
+  displayName: Check current working folder
+  inputs:
+    script: 'echo %cd%' 
+    workingDirectory: $(Build.SourcesDirectory)/edk2
+- task: CmdLine@1
   displayName: Setup ${{ parameters.build_archs}}
   inputs:
     workingDirectory: $(Build.SourcesDirectory)/edk2
