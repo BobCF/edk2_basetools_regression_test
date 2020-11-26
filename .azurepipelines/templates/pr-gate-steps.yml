@@ -38,6 +38,7 @@ steps:
 - script: |
       echo %cd%
   displayName: check current dir
+  workingDirectory: $(Build.SourcesDirectory)/edk2
 
 - task: CmdLine@1
   displayName: Setup ${{ parameters.build_archs}}
