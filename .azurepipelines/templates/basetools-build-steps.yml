@@ -27,7 +27,7 @@ steps:
   inputs:
     workingDirectory: $(Build.SourcesDirectory)/edk2
     targetFolder: '$(Build.ArtifactStagingDirectory)'
-    SourceFolder: 'BaseTools/BaseToolsBuild'
+    SourceFolder: 'edk2/BaseTools/BaseToolsBuild'
     contents: |
       BASETOOLS_BUILD*.*
     flattenFolders: true
