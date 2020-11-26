@@ -15,6 +15,7 @@ import time
 LOGGER = logging.getLogger("IncTest")
 edk2_proj_root = os.environ.get("EDK2_PROJ_ROOT",os.path.abspath(".")) 
 FileHashResult = collections.namedtuple("FileHashResult", ["filename", "hash"])
+REPO = "edk2"
 
 # for class property
 class cached_property(object):
@@ -217,17 +218,6 @@ class Edk2TestEnv(IncTestEnv):
         
 class RepoEnv():
 
-    repo_locations = {
-        'Tiano':{
-            'edk2': os.path.join(edk2_proj_root,"edk2")
-            }
-        }
-    repo_version = {
-        'Tiano':{
-            'edk2': os.environ.get("TIANO_EDK2_VER")
-            }
-        }
-
     __cache__ = {}
 
     def __new__(cls,workspace, project,caseinit,repoes):
@@ -242,18 +232,9 @@ class RepoEnv():
         self.project = project
         self.caseinit = caseinit
         self.repoes = repoes
+        self.repo_version = "HEAD"
+        self.repo_location = os.path.join(edk2_proj_root,"edk2")
 
-    @cached_property
-    def repo_components(self):
-        proj_repos = self.repo_locations[self.project]
-        component = {}
-        user_version = {r[0].lower():r[1] for r in self.repoes}
-        for r in proj_repos:
-            if r in user_version and user_version[r]:
-                component[proj_repos[r]] = user_version[r]
-            else:
-                component[proj_repos[r]] = self.repo_version[self.project][r]
-        return component
     @property
     def init_sources(self):
         sources = collections.OrderedDict([(s.source,s.dest) for s in self.caseinit if s.source])
@@ -264,8 +245,7 @@ class RepoEnv():
             changes = case.neg_changes
         else:
             changes = case.changes
-        
-        proj_repos = self.repo_locations[self.project]
+
         source_map = {os.path.basename(s):d for s,d in self.init_sources.items()}
         for ch in changes:
             LOGGER.info(ch)
@@ -275,16 +255,17 @@ class RepoEnv():
                 if len(change_com) != 2:
                     LOGGER.error("Don't know how to apply change: %s" % change_com[0])
                     continue
-                repo_localtion = proj_repos[change_com[1].lower()]
+
                 try:
-                    git_cmd(repo_localtion,"reset", "--hard")
+                    git_cmd(self.repo_location,"reset", "--hard")
                 except git_error as ge:
                     LOGGER.info(str(ge))
                 try:
-                    git_cmd(repo_localtion,"am", "--3way", "--ignore-space-change", "--keep-cr", change_com[0])
+                    git_cmd(self.repo_location,"am", "--3way", "--ignore-space-change", "--keep-cr", change_com[0])
                 except git_error as ge:
                     LOGGER.info(str(ge))
-                    git_cmd(repo_localtion,"am", "--abort")
+                    git_cmd(self.repo_location,"am", "--abort")
+                print("apply patch %s success" % change_com[0])
             else:
                 change = change_com[0]
                 dest = source_map.get(os.path.basename(change))   
@@ -299,40 +280,33 @@ class RepoEnv():
                 else:
                     LOGGER.info("change error %s" % change)
     def clean(self):
-        for comp in self.repo_components:
-            version = self.repo_components[comp]
-
+        try:
+            git_cmd(self.repo_location,"reset",self.repo_version,"--hard")
+        except Exception as e:
+            git_cmd(self.repo_location,"pull")
             try:
-                git_cmd(comp,"reset",version,"--hard")
-            except Exception as e:
-                git_cmd(comp,"pull")
-                try:
-                    git_cmd(comp,"reset",version,"--hard")
-                except Exception as se:
-                    LOGGER.warning(str(se))
+                git_cmd(self.repo_location,"reset",self.repo_version,"--hard")
+            except Exception as se:
+                LOGGER.warning(str(se))
 
     def revert(self):
-        for comp in self.repo_components:
-            version = self.repo_components[comp]
+        try:
+            git_cmd(self.repo_location,"reset",self.repo_version,"--hard")
+        except Exception as e:
+            git_cmd(self.repo_location,"pull")
             try:
-                git_cmd(comp,"reset",version,"--hard")
-            except Exception as e:
-                git_cmd(comp,"pull")
-                try:
-                    git_cmd(comp,"reset",version,"--hard")
-                except Exception as se:
-                    LOGGER.warning(str(se))
+                git_cmd(self.repo_location,"reset",self.repo_version,"--hard")
+            except Exception as se:
+                LOGGER.warning(str(se))
         self.init()
     def init(self):
-        proj_repos = self.repo_locations[self.project]
         for init_s in self.init_sources:
             init_d = self.init_sources[init_s]
             if init_s.endswith(".patch"):
-                repo_localtion = proj_repos[init_d.lower()]
                 try:
-                    git_cmd(repo_localtion,"am", "--3way", "--ignore-space-change", "--keep-cr", init_s)
+                    git_cmd(self.repo_location,"am", "--3way", "--ignore-space-change", "--keep-cr", init_s)
                 except git_error as ge:
-                    git_cmd(repo_localtion,"am", "--abort")
+                    git_cmd(self.repo_location,"am", "--abort")
                     LOGGER.info(str(ge))
             else:
                 if os.path.isdir(init_s):
@@ -528,7 +502,7 @@ class Test_Edk2PlatformIncremental():
 
     @pytest.fixture(scope='session')
     def PreTest(self):
-        version = git_cmd("./edk2","rev-parse", "HEAD")[0]
+        version = git_cmd(os.path.join(edk2_proj_root,"edk2"),"rev-parse", "HEAD")[0]
         yield version.strip()
 
     @pytest.fixture(
@@ -541,7 +515,7 @@ class Test_Edk2PlatformIncremental():
         case.exclude_filelist_type = [".obj", ".map", ".lib", ".dll", ".bin",".tmp",".inf",".md",".txt"]
         LOGGER.info("Prepare EGS case %s" % case.name)
         repo = RepoEnv(edk2_testenv.build_workspace,'Tiano',case.inputs,case.repo)
-        repo.repo_version['Tiano']['edk2'] = PreTest
+        repo.repo_version = PreTest
 
         case.clean_env()
         LOGGER.info("Test environment is cleaned")
