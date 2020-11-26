@@ -38,8 +38,10 @@ steps:
 - task: CmdLine@1
   displayName: Check current working folder
   inputs:
+    TargetType: 'inline'
     script: 'echo %cd%' 
     workingDirectory: $(Build.SourcesDirectory)/edk2
+
 - task: CmdLine@1
   displayName: Setup ${{ parameters.build_archs}}
   inputs:
