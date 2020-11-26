@@ -42,14 +42,10 @@ steps:
 
 # Build repo
 
-
-- task: CmdLine@1
+- script: stuart_setup -c TestPkg\PlatformBuild.py -t ${{ parameters.build_targets}} -a ${{ parameters.build_archs}} TOOL_CHAIN_TAG=${{ parameters.tool_chain_tag}}
   displayName: Setup ${{ parameters.build_archs}}
-  inputs:
-    workingDirectory: $(Build.SourcesDirectory)/edk2
-    filename: stuart_setup
-    arguments: -c TestPkg\PlatformBuild.py -t ${{ parameters.build_targets}} -a ${{ parameters.build_archs}} TOOL_CHAIN_TAG=${{ parameters.tool_chain_tag}}
-
+  workingDirectory: $(Build.SourcesDirectory)/edk2
+  
 
 - task: CmdLine@1
   displayName: Update ${{ parameters.build_archs}}
