@@ -1,1 +1,0 @@
-- Not found the DTS, DXS, MC, MUT files in the edk2 and Intel repo.
