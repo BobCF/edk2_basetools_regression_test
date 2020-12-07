@@ -495,7 +495,7 @@ class Case():
 
 # -------------------------- Test ---------------------------#
 
-edk2_testenv = Edk2TestEnv(edk2_proj_root,os.path.join(os.path.abspath("."),r"TestCases\pilot"),os.path.join(edk2_proj_root,"edk2"))
+edk2_testenv = Edk2TestEnv(edk2_proj_root,os.path.join(os.path.abspath("."),r"TestCases\Edk2"),os.path.join(edk2_proj_root,"edk2"))
 
 @pytest.mark.edk2_inc_test
 class Test_Edk2PlatformIncremental():
@@ -548,7 +548,7 @@ class Test_Edk2PlatformIncremental():
         yield case
         case.clean_env()
         repo.clean()
-#        case.clean_temp()
+        case.clean_temp()
         
         LOGGER.info("Test Environment is cleand for case %s",case.name)
 
