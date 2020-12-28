@@ -1,0 +1,34 @@
+From 941096a63a4f9922af219f62212cc5d48483394e Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 15:40:49 +0800
+Subject: [Patch] Test case for include ThirdTestFile.uni in 
+ FrontPageStrings.uni file.
+
+Description: Include ThirdTestFile.uni in the MdeModulePkg/Application/UiApp/FrontPageStrings.uni
+
+Repo: edk2
+
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
+---
+ TestPkg/PlatformDxe/Platform.uni | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/PlatformDxe/Platform.uni b/TestPkg/PlatformDxe/Platform.uni
+index 2d4336ba95..317741d0fc 100644
+--- a/TestPkg/PlatformDxe/Platform.uni
++++ b/TestPkg/PlatformDxe/Platform.uni
+@@ -17,10 +17,11 @@
+ 
+ /=#
+ 
+ #langdef en-US "English"
+ #include "JustATest.uni"
++#include "ThirdTestFile.uni"
+ 
+ #string STR_RES_CUR_HELP         #language en-US "The preferred resolution of the Graphics Console at next boot. It might be unset, or even invalid (hence ignored) wrt. the video RAM size."
+ #string STR_RES_NEXT             #language en-US "Change Preferred Resolution for Next Boot"
+ #string STR_RES_NEXT_HELP        #language en-US "You can specify a new preference for the Graphics Console here. The list is filtered against the video RAM size."
+ #string STR_SAVE_EXIT            #language en-US "Commit Changes and Exit"
+-- 
+2.29.1.windows.1
+

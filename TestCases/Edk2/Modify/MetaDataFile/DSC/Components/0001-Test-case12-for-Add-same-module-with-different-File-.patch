@@ -1,23 +1,25 @@
-From 8e797ceac7ff4d6ccbac91c689101f6a5826fff9 Mon Sep 17 00:00:00 2001
-From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Wed, 29 Jul 2020 16:13:26 +0800
-Subject: [PATCH] Test case12 for Add same module with different File Guid
+From 184d97fa65303bd206bbef13c1a9ff76c881ca1e Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 20:17:44 +0800
+Subject: [Patch] Test case12 for Add same module with different File Guid
 
 Description: Add TestPkg/Sec/SecMain.inf in the dsc component with different File Guid.
 
 Repo: edk2
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---
- TestPkg/LibraryClass.dsc | 2 ++
- TestPkg/Sec/SecMain.inf  | 1 +
- TestPkg/TestPkg32X64.dsc | 7 ++++++-
+ TestPkg/LibraryClass.dsc   | 3 ++-
+ TestPkg/Sec/SecMain.inf    | 1 +
+ TestPkg/TestPkgIA32X64.dsc | 6 ++++++
  3 files changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/TestPkg/LibraryClass.dsc b/TestPkg/LibraryClass.dsc
-index 6530bafbe7..936ec144df 100644
+index 6f09564e2a..329e3d618f 100644
 --- a/TestPkg/LibraryClass.dsc
 +++ b/TestPkg/LibraryClass.dsc
-@@ -44,10 +44,12 @@ NvVarsFileLib|TestPkg/Library/NvVarsFileLib/NvVarsFileLib.inf
+@@ -43,15 +43,16 @@ NvVarsFileLib|TestPkg/Library/NvVarsFileLib/NvVarsFileLib.inf
+   SortLib|MdeModulePkg/Library/UefiSortLib/UefiSortLib.inf
+   CpuLib|MdePkg/Library/BaseCpuLib/BaseCpuLib.inf
    MtrrLib|UefiCpuPkg/Library/MtrrLib/MtrrLib.inf
    FakeLibraryLib|TestPkg/Library/BaseFakeLibraryLib/BaseFakeLibraryLib.inf
    LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
@@ -26,15 +28,20 @@ index 6530bafbe7..936ec144df 100644
  [LibraryClasses.common.SEC]
    TimerLib|TestPkg/Library/AcpiTimerLib/BaseRomAcpiTimerLib.inf
    PpiListLib|EmulatorPkg/Library/SecPpiListLib/SecPpiListLib.inf
+-  
 +  SortLib|MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf
-   
  !ifdef $(DEBUG_ON_SERIAL_PORT)
    DebugLib|MdePkg/Library/BaseDebugLibSerialPort/BaseDebugLibSerialPort.inf
+ !else
+   DebugLib|TestPkg/Library/PlatformDebugLibIoPort/PlatformRomDebugLibIoPort.inf
+ !endif
 diff --git a/TestPkg/Sec/SecMain.inf b/TestPkg/Sec/SecMain.inf
 index 3066e0d102..a8f073f581 100644
 --- a/TestPkg/Sec/SecMain.inf
 +++ b/TestPkg/Sec/SecMain.inf
-@@ -52,6 +52,7 @@
+@@ -50,10 +50,11 @@
+   PeCoffExtraActionLib
+   ExtractGuidedSectionLib
    LocalApicLib
    FakeLibraryLib
    LockBoxLib
@@ -42,24 +49,29 @@ index 3066e0d102..a8f073f581 100644
  
  [Ppis]
    gEfiTemporaryRamSupportPpiGuid                # PPI ALWAYS_PRODUCED
-diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
-index b24f19fc5f..f020a0ef18 100644
---- a/TestPkg/TestPkg32X64.dsc
-+++ b/TestPkg/TestPkg32X64.dsc
-@@ -119,7 +119,12 @@
+ 
+ [Pcd]
+diff --git a/TestPkg/TestPkgIA32X64.dsc b/TestPkg/TestPkgIA32X64.dsc
+index 2444f741cd..0fcce1afff 100644
+--- a/TestPkg/TestPkgIA32X64.dsc
++++ b/TestPkg/TestPkgIA32X64.dsc
+@@ -116,10 +116,16 @@
+   TestPkg/Sec/SecMain.inf {
+     <LibraryClasses>
      NULL|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
  	LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
    }
--
 +  TestPkg/Sec/SecMain.inf {
 +    <Defines>
-+	FILE_GUID = df1cfaf6-f381-4e64-9871-fc6a30fcc890
++	    FILE_GUID = df1cfaf6-f381-4e64-9871-fc6a30fcc890
 +	<LibraryClasses>
-+    SortLib|MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf
++        SortLib|MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf
 +  }
+ 
    #
    # PEI Phase modules
    #
+   MdeModulePkg/Core/Pei/PeiMain.inf
 -- 
-2.27.0.windows.1
+2.29.1.windows.1
 

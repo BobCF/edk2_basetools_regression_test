@@ -12,7 +12,7 @@ Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
  TestPkg/TestIa32X64.fdf | 38 +++++++++++++++++++++++++++++++++++++-
  1 file changed, 37 insertions(+), 1 deletion(-)
 
-diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
+diff --git a/TestPkg/TestPkgIa32X64.fdf b/TestPkg/TestPkgIa32X64.fdf
 index c53d67cc27..db4e16e673 100644
 --- a/TestPkg/TestIa32X64.fdf
 +++ b/TestPkg/TestIa32X64.fdf

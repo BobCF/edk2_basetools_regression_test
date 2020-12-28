@@ -1,7 +1,7 @@
-From cccfb9e37a512e8cfb23c93fb4e2961c62597525 Mon Sep 17 00:00:00 2001
-From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Wed, 29 Jul 2020 12:06:39 +0800
-Subject: [PATCH] Test case11 for change FILE_GUID for one module
+From 4dc0992ed1a44e392391a79180828a8aee3a8ec7 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 20:13:30 +0800
+Subject: [Patch] Test case11 for change FILE_GUID for one module
 
 Description: Change the FILE_GUID of TestPkg/Sec/SecMain.inf.
 
@@ -15,7 +15,9 @@ diff --git a/TestPkg/Sec/SecMain.inf b/TestPkg/Sec/SecMain.inf
 index 3066e0d102..7700b3595d 100644
 --- a/TestPkg/Sec/SecMain.inf
 +++ b/TestPkg/Sec/SecMain.inf
-@@ -10,7 +10,7 @@
+@@ -8,11 +8,11 @@
+ ##
+ 
  [Defines]
    INF_VERSION                    = 0x00010005
    BASE_NAME                      = SecMain
@@ -24,6 +26,8 @@ index 3066e0d102..7700b3595d 100644
    MODULE_TYPE                    = SEC
    VERSION_STRING                 = 1.0
    ENTRY_POINT                    = SecMain
+ 
+ #
 -- 
-2.27.0.windows.1
+2.29.1.windows.1
 

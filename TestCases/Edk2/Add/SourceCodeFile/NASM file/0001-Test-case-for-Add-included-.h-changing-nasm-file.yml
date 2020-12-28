@@ -1,6 +1,6 @@
 ---
 name: Test case for Add included .h changing - nasm file
-description: Add included ForHAddTest.h file in the MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm.
+description: Add included ForHAddTest.h file in the TestPkg/Sec/Ia32/SecEntry.nasm
 
 
 command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt

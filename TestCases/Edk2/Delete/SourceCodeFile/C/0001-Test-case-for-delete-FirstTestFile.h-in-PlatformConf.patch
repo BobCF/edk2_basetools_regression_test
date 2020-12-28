@@ -1,0 +1,40 @@
+From 67ad2fd148d86a053c2f5972d3e178ce2c4320ca Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 16:53:59 +0800
+Subject: [Patch] Test case for delete FirstTestFile.h in PlatformConfig.c
+ file.
+
+Description: Delete FirstTestFile.h in the TestPkg/PlatformDxe/PlatformConfig.c
+
+Repo: edk2
+
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
+---
+ TestPkg/PlatformDxe/PlatformConfig.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/TestPkg/PlatformDxe/PlatformConfig.c b/TestPkg/PlatformDxe/PlatformConfig.c
+index 6a30059aa0..fd518023b4 100644
+--- a/TestPkg/PlatformDxe/PlatformConfig.c
++++ b/TestPkg/PlatformDxe/PlatformConfig.c
+@@ -15,16 +15,15 @@
+ #include <Library/UefiLib.h>
+ #include <Library/UefiRuntimeServicesTableLib.h>
+ #include <Guid/OvmfPlatformConfig.h>
+ 
+ #include "PlatformConfig.h"
+-#include "FirstTestFile.h"
+ 
+ //
+ // Name of the UEFI variable that we use for persistent storage.
+ //
+-STATIC CHAR16 mVariableName[] = VAR_NAME;
++STATIC CHAR16 mVariableName[] = L"PlatformConfig";
+ 
+ 
+ /**
+   Serialize and persistently save platform configuration.
+ 
+-- 
+2.29.1.windows.1
+

@@ -1,22 +1,24 @@
-From 65eecd4e7a162d594c8c18090ad8fcbb8b5a9f73 Mon Sep 17 00:00:00 2001
-From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Wed, 29 Jul 2020 11:43:01 +0800
-Subject: [PATCH] Test case4 for Add new module only in dsc component
+From a7750ff83dfba20feef62f140b813cba0c794698 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 19:49:54 +0800
+Subject: [Patch] Test case4 for Add new module only in dsc component
 
 Description: Add the library module (MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf) in component (Sec) section.
 
 Repo: edk2
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---
- TestPkg/Sec/SecMain.inf  | 1 +
- TestPkg/TestPkg32X64.dsc | 1 +
+ TestPkg/Sec/SecMain.inf    | 1 +
+ TestPkg/TestPkgIA32X64.dsc | 1 +
  2 files changed, 2 insertions(+)
 
 diff --git a/TestPkg/Sec/SecMain.inf b/TestPkg/Sec/SecMain.inf
 index 3066e0d102..a8f073f581 100644
 --- a/TestPkg/Sec/SecMain.inf
 +++ b/TestPkg/Sec/SecMain.inf
-@@ -52,6 +52,7 @@
+@@ -50,10 +50,11 @@
+   PeCoffExtraActionLib
+   ExtractGuidedSectionLib
    LocalApicLib
    FakeLibraryLib
    LockBoxLib
@@ -24,18 +26,24 @@ index 3066e0d102..a8f073f581 100644
  
  [Ppis]
    gEfiTemporaryRamSupportPpiGuid                # PPI ALWAYS_PRODUCED
-diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
-index b24f19fc5f..4e2d1693eb 100644
---- a/TestPkg/TestPkg32X64.dsc
-+++ b/TestPkg/TestPkg32X64.dsc
-@@ -118,6 +118,7 @@
+ 
+ [Pcd]
+diff --git a/TestPkg/TestPkgIA32X64.dsc b/TestPkg/TestPkgIA32X64.dsc
+index 2444f741cd..86d8eb5cbd 100644
+--- a/TestPkg/TestPkgIA32X64.dsc
++++ b/TestPkg/TestPkgIA32X64.dsc
+@@ -115,10 +115,11 @@
+   TestPkg\FakeEmuSec\Sec.inf
+   TestPkg/Sec/SecMain.inf {
      <LibraryClasses>
      NULL|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
  	LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
-+	SortLib|MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf
++    SortLib|MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf
    }
  
    #
+   # PEI Phase modules
+   #
 -- 
-2.27.0.windows.1
+2.29.1.windows.1
 

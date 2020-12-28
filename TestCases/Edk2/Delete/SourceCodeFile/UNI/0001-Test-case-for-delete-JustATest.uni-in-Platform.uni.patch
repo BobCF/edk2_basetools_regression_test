@@ -1,0 +1,37 @@
+From 17136152871a676759568bec03f42964083c9944 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 15:49:46 +0800
+Subject: [Patch] Test case for delete JustATest.uni in Platform.uni
+
+Description: delete JustATest.uni in the TestPkg\PlatformDxe/Platform.uni
+
+Repo: edk2
+
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
+---
+ TestPkg/PlatformDxe/Platform.uni | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/TestPkg/PlatformDxe/Platform.uni b/TestPkg/PlatformDxe/Platform.uni
+index 2d4336ba95..595f2de539 100644
+--- a/TestPkg/PlatformDxe/Platform.uni
++++ b/TestPkg/PlatformDxe/Platform.uni
+@@ -16,11 +16,14 @@
+ // --*/
+ 
+ /=#
+ 
+ #langdef en-US "English"
+-#include "JustATest.uni"
++#langdef   en-US "FrançaisEnglish"
++#langdef   fr-FR "English"
++#langdef   en    "Standard English"
++#langdef   fr    "Standard Français"
+ 
+ #string STR_RES_CUR_HELP         #language en-US "The preferred resolution of the Graphics Console at next boot. It might be unset, or even invalid (hence ignored) wrt. the video RAM size."
+ #string STR_RES_NEXT             #language en-US "Change Preferred Resolution for Next Boot"
+ #string STR_RES_NEXT_HELP        #language en-US "You can specify a new preference for the Graphics Console here. The list is filtered against the video RAM size."
+ #string STR_SAVE_EXIT            #language en-US "Commit Changes and Exit"
+-- 
+2.29.1.windows.1
+

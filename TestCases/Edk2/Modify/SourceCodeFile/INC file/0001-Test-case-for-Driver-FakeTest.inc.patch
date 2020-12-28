@@ -1,0 +1,31 @@
+From 8ef4e2cb10c52ba84d0fb4dcc9ace0645af94de8 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 18:49:23 +0800
+Subject: [Patch] Test case for Driver - FakeTest.inc
+
+Description: Change the value of testaddr0 in the TestPkg/FakeEmuSec/Ia32/FakeTest.inc
+
+Repo: edk2
+
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
+---
+ TestPkg/FakeEmuSec/Ia32/FakeTest.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/FakeEmuSec/Ia32/FakeTest.inc b/TestPkg/FakeEmuSec/Ia32/FakeTest.inc
+index b285a3bfcd..af85b02621 100644
+--- a/TestPkg/FakeEmuSec/Ia32/FakeTest.inc
++++ b/TestPkg/FakeEmuSec/Ia32/FakeTest.inc
+@@ -7,8 +7,8 @@
+ ;
+ ;  SPDX-License-Identifier: BSD-2-Clause-Patent
+ ;
+ ;**/
+ 
+-#define testaddr0 8
++#define testaddr0 16
+  
+ END
+-- 
+2.29.1.windows.1
+

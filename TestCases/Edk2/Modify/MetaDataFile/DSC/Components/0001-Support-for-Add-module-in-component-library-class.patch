@@ -1,23 +1,25 @@
-From 1f6dc75a17b4edf6fb56f19b111b9d2aa08b4c50 Mon Sep 17 00:00:00 2001
-From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Wed, 16 Sep 2020 16:41:28 +0800
-Subject: [PATCH] Support for Add module in component&library class
+From 0cac36f62718cfe7e4fc35d15b30d95f35653ff6 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 19:35:26 +0800
+Subject: [Patch] Support for Add module in component&library class
 
 Description: Add the library module (MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf) in component (Sec) section and library class.
 
 Repo: edk2
 
-Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
 ---
  TestPkg/LibraryClass.dsc | 1 +
  TestPkg/Sec/SecMain.inf  | 1 +
  2 files changed, 2 insertions(+)
 
 diff --git a/TestPkg/LibraryClass.dsc b/TestPkg/LibraryClass.dsc
-index 6530bafbe7..64a27ae8fb 100644
+index 6f09564e2a..c15ff7d4cf 100644
 --- a/TestPkg/LibraryClass.dsc
 +++ b/TestPkg/LibraryClass.dsc
-@@ -48,6 +48,7 @@ NvVarsFileLib|TestPkg/Library/NvVarsFileLib/NvVarsFileLib.inf
+@@ -47,10 +47,11 @@ NvVarsFileLib|TestPkg/Library/NvVarsFileLib/NvVarsFileLib.inf
+   LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
+ 
  [LibraryClasses.common.SEC]
    TimerLib|TestPkg/Library/AcpiTimerLib/BaseRomAcpiTimerLib.inf
    PpiListLib|EmulatorPkg/Library/SecPpiListLib/SecPpiListLib.inf
@@ -25,11 +27,15 @@ index 6530bafbe7..64a27ae8fb 100644
    
  !ifdef $(DEBUG_ON_SERIAL_PORT)
    DebugLib|MdePkg/Library/BaseDebugLibSerialPort/BaseDebugLibSerialPort.inf
+ !else
+   DebugLib|TestPkg/Library/PlatformDebugLibIoPort/PlatformRomDebugLibIoPort.inf
 diff --git a/TestPkg/Sec/SecMain.inf b/TestPkg/Sec/SecMain.inf
 index 3066e0d102..a8f073f581 100644
 --- a/TestPkg/Sec/SecMain.inf
 +++ b/TestPkg/Sec/SecMain.inf
-@@ -52,6 +52,7 @@
+@@ -50,10 +50,11 @@
+   PeCoffExtraActionLib
+   ExtractGuidedSectionLib
    LocalApicLib
    FakeLibraryLib
    LockBoxLib
@@ -37,6 +43,8 @@ index 3066e0d102..a8f073f581 100644
  
  [Ppis]
    gEfiTemporaryRamSupportPpiGuid                # PPI ALWAYS_PRODUCED
+ 
+ [Pcd]
 -- 
-2.27.0.windows.1
+2.29.1.windows.1
 

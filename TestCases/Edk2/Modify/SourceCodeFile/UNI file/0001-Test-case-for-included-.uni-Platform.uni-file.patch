@@ -1,0 +1,27 @@
+From 5158036b1ae8d9cb95a96e0602e2441474bc3c77 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 19:11:26 +0800
+Subject: [Patch] Test case for included .uni- Platform.uni file
+
+Description: Change the description in the TestPkg/PlatformDxe/JustATest.uni which is included in the Platform.uni file.
+
+Repo: edk2
+
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
+---
+ TestPkg/PlatformDxe/JustATest.uni | Bin 904 -> 952 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+diff --git a/TestPkg/PlatformDxe/JustATest.uni b/TestPkg/PlatformDxe/JustATest.uni
+index 25c48dcb2d7a7d62ca39c844e3612d4a440b05ef..d3cec968e7ebc97350d2b558101d67651e5a6d1c 100644
+GIT binary patch
+delta 88
+zcmeBR-@!g1jg{d!Ln6b(^odZ$&lQ{s3?U4u48;s3lNT^<<%aVZ^niT%$)!wbC@SP9
+L|77YzQl$g{dwduz
+
+delta 39
+ucmdnN-oZX0jj>{4_C&^t$&8FECNnb2O;%?VnEa5jZE_(~8<4+-Q3(JAMGS5L
+
+-- 
+2.29.1.windows.1
+

@@ -1,6 +1,6 @@
 ---
-name: Test case for Driver - MpEqu.inc file
-description: Change the value of 'ModeHighSegmentLocation' in the UefiCpuPkg/Library/MpInitLib/X64/MpEqu.inc
+name: Test case for Library - NvVarsFileLib.c file
+description: Change the Flush address in the TestPkg/Library/NvVarsFileLib/NvVarsFileLib.c
 
 command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
 init:
@@ -13,7 +13,7 @@ input:
   repo: edk2
 
 change:
-  - 0001-Test-case-for-Driver-MpEqu.inc-file.patch | edk2
+  - 0001-Test-case-for-Library-NvVarsFileLib.c-file.patch | edk2
 
 output:
   - edk2\Build

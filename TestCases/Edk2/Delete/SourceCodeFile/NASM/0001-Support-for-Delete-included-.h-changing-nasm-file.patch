@@ -1,39 +1,46 @@
-From 60b39ce51445bebafefc1442f2b8e34f02eee532 Mon Sep 17 00:00:00 2001
-From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Tue, 8 Sep 2020 20:56:28 +0800
-Subject: [PATCH] Support for Delete included .h changing - nasm file
+From 28206bf4b10ced80abdd8c67df2aef354341c01c Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 16:34:43 +0800
+Subject: [Patch] Test case for Add included .h changing - nasm file
 
-Description: Delete included ForHAddTest.h file in the MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm.
+Description: Add included ForHAddTest.h file in the Sec/Ia32/SecEntry.nasm
 
 Repo: edk2
 
-Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
 ---
- MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ TestPkg/Sec/Ia32/SecEntry.nasm | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm b/MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm
-index 4f9b98f18b..38ab5e654a 100644
---- a/MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm
-+++ b/MdeModulePkg/Core/DxeIplPeim/Ia32/IdtVectorAsm.nasm
-@@ -6,7 +6,7 @@
- ;  SPDX-License-Identifier: BSD-2-Clause-Patent
- ;
- ;**/
--
+diff --git a/TestPkg/Sec/Ia32/SecEntry.nasm b/TestPkg/Sec/Ia32/SecEntry.nasm
+index 24b1c20ca8..ecdb1a80fa 100644
+--- a/TestPkg/Sec/Ia32/SecEntry.nasm
++++ b/TestPkg/Sec/Ia32/SecEntry.nasm
+@@ -8,10 +8,11 @@
+ ;*   Abstract:
+ ;*
+ ;------------------------------------------------------------------------------
+ 
+ #include <Base.h>
 +#include "ForHAddTest.h"
+ 
      SECTION .text
  
- ;
-@@ -30,7 +30,7 @@ global ASM_PFX(AsmVectorFixup)
+ extern ASM_PFX(SecCoreStartupWithStack)
  
- global ASM_PFX(AsmGetVectorTemplatInfo)
- ASM_PFX(AsmGetVectorTemplatInfo):
--        mov   ecx, [esp + 4]
-+        mov   ecx, [esp + testaddr]
-         mov   dword [ecx], @VectorTemplateBase
-         mov   eax, (@VectorTemplateEnd - @VectorTemplateBase)
-         ret
+@@ -40,11 +41,11 @@ ASM_PFX(_ModuleEntryPoint):
+     ;
+     mov     eax, FixedPcdGet32 (PcdInitValueInTempStack)      ; dword to store
+     mov     edi, FixedPcdGet32 (PcdOvmfSecPeiTempRamBase)     ; base address,
+                                                               ;   relative to
+                                                               ;   ES
+-    mov     ecx, FixedPcdGet32 (PcdOvmfSecPeiTempRamSize) / 4 ; dword count
++    mov     ecx, FixedPcdGet32 (PcdOvmfSecPeiTempRamSize) / NumForTest ; dword count
+     cld                                                       ; store from base
+                                                               ;   up
+     rep stosd
+ 
+     ;
 -- 
-2.27.0.windows.1
+2.29.1.windows.1
 

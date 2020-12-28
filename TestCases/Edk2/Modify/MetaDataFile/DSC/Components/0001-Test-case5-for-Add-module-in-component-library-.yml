@@ -14,7 +14,7 @@ input:
   repo: edk2
 
 change:
-  - 0001-Test-case5-for-Add-module-in-component-library-.patch | edk2
+  - 0001-Test-case5-for-Add-module-in-component-library-class.patch | edk2
 
 output:
   - edk2\Build

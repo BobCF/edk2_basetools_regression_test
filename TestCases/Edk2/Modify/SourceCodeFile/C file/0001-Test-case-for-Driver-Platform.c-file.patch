@@ -1,0 +1,38 @@
+From fa059f40ca461b23ad1e5ff281935acfb92a23b7 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 18:12:20 +0800
+Subject: [Patch] Test case for Driver - Platform.c file
+
+Description: Add a new cases handler in the TestPkg/PlatformDxe/Platform.c
+
+Repo: edk2
+
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
+---
+ TestPkg/PlatformDxe/Platform.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/TestPkg/PlatformDxe/Platform.c b/TestPkg/PlatformDxe/Platform.c
+index 92e24ca00a..b61de092eb 100644
+--- a/TestPkg/PlatformDxe/Platform.c
++++ b/TestPkg/PlatformDxe/Platform.c
+@@ -182,10 +182,16 @@ PlatformConfigToFormState (
+     UnicodeSPrintAsciiFormat (
+       (CHAR16 *) MainFormState->CurrentPreferredResolution,
+       sizeof MainFormState->CurrentPreferredResolution,
+       "Unset");
+     break;
++  case EFI_TIMEOUT:
++    UnicodeSPrintAsciiFormat (
++      (CHAR16 *) MainFormState->CurrentPreferredResolution,
++      sizeof MainFormState->CurrentPreferredResolution,
++      "TimeO");
++    break;
+ 
+   default:
+     return Status;
+   }
+ 
+-- 
+2.29.1.windows.1
+

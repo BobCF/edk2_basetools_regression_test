@@ -1,0 +1,33 @@
+From bebc6a179bfacdead80065b2bb2d08be31157cfd Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 18:18:23 +0800
+Subject: [Patch] Test case for included Platform.h changing - Platform.c file
+
+Description: Change the Platform.h files which included in the TestPkg/PlatformDxe/Platform.c
+Repo: edk2
+
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
+---
+ TestPkg/PlatformDxe/Platform.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/TestPkg/PlatformDxe/Platform.h b/TestPkg/PlatformDxe/Platform.h
+index dbc1aa26c6..210be9dd81 100644
+--- a/TestPkg/PlatformDxe/Platform.h
++++ b/TestPkg/PlatformDxe/Platform.h
+@@ -15,11 +15,11 @@
+ //
+ #define FORMSTATEID_MAIN_FORM  1
+ #define FORMID_MAIN_FORM       1
+ 
+ #define QUESTION_RES_CUR       1
+-#define MAXSIZE_RES_CUR       16
++#define MAXSIZE_RES_CUR       32
+ 
+ #define LABEL_RES_NEXT         1
+ #define QUESTION_RES_NEXT      2
+ 
+ #define QUESTION_SAVE_EXIT     3
+-- 
+2.29.1.windows.1
+

@@ -1,38 +1,46 @@
-From cfede5997fe0c3024e22dfefb1091a3481edae8a Mon Sep 17 00:00:00 2001
-From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Tue, 8 Sep 2020 16:48:39 +0800
-Subject: [PATCH] Test case for Add included .inc changing - nasm file
+From b191c3ba419ccd312a1094af2c39951b3efcb36c Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 16:39:29 +0800
+Subject: [Patch] Test case for Add included .inc changing - nasm file
 
-Description: Add included ForAddTest.inc file in the UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm.
+Description: Add included ForAddTest.inc file in the SecEntry.nasm
 
 Repo: edk2
 
-Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
 ---
- UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm | 3 ++-
+ TestPkg/Sec/Ia32/SecEntry.nasm | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm b/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm
-index b74046b76a..f0e2ef933b 100644
---- a/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm
-+++ b/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm
-@@ -13,6 +13,7 @@
- ;-------------------------------------------------------------------------------
+diff --git a/TestPkg/Sec/Ia32/SecEntry.nasm b/TestPkg/Sec/Ia32/SecEntry.nasm
+index 24b1c20ca8..1bea169ba2 100644
+--- a/TestPkg/Sec/Ia32/SecEntry.nasm
++++ b/TestPkg/Sec/Ia32/SecEntry.nasm
+@@ -11,10 +11,11 @@
  
- %include "MpEqu.inc"
-+%include "ForAddTest.inc"
- extern ASM_PFX(InitializeFloatingPointUnits)
+ #include <Base.h>
  
- SECTION .text
-@@ -222,7 +223,7 @@ global ASM_PFX(AsmRelocateApLoop)
- ASM_PFX(AsmRelocateApLoop):
- AsmRelocateApLoopStart:
-     mov        eax, esp
--    mov        esp, [eax + 16]     ; TopOfApStack
-+    mov        esp, [eax + Test_TopOfApStack]     ; TopOfApStack
-     push       dword [eax]         ; push return address for stack trace
-     push       ebp
-     mov        ebp, esp
+     SECTION .text
+ 
++%include "ForHAddTest.inc"
+ extern ASM_PFX(SecCoreStartupWithStack)
+ 
+ ;
+ ; SecCore Entry Point
+ ;
+@@ -40,11 +41,11 @@ ASM_PFX(_ModuleEntryPoint):
+     ;
+     mov     eax, FixedPcdGet32 (PcdInitValueInTempStack)      ; dword to store
+     mov     edi, FixedPcdGet32 (PcdOvmfSecPeiTempRamBase)     ; base address,
+                                                               ;   relative to
+                                                               ;   ES
+-    mov     ecx, FixedPcdGet32 (PcdOvmfSecPeiTempRamSize) / 4 ; dword count
++    mov     ecx, FixedPcdGet32 (PcdOvmfSecPeiTempRamSize) / NumForTest ; dword count
+     cld                                                       ; store from base
+                                                               ;   up
+     rep stosd
+ 
+     ;
 -- 
-2.27.0.windows.1
+2.29.1.windows.1
 

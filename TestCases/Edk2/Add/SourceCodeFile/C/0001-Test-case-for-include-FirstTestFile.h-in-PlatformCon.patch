@@ -1,0 +1,40 @@
+From f40a09872cb474f3276a50a7dd060014df7e4d26 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 16:13:37 +0800
+Subject: [Patch] Test case for include FirstTestFile.h in PlatformConfig.c
+ file.
+
+Description: Include FirstTestFile.h in the TestPkg/PlatformDxe/PlatformConfig.c
+
+Repo: edk2
+
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
+---
+ TestPkg/PlatformDxe/PlatformConfig.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/TestPkg/PlatformDxe/PlatformConfig.c b/TestPkg/PlatformDxe/PlatformConfig.c
+index fd518023b4..6a30059aa0 100644
+--- a/TestPkg/PlatformDxe/PlatformConfig.c
++++ b/TestPkg/PlatformDxe/PlatformConfig.c
+@@ -15,15 +15,16 @@
+ #include <Library/UefiLib.h>
+ #include <Library/UefiRuntimeServicesTableLib.h>
+ #include <Guid/OvmfPlatformConfig.h>
+ 
+ #include "PlatformConfig.h"
++#include "FirstTestFile.h"
+ 
+ //
+ // Name of the UEFI variable that we use for persistent storage.
+ //
+-STATIC CHAR16 mVariableName[] = L"PlatformConfig";
++STATIC CHAR16 mVariableName[] = VAR_NAME;
+ 
+ 
+ /**
+   Serialize and persistently save platform configuration.
+ 
+-- 
+2.29.1.windows.1
+

@@ -1,0 +1,33 @@
+From d7b58dd28b827e01e0078d0a35a097acc1c345a9 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 19:56:35 +0800
+Subject: [Patch] Test case5 for Add module in component&library class
+
+Description: Add the library module (MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf) in component (Sec) section which already in library class.
+
+Repo: edk2
+
+Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+---
+ TestPkg/TestPkgIA32X64.dsc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/TestPkg/TestPkgIA32X64.dsc b/TestPkg/TestPkgIA32X64.dsc
+index 2444f741cd..86d8eb5cbd 100644
+--- a/TestPkg/TestPkgIA32X64.dsc
++++ b/TestPkg/TestPkgIA32X64.dsc
+@@ -115,10 +115,11 @@
+   TestPkg\FakeEmuSec\Sec.inf
+   TestPkg/Sec/SecMain.inf {
+     <LibraryClasses>
+     NULL|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
+ 	LockBoxLib|MdeModulePkg\Library\LockBoxNullLib\LockBoxNullLib.inf
++    SortLib|MdeModulePkg\Library\BaseSortLib\BaseSortLib.inf
+   }
+ 
+   #
+   # PEI Phase modules
+   #
+-- 
+2.29.1.windows.1
+

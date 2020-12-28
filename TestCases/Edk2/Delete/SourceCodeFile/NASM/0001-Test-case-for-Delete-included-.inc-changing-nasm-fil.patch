@@ -1,38 +1,46 @@
-From 5d2839ca6c28276a1b432946ccc07a679fd39770 Mon Sep 17 00:00:00 2001
-From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Tue, 8 Sep 2020 16:52:10 +0800
-Subject: [PATCH] Test case for Delete included .inc changing - nasm file
+From f8ee4099f3534c85c086423f2de4320dff813e9c Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 17:31:54 +0800
+Subject: [Patch] Test case for Delete included .inc changing - nasm file
 
-Description: Delete included ForAddTest.inc file in the UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm.
+Description: Delete included ForAddTest.inc file in the TestPkg/Sec/Ia32/SecEntry.nasm
 
 Repo: edk2
 
-Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
 ---
- UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm | 3 +--
+ TestPkg/Sec/Ia32/SecEntry.nasm | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm b/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm
-index f0e2ef933b..b74046b76a 100644
---- a/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm
-+++ b/UefiCpuPkg/Library/MpInitLib/Ia32/MpFuncs.nasm
-@@ -13,7 +13,6 @@
- ;-------------------------------------------------------------------------------
+diff --git a/TestPkg/Sec/Ia32/SecEntry.nasm b/TestPkg/Sec/Ia32/SecEntry.nasm
+index 1bea169ba2..24b1c20ca8 100644
+--- a/TestPkg/Sec/Ia32/SecEntry.nasm
++++ b/TestPkg/Sec/Ia32/SecEntry.nasm
+@@ -11,11 +11,10 @@
  
- %include "MpEqu.inc"
--%include "ForAddTest.inc"
- extern ASM_PFX(InitializeFloatingPointUnits)
+ #include <Base.h>
  
- SECTION .text
-@@ -223,7 +222,7 @@ global ASM_PFX(AsmRelocateApLoop)
- ASM_PFX(AsmRelocateApLoop):
- AsmRelocateApLoopStart:
-     mov        eax, esp
--    mov        esp, [eax + Test_TopOfApStack]     ; TopOfApStack
-+    mov        esp, [eax + 16]     ; TopOfApStack
-     push       dword [eax]         ; push return address for stack trace
-     push       ebp
-     mov        ebp, esp
+     SECTION .text
+ 
+-%include "ForHAddTest.inc"
+ extern ASM_PFX(SecCoreStartupWithStack)
+ 
+ ;
+ ; SecCore Entry Point
+ ;
+@@ -41,11 +40,11 @@ ASM_PFX(_ModuleEntryPoint):
+     ;
+     mov     eax, FixedPcdGet32 (PcdInitValueInTempStack)      ; dword to store
+     mov     edi, FixedPcdGet32 (PcdOvmfSecPeiTempRamBase)     ; base address,
+                                                               ;   relative to
+                                                               ;   ES
+-    mov     ecx, FixedPcdGet32 (PcdOvmfSecPeiTempRamSize) / NumForTest ; dword count
++    mov     ecx, FixedPcdGet32 (PcdOvmfSecPeiTempRamSize) / 4 ; dword count
+     cld                                                       ; store from base
+                                                               ;   up
+     rep stosd
+ 
+     ;
 -- 
-2.27.0.windows.1
+2.29.1.windows.1
 

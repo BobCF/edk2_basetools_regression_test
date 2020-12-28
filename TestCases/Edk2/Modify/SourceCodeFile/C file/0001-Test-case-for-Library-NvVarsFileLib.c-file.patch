@@ -1,0 +1,36 @@
+From 92cf044ce3fe39130cd75894b6d243446695854f Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 18:28:52 +0800
+Subject: [Patch] Test case for Library - NvVarsFileLib.c file
+
+Description: Change the condition in the TestPkg/Library/NvVarsFileLib/NvVarsFileLib.c
+
+Repo: edk2
+
+Signed-off-by: Bob Feng <bob.c.feng@intel.com>
+---
+ TestPkg/Library/NvVarsFileLib/NvVarsFileLib.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/TestPkg/Library/NvVarsFileLib/NvVarsFileLib.c b/TestPkg/Library/NvVarsFileLib/NvVarsFileLib.c
+index 7395723a92..09a0888dc4 100644
+--- a/TestPkg/Library/NvVarsFileLib/NvVarsFileLib.c
++++ b/TestPkg/Library/NvVarsFileLib/NvVarsFileLib.c
+@@ -40,13 +40,11 @@ ConnectNvVarsToFileSystem (
+   //
+   // We must be able to save the variables successfully to the file system
+   // to have connected successfully.
+   //
+   Status = SaveNvVarsToFs (FsHandle);
+-  if (!EFI_ERROR (Status)) {
+-    mNvVarsFileLibFsHandle = FsHandle;
+-  }
++  mNvVarsFileLibFsHandle = FsHandle;
+ 
+   return Status;
+ }
+ 
+ 
+-- 
+2.29.1.windows.1
+

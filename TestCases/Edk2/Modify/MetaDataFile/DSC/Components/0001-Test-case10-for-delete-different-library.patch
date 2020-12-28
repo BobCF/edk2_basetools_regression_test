@@ -1,7 +1,7 @@
-From 77ab224625e31aea77f7b94ba09ecac7f1d96688 Mon Sep 17 00:00:00 2001
-From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Tue, 15 Sep 2020 15:11:19 +0800
-Subject: [PATCH] Test case10 for delete different library
+From 6fc84bafd83bc93ff5e0df4de5d8ef49ab176e34 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 20:11:09 +0800
+Subject: [Patch] Test case10 for delete different library
 
 Description: Delete the library (PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf) from dsc component, which write in Library class with different value.
 
@@ -9,22 +9,26 @@ Repo: edk2
 
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---
- TestPkg/TestPkg32X64.dsc | 2 +-
+ TestPkg/TestPkgIA32X64.dsc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
-index 8c881de93b..0f1f80cb82 100644
---- a/TestPkg/TestPkg32X64.dsc
-+++ b/TestPkg/TestPkg32X64.dsc
-@@ -126,7 +126,7 @@
+diff --git a/TestPkg/TestPkgIA32X64.dsc b/TestPkg/TestPkgIA32X64.dsc
+index 2444f741cd..d0d779c258 100644
+--- a/TestPkg/TestPkgIA32X64.dsc
++++ b/TestPkg/TestPkgIA32X64.dsc
+@@ -123,11 +123,11 @@
+   # PEI Phase modules
+   #
    MdeModulePkg/Core/Pei/PeiMain.inf
    MdeModulePkg/Universal/PCD/Pei/Pcd.inf  {
      <LibraryClasses>
 -      PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
-+      #PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
++
    }
  
    MdeModulePkg/Core/DxeIplPeim/DxeIpl.inf
+   UefiCpuPkg\CpuMpPei\CpuMpPei.inf
+ #  TestPkg/PlatformPei/PlatformPei.inf
 -- 
-2.27.0.windows.1
+2.29.1.windows.1
 

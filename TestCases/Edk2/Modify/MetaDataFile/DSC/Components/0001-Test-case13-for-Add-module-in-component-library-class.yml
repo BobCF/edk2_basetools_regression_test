@@ -13,7 +13,7 @@ input:
   repo: edk2
 
 change:
-  - 0001-Test-case13-for-Add-module-in-component-library-class.patch | edk2
+  - 0001-Test-case13-for-Add-module-in-component-library-clas.patch | edk2
 
 output:
   - edk2\Build

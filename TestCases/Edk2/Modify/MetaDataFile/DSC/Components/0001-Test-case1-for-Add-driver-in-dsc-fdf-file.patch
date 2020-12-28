@@ -1,34 +1,24 @@
-From 26add8a88f67d0b769e3584bb3b4f175c8a3c730 Mon Sep 17 00:00:00 2001
-From: Yuwei Chen <yuwei.chen@intel.com>
-Date: Wed, 29 Jul 2020 11:35:29 +0800
-Subject: [PATCH] Test case1 for Add driver in dsc & fdf file
+From 60d2b3b19bf0d599886a191d52bbe68688eef9b2 Mon Sep 17 00:00:00 2001
+From: Bob Feng <bob.c.feng@intel.com>
+Date: Mon, 28 Dec 2020 19:39:52 +0800
+Subject: [Patch] Test case1 for Add driver in dsc & fdf file
 
 Description: Add the driver (MdeModulePkg\Universal\EbcDxe\EbcDebugger.inf) in both dsc and fdf.
 
 Repo: edk2
 Signed-off-by: Yuwei Chen <yuwei.chen@intel.com>
 ---
- TestPkg/TestIa32X64.fdf  | 1 +
- TestPkg/TestPkg32X64.dsc | 1 +
+ TestPkg/TestPkgIA32X64.dsc | 1 +
+ TestPkg/TestPkgIa32X64.fdf | 1 +
  2 files changed, 2 insertions(+)
 
-diff --git a/TestPkg/TestIa32X64.fdf b/TestPkg/TestIa32X64.fdf
-index 230250f210..2125417ce0 100644
---- a/TestPkg/TestIa32X64.fdf
-+++ b/TestPkg/TestIa32X64.fdf
-@@ -193,6 +193,7 @@ INF  UefiCpuPkg\CpuDxe\CpuDxe.inf
+diff --git a/TestPkg/TestPkgIA32X64.dsc b/TestPkg/TestPkgIA32X64.dsc
+index 2444f741cd..20f0e408f3 100644
+--- a/TestPkg/TestPkgIA32X64.dsc
++++ b/TestPkg/TestPkgIA32X64.dsc
+@@ -151,10 +151,11 @@
  
- INF  MdeModulePkg/Logo/LogoDxe.inf
- INF  TestPkg\FakeLogo\JpegLogoDxe.inf
-+INF  MdeModulePkg\Universal\EbcDxe\EbcDebugger.inf
- 
- ################################################################################
- 
-diff --git a/TestPkg/TestPkg32X64.dsc b/TestPkg/TestPkg32X64.dsc
-index b24f19fc5f..0141f18b27 100644
---- a/TestPkg/TestPkg32X64.dsc
-+++ b/TestPkg/TestPkg32X64.dsc
-@@ -154,6 +154,7 @@
+   MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
  
    MdeModulePkg/Logo/LogoDxe.inf
    TestPkg\FakeLogo\JpegLogoDxe.inf
@@ -36,6 +26,24 @@ index b24f19fc5f..0141f18b27 100644
    MdeModulePkg/Application/UiApp/UiApp.inf {
      <LibraryClasses>
        NULL|MdeModulePkg/Library/DeviceManagerUiLib/DeviceManagerUiLib.inf
+       NULL|MdeModulePkg/Library/BootManagerUiLib/BootManagerUiLib.inf
+       NULL|MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerUiLib.inf
+diff --git a/TestPkg/TestPkgIa32X64.fdf b/TestPkg/TestPkgIa32X64.fdf
+index 61448936de..1fc99eda55 100644
+--- a/TestPkg/TestPkgIa32X64.fdf
++++ b/TestPkg/TestPkgIa32X64.fdf
+@@ -182,10 +182,11 @@ INF  RuleOverride=ACPITABLE TestPkg/AcpiTables/AcpiTables.inf
+ 
+ INF  UefiCpuPkg\CpuDxe\CpuDxe.inf
+ 
+ INF  MdeModulePkg/Logo/LogoDxe.inf
+ INF  TestPkg\FakeLogo\JpegLogoDxe.inf
++INF  MdeModulePkg\Universal\EbcDxe\EbcDebugger.inf
+ INF  TestPkg/PlatformDxe/Platform.inf
+ 
+ ################################################################################
+ 
+ [FV.FVMAIN_COMPACT]
 -- 
-2.27.0.windows.1
+2.29.1.windows.1
 

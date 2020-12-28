@@ -1,7 +1,7 @@
 ---
 name: Test case8 for delete arch miss driver
 description: Delete the Driver (MdeModulePkg\Universal\DevicePathDxe\DevicePathDxe.inf) which only located in dsc component, while command only build IA32.
-
+type: manual
 command: build -p TestPkg\TestPkg32X64.dsc -a X64 -a IA32 -t VS2015x86 -b RELEASE -y report.txt
 init:
   - 
