@@ -1,15 +1,33 @@
 import pytest
-from py._xmlgen import html
 import os
 
-@pytest.mark.optionalhook
+# Simple HTML tag generation
+class HTMLElement:
+    def __init__(self, tag, content=""):
+        self.tag = tag
+        self.content = content
+    
+    def __str__(self):
+        return f"<{self.tag}>{self.content}</{self.tag}>"
+
+class html:
+    @staticmethod
+    def th(content):
+        return HTMLElement("th", content)
+    
+    @staticmethod
+    def td(content):
+        return HTMLElement("td", content)
+
+@pytest.hookimpl(optionalhook=True)
 def pytest_html_results_table_header(cells):
     cells.insert(2, html.th("Full Time"))
     cells.insert(3, html.th("Incremental Time"))
     cells.insert(4, html.th("Test Case Location"))
     cells.pop()
     cells.pop()
-@pytest.mark.optionalhook
+
+@pytest.hookimpl(optionalhook=True)
 def pytest_html_results_table_row(report, cells):
     cells.insert(2, html.td(report.fulltime))
     cells.insert(3, html.td(report.inctime))
@@ -17,7 +35,7 @@ def pytest_html_results_table_row(report, cells):
     cells.pop()
     cells.pop()
 
-@pytest.mark.hookwrapper
+@pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
@@ -41,23 +59,23 @@ def pytest_runtest_makereport(item, call):
     setattr(report,"inctime",str(inctime) + "s")
 
 
-@pytest.mark.optionalhook
+@pytest.hookimpl(optionalhook=True)
 def pytest_html_report_title(report):
     report.title = "EDK2 Incremental Build Test Report"
 
 
 
 def pytest_configure(config):
+    if hasattr(config, '_metadata'):
+        config._metadata["Project"] = "Edk2"
+        config._metadata['ToolChain'] = 'VS2015'
+        config._metadata['Target'] = 'RELEASE'
 
-    config._metadata["Project"] = "Edk2"
-    config._metadata['ToolChain'] = 'VS2015'
-    config._metadata['Target'] = 'RELEASE'
-
-    config._metadata.pop("Packages")
-    config._metadata.pop("Platform")
-    config._metadata.pop("Plugins")
-    config._metadata.pop("Python")
-    if "JAVA_HOME" in config._metadata:
-        config._metadata.pop("JAVA_HOME")
+        config._metadata.pop("Packages", None)
+        config._metadata.pop("Platform", None)
+        config._metadata.pop("Plugins", None)
+        config._metadata.pop("Python", None)
+        if "JAVA_HOME" in config._metadata:
+            config._metadata.pop("JAVA_HOME")
 
     

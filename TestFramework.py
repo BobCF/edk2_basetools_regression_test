@@ -152,30 +152,33 @@ class IncTestEnv():
         case = Case()
         case.name = os.path.basename(data.get('name',''))
         case.description = data.get('description','')
-        case_init = data.get('init')
+        case_init = data.get('init', [])
         case_input = data.get('input')
         case.type = data.get('type','Auto')
 
         pathes = case_file.split(os.sep)
         case.case_file = os.sep.join(pathes[pathes.index("TestCases")+1:])
 
-        for item in case_init:
-            if not item['src'] or item['src'].endswith(".patch"):
-                repo_info = item['dest'].split("|")
-                if len(repo_info) == 1:
-                    version = ''
-                    repo_name = repo_info[0].strip().lower()
-                else:
-                    version = repo_info[1].strip()
-                    repo_name = repo_info[0].strip().lower()
-                case.repo.add((repo_name,version))
-        for item in case.repo:
-            if case_input['repo'].lower() == item[0]:
-                break
-        else:
-            case.repo.add((case_input['repo'].lower(),''))
+        if case_init:
+            for item in case_init:
+                if item and item.get('src') and item.get('src').endswith(".patch"):
+                    repo_info = item['dest'].split("|")
+                    if len(repo_info) == 1:
+                        version = ''
+                        repo_name = repo_info[0].strip().lower()
+                    else:
+                        version = repo_info[1].strip()
+                        repo_name = repo_info[0].strip().lower()
+                    case.repo.add((repo_name,version))
         
-        case.inputs = [INPUT(item['src'],item['dest']) for item in case_init if item['src']]
+        if case_input:
+            for item in case.repo:
+                if case_input.get('repo', '').lower() == item[0]:
+                    break
+            else:
+                case.repo.add((case_input.get('repo','').lower(),''))
+        
+        case.inputs = [INPUT(item['src'],item['dest']) for item in case_init if item and item.get('src')]
         case.changes = [item for item in data.get('change',[])]
         case.neg_changes = [item for item in data.get('neg_change',[])]
         case.outputs= data.get('output',[])
